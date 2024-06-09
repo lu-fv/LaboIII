@@ -1,13 +1,19 @@
 package Models;
 
+import Enums.Category;
+
 public class Beverage extends Product{
     private Double litres;
 
     public Beverage(){
     }
 
-    public Beverage(Integer ID, String productName, Integer brand, Enum categories, Double litres) {
-        super(ID, productName, brand, categories);
+    public Beverage(Double litres) {
+        this.litres = litres;
+    }
+
+    public Beverage(Integer ID, String productName, Integer brand, Category category, Double litres) {
+        super(ID, productName, brand, category);
         this.litres = litres;
     }
 
