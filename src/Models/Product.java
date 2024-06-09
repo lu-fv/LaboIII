@@ -1,19 +1,20 @@
 package Models;
+import Enums.Category;
 
 public abstract class Product {
     private Integer ID;
     private String productName;
     private Integer brand;
-    public Enum Categories;
+    private Category category;
 
     public Product() {
     }
 
-    public Product(Integer ID, String productName, Integer brand, Enum categories) {
+    public Product(Integer ID, String productName, Integer brand, Category category) {
         this.ID = ID;
         this.productName = productName;
         this.brand = brand;
-        Categories = categories;
+        this.category = category;
     }
 
     public Integer getID() {
@@ -40,11 +41,11 @@ public abstract class Product {
         this.brand = brand;
     }
 
-    public Enum getCategories() {
-        return Categories;
+    public Enum getCategory() {
+        return category;
     }
 
-    public void setCategories(Enum categories) {
-        Categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
