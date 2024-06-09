@@ -3,7 +3,6 @@ package Models;
 import java.util.HashMap;
 
 public class Cart {
-
     private double totalPrice;
     private HashMap<Product, Integer> List;
 

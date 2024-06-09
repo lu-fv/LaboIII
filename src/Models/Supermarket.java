@@ -7,18 +7,18 @@ import java.util.HashSet;
 public class Supermarket {
     private String name;
     private String adresss;
-    private String tel;
-    private String CUIT;
+    private String phone;
+    private String cuit;
     HashSet<Product> productListHashSet = new HashSet<>();
 
     public Supermarket() {
     }
 
-    public Supermarket(String name, String adresss, String tel, String CUIT, HashSet<Product> productListHashSet) {
+    public Supermarket(String name, String adresss, String phone, String cuit, HashSet<Product> productListHashSet) {
         this.name = name;
         this.adresss = adresss;
-        this.tel = tel;
-        this.CUIT = CUIT;
+        this.phone = phone;
+        this.cuit = cuit;
         this.productListHashSet = productListHashSet;
     }
 
@@ -38,20 +38,20 @@ public class Supermarket {
         this.adresss = adresss;
     }
 
-    public String getTel() {
-        return tel;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getCUIT() {
-        return CUIT;
+    public String getCuit() {
+        return cuit;
     }
 
-    public void setCUIT(String CUIT) {
-        this.CUIT = CUIT;
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
     }
 
     public HashSet<Product> getProductListHashSet() {
