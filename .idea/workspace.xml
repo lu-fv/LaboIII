@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter">
-      <change afterPath="$PROJECT_DIR$/src/Enums/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enums/Categories.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Supermarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Supermarket.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

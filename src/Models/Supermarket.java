@@ -2,21 +2,22 @@ package Models;
 import  java.lang.String;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 //import java.util.Set;
 
 public class Supermarket {
     private String name;
-    private String adresss;
+    private String address;
     private String phone;
     private String cuit;
-    HashSet<Product> productListHashSet = new HashSet<>();
+    private Set<Product> productListHashSet = new HashSet<>();
 
     public Supermarket() {
     }
 
-    public Supermarket(String name, String adresss, String phone, String cuit, HashSet<Product> productListHashSet) {
+    public Supermarket(String name, String address, String phone, String cuit, HashSet<Product> productListHashSet) {
         this.name = name;
-        this.adresss = adresss;
+        this.address = address;
         this.phone = phone;
         this.cuit = cuit;
         this.productListHashSet = productListHashSet;
@@ -30,12 +31,12 @@ public class Supermarket {
         this.name = name;
     }
 
-    public String getAdresss() {
-        return adresss;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdresss(String adresss) {
-        this.adresss = adresss;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhone() {
@@ -54,11 +55,11 @@ public class Supermarket {
         this.cuit = cuit;
     }
 
-    public HashSet<Product> getProductListHashSet() {
+    public Set<Product> getProductListHashSet() {
         return productListHashSet;
     }
 
-    public void setProductListHashSet(HashSet<Product> productListHashSet) {
+    public void setProductListHashSet(Set<Product> productListHashSet) {
         this.productListHashSet = productListHashSet;
     }
 
