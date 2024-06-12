@@ -1,10 +1,21 @@
 package Service.impl;
 
 import Service.MenusService;
+import Service.SupermarketService;
 
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
+
+    private FoodServiceImpl foodService;
+    private BeverageServiceImpl beverageService;
+    private SupermarketService supermarketService;
+
+    public MenusServiceImpl() {
+        this.foodService = new FoodServiceImpl();
+        this.beverageService = new BeverageServiceImpl();
+        this.supermarketService = new SupermarketServiceImpl();
+    }
 
     @Override
     public void initialMenu(){
@@ -25,6 +36,7 @@ public class MenusServiceImpl implements MenusService {
                 case 1:
                     break;
                 case 2:
+                    privateAccessMenu();
                     break;
                 case 0:
                     break;
@@ -101,6 +113,104 @@ public class MenusServiceImpl implements MenusService {
                     break;
             }
         }while(opc!=0);
+    }
+
+    public void privateAccessMenu() {
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("======================= ADMINISTRACIÓN ============================");
+            System.out.println("\n");
+            System.out.println("            [1] PRODUCTOS");
+            System.out.println("            [2] SUPERMERCADOS");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+                    privateAccessProductMenu();
+                    break;
+                case 2:
+                    privateAccessSupermarketMenu();
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
+            }
+        } while (opc != 0);
+    }
+
+    public void privateAccessProductMenu() {
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("            [1] CREAR PRODUCTO");
+            System.out.println("            [2] MODIFICAR PRODUCTO");
+            System.out.println("            [3] ELIMINAR PRODUCTO");
+            System.out.println("            [4] VER PRODUCTOS");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+                    foodService.create();
+                    break;
+                case 2:
+                    foodService.modify();
+                    break;
+                case 3:
+                    foodService.delete();
+                    break;
+                case 4:
+                    foodService.showAll();
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
+            }
+        }while (opc != 0);
+    }
+
+    public void privateAccessSupermarketMenu() {
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("            [1] CREAR SUPERMERCADO");
+            System.out.println("            [2] MODIFICAR SUPERMERCADO");
+            System.out.println("            [3] ELIMINAR SUPERMERCADO");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
+            }
+        }while (opc != 0);
     }
 
 }

@@ -12,8 +12,8 @@ public class Beverage extends Product{
         this.litres = litres;
     }
 
-    public Beverage(Integer ID, String productName, Integer brand, Category category, Double litres) {
-        super(ID, productName, brand, category);
+    public Beverage(Integer ID, String productName, Double price, String brand, Category category, Double litres) {
+        super(ID, productName, price, brand, category);
         this.litres = litres;
     }
 

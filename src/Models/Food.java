@@ -8,8 +8,8 @@ public class Food extends Product{
     public Food(){
 
     }
-    public Food(Integer ID, String productName, Integer brand, Category category, Double kg) {
-        super(ID, productName, brand, category);
+    public Food(Integer ID, String productName, Double price, String brand, Category category, Double kg) {
+        super(ID, productName, price, brand, category);
         this.kg = kg;
     }
 
@@ -19,5 +19,11 @@ public class Food extends Product{
 
     public void setKg(Double kg) {
         this.kg = kg;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+
+                "\nPeso: " + kg + " kg";
     }
 }
