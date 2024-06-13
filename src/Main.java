@@ -1,3 +1,4 @@
+import Enums.Category;
 import Service.impl.FoodServiceImpl;
 import Service.impl.MenusServiceImpl;
 
@@ -16,6 +17,10 @@ public class Main {
         foodService.showAll();
         foodService.modify();
         foodService.showAll();*/
+
+        for (Category c : Category.values()){
+            System.out.println(c);
+        }
 
         MenusServiceImpl menu = new MenusServiceImpl();
 

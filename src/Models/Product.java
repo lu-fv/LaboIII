@@ -12,11 +12,11 @@ public abstract class Product {
     }
 
     public Product(Integer ID, String productName, Double price, String brand, Category category) {
-        this.ID = ID;
-        this.productName = productName;
-        this.price = price;
-        this.brand = brand;
-        this.category = category;
+        this.setID(ID);
+        this.setProductName(productName);
+        this.setPrice(price);
+        this.setBrand(brand);
+        this.setCategory(category);
     }
 
     public Integer getID() {
@@ -33,6 +33,14 @@ public abstract class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getBrand() {

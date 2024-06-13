@@ -5,40 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter">
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Enums/Category.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/LaboIII.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/BeverageService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/CartService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/FoodService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/MenusService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/SupermarketService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/BeverageServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/CartServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/FoodServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/ENUMS/Categories.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/INTERFACES/Sale.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Enums/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Enums/Category.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/FoodServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/FoodServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Enums/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enums/Category.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Beverage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Food.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/FoodService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/FoodService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/impl/FoodServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/FoodServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>

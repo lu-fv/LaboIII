@@ -4,7 +4,9 @@ import Enums.Category;
 import Models.Food;
 import Service.FoodService;
 
+import java.text.ParseException;
 import java.util.*;
+//CREAR CLASE PRODUCTO IMPL (HERENCIA)
 
 public class FoodServiceImpl implements FoodService {
     private Map<Integer, Food> foods;
@@ -13,11 +15,13 @@ public class FoodServiceImpl implements FoodService {
         this.foods = new HashMap<>();
     }
 
+    //AGREGAR
     @Override
     public Food add(Food food) {
         return foods.put(food.getID(), food);
     }
 
+    //AGREGAR TODOS
     @Override
     public void addAll(List<Food> foodList) {
         for (Food f : foodList) {
@@ -25,54 +29,63 @@ public class FoodServiceImpl implements FoodService {
         }
     }
 
+    //CREAR
     @Override
     public Food create() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Id:");
-        Integer id = Integer.parseInt(scanner.nextLine());
+        Integer id = null;
+        String name = null;
+        Double price = null;
+        String brand = null;
+        Category category = null;
+        Double kg = null;
 
-        System.out.println("Nombre:");
-        String name = scanner.nextLine();
+        try {
+            System.out.println("Id:");
+            id = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Marca:");
-        String brand = scanner.nextLine();
+            System.out.println("Nombre:");
+            name = scanner.nextLine();
 
-        System.out.println("Id categoría:");
-        showCategories();
-        Integer categoryId = Integer.parseInt(scanner.nextLine());
-        Category category = selectCategory(categoryId);
+            System.out.println("Marca:");
+            brand = scanner.nextLine();
 
-        System.out.println("Precio:");
-        Double price = Double.parseDouble(scanner.nextLine());
+            System.out.println("Id categoría:");
+            showCategories();
+            Integer categoryId = Integer.parseInt(scanner.nextLine());
+            category = selectCategory(categoryId);
 
-        System.out.println("Peso en kg:");
-        Double kg = Double.parseDouble(scanner.nextLine());
+            System.out.println("Precio:");
+            price = Double.parseDouble(scanner.nextLine());
 
+            System.out.println("Peso en kg:");
+            kg = Double.parseDouble(scanner.nextLine());
+
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Ingreso de datos erroneo");
+        }
         return this.add(new Food(id, name, price, brand, category, kg));
     }
 
+    //INTERNA CREAR: SELECCIONAR CATEGORÍA
     private Category selectCategory(Integer id) {
-        if (id == 0) {
-            return Category.DAIRY;
-        } else if (id == 1) {
-            return Category.BAKERY;
-        } else if (id == 2) {
-            return Category.GROCERY;
-        } else if (id == 3) {
-            return Category.ALCOHOL;
-        } else {
-            return null;
+        for (Category c : Category.values()) {
+            if (id == c.getId()) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    //INTERNA CREAR: MOSTRAR CATEGORÍAS
+    private void showCategories() {
+        for (Category c : Category.values()) {
+            System.out.println(c);
         }
     }
 
-    private void showCategories() {
-        System.out.println(Category.DAIRY.toString());
-        System.out.println(Category.BAKERY.toString());
-        System.out.println(Category.GROCERY.toString());
-        System.out.println(Category.ALCOHOL.toString());
-    }
-
+    //ELIMINAR
     @Override
     public Food delete() {
         Scanner scanner = new Scanner(System.in);
@@ -81,35 +94,41 @@ public class FoodServiceImpl implements FoodService {
         return foods.remove(id);
     }
 
+    //MODIFICAR
     @Override
     public Food modify() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese id");
         Integer id = Integer.parseInt(scanner.nextLine());
         Food food;
-        if ((food = foods.get(id)) != null) { //modificar todo o solo precio y kg
+        if ((food = foods.get(id)) != null) {
             System.out.println("Nombre:");
             String name = scanner.nextLine();
+            food.setProductName(name);
 
             System.out.println("Marca:");
             String brand = scanner.nextLine();
+            food.setBrand(brand);
 
             System.out.println("Id categoría:");
             showCategories();
             Integer categoryId = Integer.parseInt(scanner.nextLine());
             Category category = selectCategory(categoryId);
+            food.setCategory(category);
 
             System.out.println("Precio:");
             Double price = Double.parseDouble(scanner.nextLine());
+            food.setPrice(price);
 
             System.out.println("Peso en kg:");
             Double kg = Double.parseDouble(scanner.nextLine());
-            return this.add(new Food(id, name, price, brand, category, kg));
+            return foods.put(food.getID(), food);
         } else {
             return null;
         }
     }
 
+    //MOSTRAR TODOS LOS ELEMENTOS
     @Override
     public void showAll() {
         for (Map.Entry<Integer, Food> entry : foods.entrySet()) {

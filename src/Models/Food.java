@@ -10,7 +10,7 @@ public class Food extends Product{
     }
     public Food(Integer ID, String productName, Double price, String brand, Category category, Double kg) {
         super(ID, productName, price, brand, category);
-        this.kg = kg;
+        this.setKg(kg);
     }
 
     public Double getKg() {

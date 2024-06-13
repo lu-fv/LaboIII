@@ -19,6 +19,10 @@ public enum Category {
         return id + ": " + type;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getType() {
         return type;
     }
