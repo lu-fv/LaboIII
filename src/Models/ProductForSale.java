@@ -6,9 +6,9 @@ public class ProductForSale {
     private Boolean onSale;
 
     public ProductForSale(Product product, Double price, Boolean onSale) {
-        this.product = product;
-        this.price = price;
-        this.onSale = onSale;
+        this.setProduct(product);
+        this.setPrice(price);
+        this.setOnSale(onSale);
     }
 
     public Product getProduct() {
@@ -34,7 +34,6 @@ public class ProductForSale {
     public void setOnSale(Boolean onSale) {
         this.onSale = onSale;
     }
-
 
     @Override
     public String toString() {

@@ -7,16 +7,14 @@ public abstract class Product {
     private String brand;
     private Category category;
 
-
-
     public Product() {
     }
 
     public Product(Integer ID, String productName, String brand, Category category) {
-        this.ID = ID;
-        this.productName = productName;
-        this.brand = brand;
-        this.category = category;
+        this.setID(ID);
+        this.setProductName(productName);
+        this.setBrand(brand);
+        this.setCategory(category);
     }
 
     public Integer getID() {
@@ -53,11 +51,9 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "ID=" + ID +
-                ", productName='" + productName + '\'' +
-                ", brand='" + brand + '\'' +
-                ", category=" + category +
-                '}';
+        return "Producto: " + productName +
+                "\nId: " + ID +
+                "\nMarca: " + brand +
+                "\nCategoría: " + category.getType();
     }
 }
