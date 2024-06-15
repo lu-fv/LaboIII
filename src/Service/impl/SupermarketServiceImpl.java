@@ -2,6 +2,7 @@ package Service.impl;
 
 import Enums.Category;
 import Models.Product;
+import Models.ProductForSale;
 import Service.SupermarketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,68 +13,67 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SupermarketServiceImpl implements SupermarketService {
-    public List<Product> searchSalesProducts() {
+    public List<ProductForSale> searchSalesProducts() {
         try {
             File fv = new File("vea.json");
             File fc = new File("carrefour.json");
             File fd = new File("disco.json");
 
-            List<Product> listProduct = new ArrayList<>();
+            List<ProductForSale> listProduct = new ArrayList<>();
             ObjectMapper objectMapper = new ObjectMapper();
 
             while (fv.canRead()) {
-                Product pv = objectMapper.readValue(fv, Product.class);
-                if (pv.getSale()) {
+                ProductForSale pv = objectMapper.readValue(fv, ProductForSale.class);
+                if (pv.getOnSale()) {
                     listProduct.add(pv);
                 }
             }
 
             while (fc.canRead()) {
-                Product pc = objectMapper.readValue(fc, Product.class);
-                if (pc.getSale()) {
+                ProductForSale pc = objectMapper.readValue(fc, ProductForSale.class);
+                if (pc.getOnSale()) {
                     listProduct.add(pc);
                 }
             }
 
             while (fd.canRead()) {
-                Product pd = objectMapper.readValue(fd, Product.class);
-                if (pd.getSale()) {
+                ProductForSale pd = objectMapper.readValue(fd, ProductForSale.class);
+                if (pd.getOnSale()) {
                     listProduct.add(pd);
                 }
             }
-
             return listProduct;
         }catch(IOException e){
             return null;
         }
     }
 
-    public List<Product> searchSpecialProductsByName(String name){
+    public List<ProductForSale> searchSpecialProductsByName(String name){
         try {
             File fv = new File("vea.json");
             File fc = new File("carrefour.json");
             File fd = new File("disco.json");
 
-            List<Product> listProduct = new ArrayList<>();
+            List<ProductForSale> listProduct = new ArrayList<>();
             ObjectMapper objectMapper = new ObjectMapper();
 
             while (fv.canRead()) {
-                Product pv = objectMapper.readValue(fv, Product.class);
-                if (pv.getProductName().contains(name)) {
+                ProductForSale pv = objectMapper.readValue(fv, ProductForSale.class);
+                if (pv.getProduct().getProductName().contains(name)) {
                     listProduct.add(pv);
                 }
             }
 
             while (fc.canRead()) {
-                Product pc = objectMapper.readValue(fc, Product.class);
-                if (pc.getProductName().contains(name)) {
+                ProductForSale pc = objectMapper.readValue(fc, ProductForSale.class);
+                if (pc.getProduct().getProductName().contains(name)) {
                     listProduct.add(pc);
                 }
             }
 
             while (fd.canRead()) {
-                Product pd = objectMapper.readValue(fd, Product.class);
-                if (pd.getProductName().contains(name)) {
+                ProductForSale pd = objectMapper.readValue(fd, ProductForSale.class);
+                if (pd.getProduct().getProductName().contains(name)) {
                     listProduct.add(pd);
                 }
             }
@@ -85,32 +85,32 @@ public class SupermarketServiceImpl implements SupermarketService {
 
     }
 
-    public List<Product> searchProductsByCategory(Category c){
+    public List<ProductForSale> searchProductsByCategory(Category c){
         try {
             File fv = new File("vea.json");
             File fc = new File("carrefour.json");
             File fd = new File("disco.json");
 
-            List<Product> listProduct = new ArrayList<>();
+            List<ProductForSale> listProduct = new ArrayList<>();
             ObjectMapper objectMapper = new ObjectMapper();
 
             while (fv.canRead()) {
-                Product pv = objectMapper.readValue(fv, Product.class);
-                if (pv.getCategory() == c) {
+                ProductForSale pv = objectMapper.readValue(fv, ProductForSale.class);
+                if (pv.getProduct().getCategory() == c) {
                     listProduct.add(pv);
                 }
             }
 
             while (fc.canRead()) {
-                Product pc = objectMapper.readValue(fc, Product.class);
-                if (pc.getCategory() == c) {
+                ProductForSale pc = objectMapper.readValue(fc, ProductForSale.class);
+                if (pc.getProduct().getCategory() == c) {
                     listProduct.add(pc);
                 }
             }
 
             while (fd.canRead()) {
-                Product pd = objectMapper.readValue(fd, Product.class);
-                if (pd.getCategory() == c) {
+                ProductForSale pd = objectMapper.readValue(fd, ProductForSale.class);
+                if (pd.getProduct().getCategory()== c) {
                     listProduct.add(pd);
                 }
             }

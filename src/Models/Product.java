@@ -2,33 +2,29 @@ package Models;
 import Enums.Category;
 
 public abstract class Product {
-    private Integer id;
+    private Integer ID;
     private String productName;
     private String brand;
     private Category category;
-    private Double unitPrice;
 
-    private Boolean sale = false;
+
 
     public Product() {
     }
 
-    public Product(Integer id, String productName, String brand, Category category, Double unitPrice) {
-        this.id = id;
+    public Product(Integer ID, String productName, String brand, Category category) {
+        this.ID = ID;
         this.productName = productName;
         this.brand = brand;
         this.category = category;
-        this.unitPrice = unitPrice;
     }
 
-
-
-    public Integer getId() {
-        return id;
+    public Integer getID() {
+        return ID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     public String getProductName() {
@@ -47,7 +43,7 @@ public abstract class Product {
         this.brand = brand;
     }
 
-    public Enum getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -55,30 +51,13 @@ public abstract class Product {
         this.category = category;
     }
 
-    public Double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public Boolean getSale() {
-        return sale;
-    }
-
-    public void setSale(Boolean sale) {
-        this.sale = sale;
-    }
-
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
+                "ID=" + ID +
                 ", productName='" + productName + '\'' +
                 ", brand='" + brand + '\'' +
                 ", category=" + category +
-                ", unitPrice=" + unitPrice +
                 '}';
     }
 }
