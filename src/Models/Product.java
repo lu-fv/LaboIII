@@ -4,13 +4,15 @@ import Enums.Category;
 public abstract class Product {
     private Integer ID;
     private String productName;
-    private Integer brand;
+    private String brand;
     private Category category;
+
+
 
     public Product() {
     }
 
-    public Product(Integer ID, String productName, Integer brand, Category category) {
+    public Product(Integer ID, String productName, String brand, Category category) {
         this.ID = ID;
         this.productName = productName;
         this.brand = brand;
@@ -33,19 +35,29 @@ public abstract class Product {
         this.productName = productName;
     }
 
-    public Integer getBrand() {
+    public String getBrand() {
         return brand;
     }
 
-    public void setBrand(Integer brand) {
+    public void setBrand(String brand) {
         this.brand = brand;
     }
 
-    public Enum getCategory() {
+    public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "ID=" + ID +
+                ", productName='" + productName + '\'' +
+                ", brand='" + brand + '\'' +
+                ", category=" + category +
+                '}';
     }
 }

@@ -2,6 +2,8 @@ package Models;
 
 import Enums.Category;
 
+import javax.swing.text.StyledEditorKit;
+
 public class Beverage extends Product{
     private Double litres;
 
@@ -12,8 +14,8 @@ public class Beverage extends Product{
         this.litres = litres;
     }
 
-    public Beverage(Integer ID, String productName, Integer brand, Category category, Double litres) {
-        super(ID, productName, brand, category);
+    public Beverage(Integer id, String productName, String brand, Category category, Double unitPrice, Double litres) {
+        super(id, productName, brand, category, unitPrice);
         this.litres = litres;
     }
 
