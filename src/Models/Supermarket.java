@@ -5,17 +5,17 @@ import java.util.HashSet;
 import java.util.Set;
 //import java.util.Set;
 
-public class Supermarket {
+public class Supermarket <T> {
     private String name;
     private String address;
     private String phone;
     private String cuit;
-    private Set<Product> productListHashSet = new HashSet<>();
+    private Set<T> productListHashSet = new HashSet<>();
 
     public Supermarket() {
     }
 
-    public Supermarket(String name, String address, String phone, String cuit, HashSet<Product> productListHashSet) {
+    public Supermarket(String name, String address, String phone, String cuit, HashSet<T> productListHashSet) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -55,13 +55,22 @@ public class Supermarket {
         this.cuit = cuit;
     }
 
-    public Set<Product> getProductListHashSet() {
+    public Set<T> getProductListHashSet() {
         return productListHashSet;
     }
 
-    public void setProductListHashSet(Set<Product> productListHashSet) {
+    public void setProductListHashSet(Set<T> productListHashSet) {
         this.productListHashSet = productListHashSet;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Supermarket{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", cuit='" + cuit + '\'' +
+                ", productListHashSet=" + productListHashSet +
+                '}';
+    }
 }
