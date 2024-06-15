@@ -3,8 +3,10 @@ package Models;
 import Enums.Category;
 
 public class Food extends Product {
+    //ATTRIBUTES-----------------------------------------
     private Boolean perishable;
 
+    //CONSTRUCTORS---------------------------------------
     public Food() {
 
     }
@@ -14,6 +16,7 @@ public class Food extends Product {
         this.perishable = perishable;
     }
 
+    //GETTERS & SETTERS----------------------------------
     public Boolean getPerishable() {
         return perishable;
     }
@@ -22,6 +25,7 @@ public class Food extends Product {
         this.perishable = perishable;
     }
 
+    //TO STRING------------------------------------------
     @Override
     public String toString() {
         return super.toString() +

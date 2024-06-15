@@ -3,10 +3,10 @@ package Models;
 import Enums.Category;
 
 public class Beverage extends Product{
-    //ATRIBUTOS------------------------------------------
+    //ATTRIBUTES------------------------------------------
     private Double litres;
 
-    //CONSTRUCTORES--------------------------------------
+    //CONSTRUCTORS--------------------------------------
     public Beverage(){
     }
 

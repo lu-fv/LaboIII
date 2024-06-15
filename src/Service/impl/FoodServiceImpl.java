@@ -66,15 +66,6 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService {
         return perishable;
     }
 
-    //ELIMINAR
-    @Override
-    public Food delete() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese id");
-        Integer id = Integer.parseInt(scanner.nextLine());
-        return foods.remove(id);
-    }
-
     //MODIFICAR
     @Override
     public Food modify() {
@@ -102,6 +93,15 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService {
         } else {
             return null;
         }
+    }
+
+    //ELIMINAR
+    @Override
+    public Food delete() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese id");
+        Integer id = Integer.parseInt(scanner.nextLine());
+        return foods.remove(id);
     }
 
     //MOSTRAR TODOS LOS ELEMENTOS

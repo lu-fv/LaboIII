@@ -173,6 +173,9 @@ public class MenusServiceImpl implements MenusService {
                     foodService.delete();
                     break;
                 case 4:
+                    System.out.println("=BEBIDAS============");
+                    beverageService.showAll();
+                    System.out.println("=COMIDAS============");
                     foodService.showAll();
                     break;
                 default:
@@ -187,7 +190,7 @@ public class MenusServiceImpl implements MenusService {
         Integer opc;
 
         do {
-            System.out.println("            [1] CREAR COMIDA");
+            System.out.println("            [1] CREAR ALIMENTO");
             System.out.println("            [2] CREAR BEBIDA");
             System.out.println("            [0] SALIR\n");
 
@@ -201,7 +204,7 @@ public class MenusServiceImpl implements MenusService {
                     foodService.create();
                     break;
                 case 2:
-                    //crear beverage
+                    beverageService.create();
                     break;
                 default:
                     System.out.println("Opción no disponible");
