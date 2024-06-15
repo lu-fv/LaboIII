@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="service and impl manu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProyectoLaboIII.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoLaboIII.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Supermarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Supermarket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/SupermarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SupermarketService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +43,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "LUCIA-FRANCO",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/Labo 3/practicaJSON",
     "onboarding.tips.debug.path": "E:/Labo III/ProyectoLaboIII/src/Main.java",

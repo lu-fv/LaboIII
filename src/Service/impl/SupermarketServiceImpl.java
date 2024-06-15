@@ -4,6 +4,7 @@ import Enums.Category;
 import Models.Supermarket;
 import Service.SupermarketService;
 import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -20,7 +21,9 @@ public class SupermarketServiceImpl implements SupermarketService {
         Supermarket supermarket = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            List<Supermarket> supermarkets = mapper.readValue(supermarketFile, List.class); // levanto la lista de supermercado de Json
+           // List<Supermarket> supermarkets = mapper.readValue(supermarketFile, List.class); // levanto la lista de supermercado de Json
+            List<Supermarket> supermarkets = mapper.readValue(supermarketFile, new TypeReference<List<Supermarket>>(){}); // levanto la lista por referencia de supermercado de Json
+
             for (Supermarket superM : supermarkets) {
                 if (superM.getName().equals(name)) {
                     supermarket = superM;
