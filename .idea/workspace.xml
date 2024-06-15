@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="service and impl manu">
-      <change afterPath="$PROJECT_DIR$/src/Models/ProductForSale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/ENUMS/Categories.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/INTERFACES/Sale.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/SupermarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SupermarketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="service and impl manu" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +20,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -54,11 +47,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "LUCIA-FRANCO",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Labo 3/practicaJSON",
+    "last_opened_file_path": "E:/ArchivosJson/jar_files (1)/jackson-databind-2.17.1.jar",
     "onboarding.tips.debug.path": "E:/Labo III/ProyectoLaboIII/src/Main.java",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.29425287",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
