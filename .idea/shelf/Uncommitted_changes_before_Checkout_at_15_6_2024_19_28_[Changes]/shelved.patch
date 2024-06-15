@@ -1,0 +1,28 @@
+Index: src/Service/impl/SupermarketServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Service.impl;\r\n\r\nimport Enums.Category;\r\nimport Models.Product;\r\nimport Models.ProductForSale;\r\nimport Models.Supermarket;\r\nimport Service.SupermarketService;\r\nimport com.fasterxml.jackson.core.exc.StreamReadException;\r\nimport com.fasterxml.jackson.core.type.TypeReference;\r\nimport com.fasterxml.jackson.databind.ObjectMapper;\r\n\r\nimport java.io.File;\r\nimport java.io.IOException;\r\nimport java.util.*;\r\nimport java.util.stream.Collectors;\r\n\r\n\r\npublic class SupermarketServiceImpl implements SupermarketService {\r\n    private final File supermarketFile = new File(\"supermarket.json\");\r\n\r\n    public Supermarket Search(String name) {\r\n\r\n        Supermarket supermarket = null;\r\n        try {\r\n            ObjectMapper mapper = new ObjectMapper();\r\n           // List<Supermarket> supermarkets = mapper.readValue(supermarketFile, List.class); // levanto la lista de supermercado de Json\r\n            List<Supermarket> supermarkets = mapper.readValue(supermarketFile, new TypeReference<List<Supermarket>>(){}); // levanto la lista por referencia de supermercado de Json\r\n\r\n            for (Supermarket superM : supermarkets) {\r\n                if (superM.getName().equals(name)) {\r\n                    supermarket = superM;\r\n                }\r\n\r\n            }\r\n        } catch (StreamReadException e) {\r\n            e.printStackTrace();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return supermarket;\r\n    }\r\n\r\n    public Supermarket SearchByCategory(Category category) {\r\n\r\n        Supermarket supermarket = null;\r\n        try {\r\n            ObjectMapper mapper = new ObjectMapper();\r\n            // List<Supermarket> supermarkets = mapper.readValue(supermarketFile, List.class); // levanto la lista de supermercado de Json\r\n            List<Supermarket> supermarkets = mapper.readValue(supermarketFile, new TypeReference<List<Supermarket>>(){}); // levanto la lista por referencia de supermercado de Json\r\n            ProductForSale product = new ProductForSale();\r\n            for (Supermarket superM : supermarkets) {\r\n                if (product.getProduct().getCategory().equals(category) ) {\r\n                    supermarket = superM;\r\n                }\r\n\r\n            }\r\n        } catch (StreamReadException e) {\r\n            e.printStackTrace();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return supermarket;\r\n    }\r\n\r\n    public void ShowListSupermarket(Supermarket supermarket) {\r\n        if (supermarket != null) {\r\n            System.out.println(supermarket);\r\n\r\n        }\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Service/impl/SupermarketServiceImpl.java b/src/Service/impl/SupermarketServiceImpl.java
+--- a/src/Service/impl/SupermarketServiceImpl.java	
++++ b/src/Service/impl/SupermarketServiceImpl.java	
+@@ -1,7 +1,6 @@
+ package Service.impl;
+ 
+ import Enums.Category;
+-import Models.Product;
+ import Models.ProductForSale;
+ import Models.Supermarket;
+ import Service.SupermarketService;
+@@ -11,8 +10,7 @@
+ 
+ import java.io.File;
+ import java.io.IOException;
+-import java.util.*;
+-import java.util.stream.Collectors;
++import java.util.List;
+ 
+ 
+ public class SupermarketServiceImpl implements SupermarketService {

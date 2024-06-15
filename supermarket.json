@@ -1,0 +1,14 @@
+[{
+  "name":"vea",
+  "address":"indep 123",
+  "phone":"25515",
+  "cuit":"30525522554",
+  "productListHashSet":
+    [
+      {"productName":"PAPA",
+        "brand":2,
+        "category":"GROCERY",
+        "kg":5.0,
+        "id":1}
+    ]
+}]

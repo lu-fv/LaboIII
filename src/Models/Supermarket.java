@@ -1,15 +1,11 @@
 package Models;
-
-import Enums.Category;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.String;
-import java.util.*;
+import  java.lang.String;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 //import java.util.Set;
 
-public class Supermarket<T> {
+public class Supermarket <T> {
     private String name;
     private String address;
     private String phone;
@@ -25,9 +21,6 @@ public class Supermarket<T> {
         this.phone = phone;
         this.cuit = cuit;
         this.productListHashSet = productListHashSet;
-    }
-
-    public Supermarket(String carrefour, String address, String number, String cuit, Set<Product> listaProducto) {
     }
 
     public String getName() {
@@ -70,6 +63,14 @@ public class Supermarket<T> {
         this.productListHashSet = productListHashSet;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Supermarket{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", cuit='" + cuit + '\'' +
+                ", productListHashSet=" + productListHashSet +
+                '}';
+    }
 }
