@@ -1,6 +1,8 @@
 package Service.impl;
 
 import Enums.Category;
+import Models.Product;
+import Models.ProductForSale;
 import Models.Supermarket;
 import Service.SupermarketService;
 import com.fasterxml.jackson.core.exc.StreamReadException;
@@ -38,10 +40,34 @@ public class SupermarketServiceImpl implements SupermarketService {
         return supermarket;
     }
 
+    public Supermarket SearchByCategory(Category category) {
+
+        Supermarket supermarket = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            // List<Supermarket> supermarkets = mapper.readValue(supermarketFile, List.class); // levanto la lista de supermercado de Json
+            List<Supermarket> supermarkets = mapper.readValue(supermarketFile, new TypeReference<List<Supermarket>>(){}); // levanto la lista por referencia de supermercado de Json
+            ProductForSale product = new ProductForSale();
+            for (Supermarket superM : supermarkets) {
+                if (product.getProduct().getCategory().equals(category) ) {
+                    supermarket = superM;
+                }
+
+            }
+        } catch (StreamReadException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return supermarket;
+    }
+
     public void ShowListSupermarket(Supermarket supermarket) {
         if (supermarket != null) {
             System.out.println(supermarket);
 
         }
     }
+
+
 }
