@@ -29,7 +29,6 @@ private final File supermarketFile= new File("supermarket.json");
         String cuit= sc.nextLine();
         Integer opc;
 
-
         do{
             System.out.println("1 - Ingresar un alimento: ");
             System.out.println("2 - Ingrese una bebida: ");
