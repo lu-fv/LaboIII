@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.HashSet;
 import Enums.Category;
 import Models.ProductForSale;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,8 +56,76 @@ private final File supermarketFile= new File("supermarket.json");
         Supermarket s= new Supermarket(name, adress, phone, cuit, (HashSet<Product>) products);
 
         return s;
+    }
+
+
+    @Override
+    public void deleteSupermarket(Supermarket<ProductForSale> s) {
+        Scanner sr= new Scanner(System.in);
+        System.out.println("Ingrese CUIT del supermercado a eliminar: ");
+        String cuit = sr.nextLine();
 
     }
+
+    @Override
+    public void modifySupermarket(Supermarket<ProductForSale> s) {
+        Integer opc;
+        Scanner sr= new Scanner(System.in);
+        Scanner st= new Scanner(System.in);
+
+        do{
+            System.out.println("ELIGE CAMPO A MODIFICAR");
+            System.out.println("1 - domicilio");
+            System.out.println("2 - telefono");
+            System.out.println("3 - CUIT");
+            System.out.println("4 - salir");
+            opc= sr.nextInt();
+            switch(opc){
+                case 1:
+                    System.out.println("ingrese nuevo domicilio: ");
+                    s.setAddress(st.nextLine());
+                    break;
+                case 2:
+                    System.out.println("ingrese nuevo telefono: ");
+                    s.setPhone(st.nextLine());
+                    break;
+                case 3:
+                    System.out.println("ingrese nueva CUIT: ");
+                    s.setCuit(st.nextLine());
+                    break;
+                default:
+                    System.out.println("ingrese una opcion valida");
+                    break;
+            }
+
+
+        }while(opc!=4);
+
+    }
+
+    @Override
+    public void supermarketList(Supermarket<ProductForSale> s) {
+        for(ProductForSale p : s.getProductListHashSet()){
+            p.toString();
+        }
+
+    }
+    
+    @Override
+    public void saveSupermarketInJsonFile(Supermarket<ProductForSale> s) throws IOException {
+        if (!supermarketFile.exists()) {
+            supermarketFile.createNewFile();
+        }
+        try {
+            ObjectMapper mapper= new ObjectMapper();
+            mapper.writeValue(supermarketFile, s);
+
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @Override
     public List<ProductForSale> searchSalesProducts() {
         try {
@@ -93,8 +161,8 @@ private final File supermarketFile= new File("supermarket.json");
             return null;
         }
     }
-    
-    @Overrride
+
+    @Override
     public List<ProductForSale> searchSpecialProductsByName(String name){
         try {
             File fv = new File("vea.json");
@@ -131,7 +199,7 @@ private final File supermarketFile= new File("supermarket.json");
         }
 
     }
-    
+
     @Override
     public List<ProductForSale> searchProductsByCategory(Category c){
         try {
@@ -167,73 +235,7 @@ private final File supermarketFile= new File("supermarket.json");
             return null;
         }
     }
-   
-
-    @Override
-    public void deleteSupermarket(Supermarket s) {
-        Scanner sr= new Scanner(System.in);
-        System.out.println("Ingrese CUIT del supermercado a eliminar: ");
-        String cuit = sr.nextLine();
-
-    }
-
-    @Override
-    public void modifySupermarket(Supermarket s) {
-        Integer opc;
-        Scanner sr= new Scanner(System.in);
-        Scanner st= new Scanner(System.in);
-
-        do{
-            System.out.println("ELIGE CAMPO A MODIFICAR");
-            System.out.println("1 - domicilio");
-            System.out.println("2 - telefono");
-            System.out.println("3 - CUIT");
-            System.out.println("4 - salir");
-            opc= sr.nextInt();
-            switch(opc){
-                case 1:
-                    System.out.println("ingrese nuevo domicilio: ");
-                    s.setAddress(st.nextLine());
-                    break;
-                case 2:
-                    System.out.println("ingrese nuevo telefono: ");
-                    s.setPhone(st.nextLine());
-                    break;
-                case 3:
-                    System.out.println("ingrese nueva CUIT: ");
-                    s.setCuit(st.nextLine());
-                    break;
-                default:
-                    System.out.println("ingrese una opcion valida");
-                    break;
-            }
 
 
-        }while(opc!=4);
-
-    }
-
-    @Override
-    public void supermarketList(Supermarket s) {
-        for(Product p: s.getProductListHashSet()){
-            p.toString();
-        }
-
-    }
-    
-    @Override
-    public void saveSupermarketInJsonFile(Supermarket s) throws IOException {
-        if (!supermarketFile.exists()) {
-            supermarketFile.createNewFile();
-        }
-        try {
-            ObjectMapper mapper= new ObjectMapper();
-            mapper.writeValue(supermarketFile, s);
-
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
 
