@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.util.*;
 //CREAR CLASE PRODUCTO IMPL (HERENCIA)
 
-public class FoodServiceImpl implements FoodService {
+public class FoodServiceImpl extends ProductServiceImpl implements FoodService {
     private Map<Integer, Food> foods;
 
     public FoodServiceImpl() {
@@ -32,57 +32,38 @@ public class FoodServiceImpl implements FoodService {
     //CREAR
     @Override
     public Food create() {
-        Scanner scanner = new Scanner(System.in);
-
-        Integer id = null;
-        String name = null;
-        Double price = null;
-        String brand = null;
-        Category category = null;
-        Double kg = null;
-
         try {
-            System.out.println("Id:");
-            id = Integer.parseInt(scanner.nextLine());
-
-            System.out.println("Nombre:");
-            name = scanner.nextLine();
-
-            System.out.println("Marca:");
-            brand = scanner.nextLine();
-
-            System.out.println("Id categoría:");
-            showCategories();
-            Integer categoryId = Integer.parseInt(scanner.nextLine());
-            category = selectCategory(categoryId);
-
-            System.out.println("Precio:");
-            price = Double.parseDouble(scanner.nextLine());
-
-            System.out.println("Peso en kg:");
-            kg = Double.parseDouble(scanner.nextLine());
+            return this.add(new Food(ProductServiceImpl.createID(),
+                    ProductServiceImpl.createName(),
+                    ProductServiceImpl.createBrand(),
+                    ProductServiceImpl.createCategory(),
+                    createPerishable()));
 
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Ingreso de datos erroneo");
         }
-        return this.add(new Food(id, name, price, brand, category, kg));
     }
 
-    //INTERNA CREAR: SELECCIONAR CATEGORÍA
-    private Category selectCategory(Integer id) {
-        for (Category c : Category.values()) {
-            if (id == c.getId()) {
-                return c;
-            }
-        }
-        return null;
-    }
+    //INTERNA CREAR: CREAR PERISHABLE
+    private Boolean createPerishable() {
+        Scanner scanner = new Scanner(System.in);
 
-    //INTERNA CREAR: MOSTRAR CATEGORÍAS
-    private void showCategories() {
-        for (Category c : Category.values()) {
-            System.out.println(c);
+        Boolean perishable = null;
+        Integer aux = null;
+
+        System.out.println("Alimento perecedero:");
+        System.out.println("1. Sí");
+        System.out.println("2. No");
+        do { //Cambiar a excepción
+            aux = Integer.parseInt(scanner.nextLine());
+        } while (aux != 1 && aux != 2);
+
+        if (aux == 1) {
+            perishable = true;
+        } else {
+            perishable = false;
         }
+        return perishable;
     }
 
     //ELIMINAR
@@ -111,17 +92,12 @@ public class FoodServiceImpl implements FoodService {
             food.setBrand(brand);
 
             System.out.println("Id categoría:");
-            showCategories();
+            ProductServiceImpl.showCategories();
             Integer categoryId = Integer.parseInt(scanner.nextLine());
-            Category category = selectCategory(categoryId);
+            Category category = ProductServiceImpl.selectCategory(categoryId);
             food.setCategory(category);
 
-            System.out.println("Precio:");
-            Double price = Double.parseDouble(scanner.nextLine());
-            food.setPrice(price);
-
-            System.out.println("Peso en kg:");
-            Double kg = Double.parseDouble(scanner.nextLine());
+            food.setPerishable(createPerishable());
             return foods.put(food.getID(), food);
         } else {
             return null;

@@ -2,28 +2,29 @@ package Models;
 
 import Enums.Category;
 
-public class Food extends Product{
-    private Double kg;
+public class Food extends Product {
+    private Boolean perishable;
 
-    public Food(){
+    public Food() {
 
     }
-    public Food(Integer ID, String productName, Double price, String brand, Category category, Double kg) {
-        super(ID, productName, price, brand, category);
-        this.setKg(kg);
+
+    public Food(Integer ID, String productName, String brand, Category category, Boolean perishable) {
+        super(ID, productName, brand, category);
+        this.perishable = perishable;
     }
 
-    public Double getKg() {
-        return kg;
+    public Boolean getPerishable() {
+        return perishable;
     }
 
-    public void setKg(Double kg) {
-        this.kg = kg;
+    public void setPerishable(Boolean perishable) {
+        this.perishable = perishable;
     }
 
     @Override
     public String toString() {
-        return super.toString()+
-                "\nPeso: " + kg + " kg";
+        return super.toString() +
+                (perishable ? "\nAlimento perecedero" : "\nAlimento no perecedero");
     }
 }

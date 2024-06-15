@@ -1,5 +1,6 @@
 package Service.impl;
 
+import Models.Product;
 import Service.MenusService;
 import Service.SupermarketService;
 
@@ -18,7 +19,7 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void initialMenu(){
+    public void initialMenu() {
 
         Scanner sc = new Scanner(System.in);
         Integer opc;
@@ -49,7 +50,7 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void clientMenu(){
+    public void clientMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
@@ -112,7 +113,7 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Ingrese una opcion correcta!");
                     break;
             }
-        }while(opc!=0);
+        } while (opc != 0);
     }
 
     public void privateAccessMenu() {
@@ -163,7 +164,7 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Volviendo...");
                     break;
                 case 1:
-                    foodService.create();
+                    privateAccessCreateProductMenu();
                     break;
                 case 2:
                     foodService.modify();
@@ -178,7 +179,35 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Opción no disponible");
                     break;
             }
-        }while (opc != 0);
+        } while (opc != 0);
+    }
+
+    public void privateAccessCreateProductMenu() {
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("            [1] CREAR COMIDA");
+            System.out.println("            [2] CREAR BEBIDA");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+                    foodService.create();
+                    break;
+                case 2:
+                    //crear beverage
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
+            }
+        } while (opc != 0);
     }
 
     public void privateAccessSupermarketMenu() {
@@ -189,6 +218,9 @@ public class MenusServiceImpl implements MenusService {
             System.out.println("            [1] CREAR SUPERMERCADO");
             System.out.println("            [2] MODIFICAR SUPERMERCADO");
             System.out.println("            [3] ELIMINAR SUPERMERCADO");
+            System.out.println("            [4] AÑADIR PRODUCTO");
+            System.out.println("            [5] MODIFICAR PRECIO");
+            System.out.println("            [6] ELIMINAR PRODUCTO");
             System.out.println("            [0] SALIR\n");
 
             opc = Integer.parseInt(sc.nextLine());
@@ -206,11 +238,20 @@ public class MenusServiceImpl implements MenusService {
                 case 3:
 
                     break;
+                case 4:
+
+                    break;
+                case 5:
+
+                    break;
+                case 6:
+
+                    break;
                 default:
                     System.out.println("Opción no disponible");
                     break;
             }
-        }while (opc != 0);
+        } while (opc != 0);
     }
 
 }

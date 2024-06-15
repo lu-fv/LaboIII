@@ -18,9 +18,6 @@ public class Main {
         foodService.modify();
         foodService.showAll();*/
 
-        for (Category c : Category.values()){
-            System.out.println(c);
-        }
 
         MenusServiceImpl menu = new MenusServiceImpl();
 
