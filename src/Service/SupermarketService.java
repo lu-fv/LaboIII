@@ -29,10 +29,10 @@ public interface SupermarketService {
     //endregion
 
     //region BÚSQUEDA GENERAL----------------------------------------------------
-    List<ProductForSale> searchSalesProducts();
+    List<ProductForSale> searchSalesProducts() throws IOException;
 
-    List<ProductForSale> searchSpecialProductsByName(String name);
+    List<ProductForSale> searchSpecialProductsByName(String name) throws IOException;
 
-    List<ProductForSale> searchProductsByCategory(Category c);
+    List<ProductForSale> searchProductsByCategory(Category c) throws IOException;
     //endregion
 }

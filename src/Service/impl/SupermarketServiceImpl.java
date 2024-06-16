@@ -8,17 +8,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
-import java.util.HashSet;
+import java.util.*;
 
 import Enums.Category;
 import Models.ProductForSale;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
@@ -192,85 +188,81 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
     //region BÚSQUEDA GENERAL----------------------------------------------------
     @Override
-    public List<ProductForSale> searchSalesProducts() {
+    public List<ProductForSale> searchSalesProducts() throws IOException {
+        //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
         List<ProductForSale> listProduct = new ArrayList<>();
 
-        Supermarket vea = this.search("vea");
-        Supermarket carrefour = this.search("carrefour");
-        Supermarket disco = this.search("disco");
+        //leo la lista de supermercados del json
+        ObjectMapper objectMapperSupermarket = new ObjectMapper();
+        List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
 
-        for (ProductForSale p : vea.getProductListHashSet()){
-            if(p.getOnSale()){
-                listProduct.add(p);
-            }
-        }
-
-        for (ProductForSale p : carrefour.getProductListHashSet()){
-            if(p.getOnSale()){
-                listProduct.add(p);
-            }
-        }
-
-        for (ProductForSale p : disco.getProductListHashSet()){
-            if(p.getOnSale()){
-                listProduct.add(p);
+        //recorro la lista de supermercados
+        for (Supermarket s : listSupermarket) {
+            //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+            if (!s.getProductListHashSet().isEmpty()) {
+                //recorro el Set de productos de cada supermercado
+                for (ProductForSale p : s.getProductListHashSet()) {
+                    if (p.getOnSale()) {
+                        //agrego a la lista los productos que esten en oferta
+                        listProduct.add(p);
+                    }
+                }
             }
         }
         return listProduct;
     }
 
     @Override
-    public List<ProductForSale> searchSpecialProductsByName(String name) {
+    public List<ProductForSale> searchSpecialProductsByName(String name) throws IOException {
+
+        //me aseguro que este todo en minuscula para comparar despues con los productos del json
+        name = name.toLowerCase(Locale.ROOT);
+        //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
         List<ProductForSale> listProduct = new ArrayList<>();
 
-        Supermarket vea = this.search("vea");
-        Supermarket carrefour = this.search("carrefour");
-        Supermarket disco = this.search("disco");
+        //leo la lista de supermercados del json
+        ObjectMapper objectMapperSupermarket = new ObjectMapper();
+        List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
 
-        for (ProductForSale p : vea.getProductListHashSet()){
-            if(p.getProduct().getProductName().equalsIgnoreCase(name)){
-                listProduct.add(p);
-            }
-        }
-
-        for (ProductForSale p : carrefour.getProductListHashSet()){
-            if(p.getProduct().getProductName().equalsIgnoreCase(name)){
-                listProduct.add(p);
-            }
-        }
-
-        for (ProductForSale p : disco.getProductListHashSet()){
-            if(p.getProduct().getProductName().equalsIgnoreCase(name)){
-                listProduct.add(p);
+        //recorro la lista de supermercados
+        for (Supermarket s : listSupermarket) {
+            //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+            if (!s.getProductListHashSet().isEmpty()) {
+                //recorro el Set de productos de cada supermercado
+                for (ProductForSale p : s.getProductListHashSet()) {
+                    //paso a minuscula el nombre del producto
+                    String nameProductSupermarket = p.getProduct().getProductName().toLowerCase(Locale.ROOT);
+                    if (nameProductSupermarket.contains(name)) {
+                        //agrego a la lista los productos que coincide con la descripcion
+                        listProduct.add(p);
+                    }
+                }
             }
         }
         return listProduct;
-
     }
 
     @Override
-    public List<ProductForSale> searchProductsByCategory(Category c) {
+    public List<ProductForSale> searchProductsByCategory(Category c) throws IOException {
+        //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
         List<ProductForSale> listProduct = new ArrayList<>();
 
-        Supermarket vea = this.search("vea");
-        Supermarket carrefour = this.search("carrefour");
-        Supermarket disco = this.search("disco");
+        //leo la lista de supermercados del json
+        ObjectMapper objectMapperSupermarket = new ObjectMapper();
+        List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
 
-        for (ProductForSale p : vea.getProductListHashSet()){
-            if(p.getProduct().getCategory() == c){
-                listProduct.add(p);
-            }
-        }
-
-        for (ProductForSale p : carrefour.getProductListHashSet()){
-            if(p.getProduct().getCategory() == c){
-                listProduct.add(p);
-            }
-        }
-
-        for (ProductForSale p : disco.getProductListHashSet()){
-            if(p.getProduct().getCategory() == c){
-                listProduct.add(p);
+        //recorro la lista de supermercados
+        for (Supermarket s : listSupermarket) {
+            //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+            if (!s.getProductListHashSet().isEmpty()) {
+                //recorro el Set de productos de cada supermercado
+                for (ProductForSale p : s.getProductListHashSet()) {
+                    //paso a minuscula el nombre del producto
+                    if (p.getProduct().getCategory() == c) {
+                        //agrego a la lista los productos que coincide con la categoria
+                        listProduct.add(p);
+                    }
+                }
             }
         }
         return listProduct;

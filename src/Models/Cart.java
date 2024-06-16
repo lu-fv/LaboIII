@@ -3,15 +3,19 @@ package Models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cart {
+public class Cart<T> {
     private double totalPrice;
-    private Map<Product, Integer> cart = new HashMap<>();
+    private Map<T, Integer> cart = new HashMap<>();
 
     public Cart() {
     }
 
-    public Cart(double totalPrice, HashMap<Product, Integer> cart) {
+    public Cart(double totalPrice, Map<T, Integer> cart) {
         this.totalPrice = totalPrice;
+        this.cart = cart;
+    }
+
+    public Cart(Map<T, Integer> cart) {
         this.cart = cart;
     }
 
@@ -23,12 +27,11 @@ public class Cart {
         this.totalPrice = totalPrice;
     }
 
-    public Map<Product, Integer> getCart() {
+    public Map<T, Integer> getCart() {
         return cart;
     }
 
-    public void setCart(HashMap<Product, Integer> list) {
+    public void setCart(Map<T, Integer> cart) {
         this.cart = cart;
     }
-
 }
