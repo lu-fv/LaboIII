@@ -8,27 +8,31 @@ import java.io.IOException;
 import java.util.List;
 
 public interface SupermarketService {
-    //ABM-----------------------------------------------------------------
+    //region ABM-----------------------------------------------------------------
     Supermarket addSupermarket();
 
-    void deleteSupermarket(Supermarket<ProductForSale> s);
+    void deleteSupermarket(Supermarket s);
 
-    void modifySupermarket(Supermarket<ProductForSale> s);
+    void modifySupermarket(Supermarket s);
 
-    void supermarketList(Supermarket<ProductForSale> s);
+    void supermarketList(Supermarket s);
 
-    void saveSupermarketInJsonFile(Supermarket<ProductForSale> s) throws IOException;
+    void saveSupermarketInJsonFile(Supermarket s) throws IOException;
+    //endregion
 
-    //BÚSQUEDA GENERAL----------------------------------------------------
+    //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
+    Supermarket search(String name) throws IOException;
+
+    void showListSupermarket(Supermarket supermarket);
+
+    Supermarket searchByCategory(Category category);
+    //endregion
+
+    //region BÚSQUEDA GENERAL----------------------------------------------------
     List<ProductForSale> searchSalesProducts();
 
     List<ProductForSale> searchSpecialProductsByName(String name);
 
     List<ProductForSale> searchProductsByCategory(Category c);
-
-    //BÚSQUEDA POR SUPERMERCADO-------------------------------------------
-    Supermarket Search(String name) throws IOException;
-    void ShowListSupermarket(Supermarket supermarket);
-     Supermarket SearchByCategory(Category category);
-
+    //endregion
 }

@@ -23,7 +23,7 @@ import java.util.Set;
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
 
-    //ABM-----------------------------------------------------------------
+    //region ABM-----------------------------------------------------------------
     @Override
     public Supermarket addSupermarket() {
         Scanner sc = new Scanner(System.in);
@@ -59,13 +59,15 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                     break;
             }
         } while (opc != 3);
-        Supermarket s = new Supermarket(name, adress, phone, cuit, (HashSet<Product>) products);
+
+        Set<ProductForSale> listProduct = new HashSet<>();
+        Supermarket s = new Supermarket(name, adress, phone, cuit, listProduct);
 
         return s;
     }
 
     @Override
-    public void deleteSupermarket(Supermarket<ProductForSale> s) {
+    public void deleteSupermarket(Supermarket s) {
         Scanner sr = new Scanner(System.in);
         System.out.println("Ingrese CUIT del supermercado a eliminar: ");
         String cuit = sr.nextLine();
@@ -73,7 +75,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public void modifySupermarket(Supermarket<ProductForSale> s) {
+    public void modifySupermarket(Supermarket s) {
         Integer opc;
         Scanner sr = new Scanner(System.in);
         Scanner st = new Scanner(System.in);
@@ -109,142 +111,29 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public void supermarketList(Supermarket<ProductForSale> s) {
+    public void supermarketList(Supermarket s) {
         for (ProductForSale p : s.getProductListHashSet()) {
             p.toString();
         }
-
     }
 
     @Override
-    public void saveSupermarketInJsonFile(Supermarket<ProductForSale> s) throws IOException {
+    public void saveSupermarketInJsonFile(Supermarket s) throws IOException {
         if (!supermarketFile.exists()) {
             supermarketFile.createNewFile();
         }
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(supermarketFile, s);
-
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
+    //endregion
 
-    //BÚSQUEDA GENERAL----------------------------------------------------
+    //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
     @Override
-    public List<ProductForSale> searchSalesProducts() {
-        try {
-            File fv = new File("vea.json");
-            File fc = new File("carrefour.json");
-            File fd = new File("disco.json");
-
-            List<ProductForSale> listProduct = new ArrayList<>();
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            while (fv.canRead()) {
-                ProductForSale pv = objectMapper.readValue(fv, ProductForSale.class);
-                if (pv.getOnSale()) {
-                    listProduct.add(pv);
-                }
-            }
-
-            while (fc.canRead()) {
-                ProductForSale pc = objectMapper.readValue(fc, ProductForSale.class);
-                if (pc.getOnSale()) {
-                    listProduct.add(pc);
-                }
-            }
-
-            while (fd.canRead()) {
-                ProductForSale pd = objectMapper.readValue(fd, ProductForSale.class);
-                if (pd.getOnSale()) {
-                    listProduct.add(pd);
-                }
-            }
-            return listProduct;
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    @Override
-    public List<ProductForSale> searchSpecialProductsByName(String name) {
-        try {
-            File fv = new File("vea.json");
-            File fc = new File("carrefour.json");
-            File fd = new File("disco.json");
-
-            List<ProductForSale> listProduct = new ArrayList<>();
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            while (fv.canRead()) {
-                ProductForSale pv = objectMapper.readValue(fv, ProductForSale.class);
-                if (pv.getProduct().getProductName().contains(name)) {
-                    listProduct.add(pv);
-                }
-            }
-
-            while (fc.canRead()) {
-                ProductForSale pc = objectMapper.readValue(fc, ProductForSale.class);
-                if (pc.getProduct().getProductName().contains(name)) {
-                    listProduct.add(pc);
-                }
-            }
-
-            while (fd.canRead()) {
-                ProductForSale pd = objectMapper.readValue(fd, ProductForSale.class);
-                if (pd.getProduct().getProductName().contains(name)) {
-                    listProduct.add(pd);
-                }
-            }
-            return listProduct;
-
-        } catch (IOException e) {
-            return null;
-        }
-
-    }
-
-    @Override
-    public List<ProductForSale> searchProductsByCategory(Category c) {
-        try {
-            File fv = new File("vea.json");
-            File fc = new File("carrefour.json");
-            File fd = new File("disco.json");
-
-            List<ProductForSale> listProduct = new ArrayList<>();
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            while (fv.canRead()) {
-                ProductForSale pv = objectMapper.readValue(fv, ProductForSale.class);
-                if (pv.getProduct().getCategory() == c) {
-                    listProduct.add(pv);
-                }
-            }
-
-            while (fc.canRead()) {
-                ProductForSale pc = objectMapper.readValue(fc, ProductForSale.class);
-                if (pc.getProduct().getCategory() == c) {
-                    listProduct.add(pc);
-                }
-            }
-
-            while (fd.canRead()) {
-                ProductForSale pd = objectMapper.readValue(fd, ProductForSale.class);
-                if (pd.getProduct().getCategory() == c) {
-                    listProduct.add(pd);
-                }
-            }
-            return listProduct;
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    //BÚSQUEDA POR SUPERMERCADO-------------------------------------------
-    @Override
-    public Supermarket Search(String name) {
+    public Supermarket search(String name) {
 
         Supermarket supermarket = null;
         try {
@@ -254,7 +143,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             }); // levanto la lista por referencia de supermercado de Json
 
             for (Supermarket superM : supermarkets) {
-                if (superM.getName().equals(name)) {
+                if (superM.getName().equalsIgnoreCase(name)) {
                     supermarket = superM;
                 }
 
@@ -268,7 +157,15 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public Supermarket SearchByCategory(Category category) {
+    public void showListSupermarket(Supermarket supermarket) {
+        if (supermarket != null) {
+            System.out.println(supermarket);
+
+        }
+    }
+
+    @Override
+    public Supermarket searchByCategory(Category category) {
 
         Supermarket supermarket = null;
         try {
@@ -291,11 +188,92 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         return supermarket;
     }
 
-    @Override
-    public void ShowListSupermarket(Supermarket supermarket) {
-        if (supermarket != null) {
-            System.out.println(supermarket);
+    //endregion
 
+    //region BÚSQUEDA GENERAL----------------------------------------------------
+    @Override
+    public List<ProductForSale> searchSalesProducts() {
+        List<ProductForSale> listProduct = new ArrayList<>();
+
+        Supermarket vea = this.search("vea");
+        Supermarket carrefour = this.search("carrefour");
+        Supermarket disco = this.search("disco");
+
+        for (ProductForSale p : vea.getProductListHashSet()){
+            if(p.getOnSale()){
+                listProduct.add(p);
+            }
         }
+
+        for (ProductForSale p : carrefour.getProductListHashSet()){
+            if(p.getOnSale()){
+                listProduct.add(p);
+            }
+        }
+
+        for (ProductForSale p : disco.getProductListHashSet()){
+            if(p.getOnSale()){
+                listProduct.add(p);
+            }
+        }
+        return listProduct;
     }
+
+    @Override
+    public List<ProductForSale> searchSpecialProductsByName(String name) {
+        List<ProductForSale> listProduct = new ArrayList<>();
+
+        Supermarket vea = this.search("vea");
+        Supermarket carrefour = this.search("carrefour");
+        Supermarket disco = this.search("disco");
+
+        for (ProductForSale p : vea.getProductListHashSet()){
+            if(p.getProduct().getProductName().equalsIgnoreCase(name)){
+                listProduct.add(p);
+            }
+        }
+
+        for (ProductForSale p : carrefour.getProductListHashSet()){
+            if(p.getProduct().getProductName().equalsIgnoreCase(name)){
+                listProduct.add(p);
+            }
+        }
+
+        for (ProductForSale p : disco.getProductListHashSet()){
+            if(p.getProduct().getProductName().equalsIgnoreCase(name)){
+                listProduct.add(p);
+            }
+        }
+        return listProduct;
+
+    }
+
+    @Override
+    public List<ProductForSale> searchProductsByCategory(Category c) {
+        List<ProductForSale> listProduct = new ArrayList<>();
+
+        Supermarket vea = this.search("vea");
+        Supermarket carrefour = this.search("carrefour");
+        Supermarket disco = this.search("disco");
+
+        for (ProductForSale p : vea.getProductListHashSet()){
+            if(p.getProduct().getCategory() == c){
+                listProduct.add(p);
+            }
+        }
+
+        for (ProductForSale p : carrefour.getProductListHashSet()){
+            if(p.getProduct().getCategory() == c){
+                listProduct.add(p);
+            }
+        }
+
+        for (ProductForSale p : disco.getProductListHashSet()){
+            if(p.getProduct().getCategory() == c){
+                listProduct.add(p);
+            }
+        }
+        return listProduct;
+    }
+    //endregion
 }
