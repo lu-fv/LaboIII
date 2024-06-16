@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
             ObjectMapper objectMapperCart = new ObjectMapper();
             objectMapperCart.writeValue(cartFile, cart);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }
