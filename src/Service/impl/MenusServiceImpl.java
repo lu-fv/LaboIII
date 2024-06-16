@@ -1,6 +1,5 @@
 package Service.impl;
 
-import Models.Product;
 import Service.MenusService;
 import Service.SupermarketService;
 
@@ -10,7 +9,7 @@ public class MenusServiceImpl implements MenusService {
 
     private FoodServiceImpl foodService;
     private BeverageServiceImpl beverageService;
-    private SupermarketService supermarketService;
+    private SupermarketServiceImpl supermarketService;
 
     public MenusServiceImpl() {
         this.foodService = new FoodServiceImpl();

@@ -1,13 +1,9 @@
 package Models;
 
-import Enums.Category;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.String;
 import java.util.*;
-//import java.util.Set;
 
 public class Supermarket<T> {
     private String name;

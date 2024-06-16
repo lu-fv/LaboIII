@@ -5,6 +5,9 @@ public class ProductForSale {
     private Double price;
     private Boolean onSale;
 
+    public ProductForSale() {
+    }
+
     public ProductForSale(Product product, Double price, Boolean onSale) {
         this.setProduct(product);
         this.setPrice(price);
