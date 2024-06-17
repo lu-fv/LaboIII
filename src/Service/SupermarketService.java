@@ -11,9 +11,9 @@ public interface SupermarketService {
     //region ABM-----------------------------------------------------------------
     Supermarket addSupermarket();
 
-    void deleteSupermarket(Supermarket s);
+    void deleteSupermarket() throws IOException;
 
-    void modifySupermarket(Supermarket s);
+    public void modifySupermarket(String name);
 
     void supermarketList(Supermarket s);
 

@@ -15,6 +15,13 @@ public class Supermarket{
     public Supermarket() {
     }
 
+    public Supermarket(String name, String address, String phone, String cuit) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.cuit = cuit;
+    }
+
     public Supermarket(String name, String address, String phone, String cuit, Set<ProductForSale> productListHashSet) {
         this.name = name;
         this.address = address;

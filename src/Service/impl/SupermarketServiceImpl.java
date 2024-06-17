@@ -1,7 +1,9 @@
 package Service.impl;
 
+import Models.Food;
 import Models.Product;
 import Models.Supermarket;
+import Service.FoodService;
 import Service.SupermarketService;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -18,13 +20,12 @@ import java.io.IOException;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
+    private HashMap<String, Supermarket>superMarketList; //cuit y supermercado
 
     //region ABM-----------------------------------------------------------------
     @Override
     public Supermarket addSupermarket() {
         Scanner sc = new Scanner(System.in);
-        Scanner si = new Scanner(System.in);
-        Set<Product> products = new HashSet<>();
         System.out.println("ingrese nombre/denominacion: ");
         String name = sc.nextLine();
         System.out.println("Ingrese direccion: ");
@@ -33,45 +34,34 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         String phone = sc.nextLine();
         System.out.println("Ingrese clave de indentificacion tributaria: ");
         String cuit = sc.nextLine();
-        Integer opc;
 
-        do {
-            System.out.println("1 - Ingresar un alimento: ");
-            System.out.println("2 - Ingrese una bebida: ");
-            System.out.println("3 - salir");
-            opc = si.nextInt();
-
-            switch (opc) {
-                case 1:
-                    ///funcion de alta de alimento
-                    //products.add(//return de la funcion);
-                    break;
-                case 2:
-                    ///funcion de alta de bebida
-                    //products.add(//return de la funcion);
-                    break;
-                default:
-                    System.out.println("opcion incorrecta");
-                    break;
-            }
-        } while (opc != 3);
-
-        Set<ProductForSale> listProduct = new HashSet<>();
-        Supermarket s = new Supermarket(name, adress, phone, cuit, listProduct);
-
+        Supermarket s = new Supermarket(name, adress, phone, cuit);
         return s;
     }
 
     @Override
-    public void deleteSupermarket(Supermarket s) {
+    public void deleteSupermarket() throws IOException {
         Scanner sr = new Scanner(System.in);
-        System.out.println("Ingrese CUIT del supermercado a eliminar: ");
-        String cuit = sr.nextLine();
+        System.out.println("Ingrese nombre del supermercado a eliminar: ");
+        String name= sr.nextLine();
+
+        Supermarket s= search(name);
+        this.superMarketList.remove(s);
+
+        try{
+            ObjectMapper mapper= new ObjectMapper();
+            mapper.writeValue(supermarketFile, superMarketList);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 
     @Override
-    public void modifySupermarket(Supermarket s) {
+    public void modifySupermarket(String name) {
+
+        Supermarket s= search(name);
+
         Integer opc;
         Scanner sr = new Scanner(System.in);
         Scanner st = new Scanner(System.in);
@@ -104,10 +94,17 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         } while (opc != 4);
 
+        
+
     }
 
     @Override
     public void supermarketList(Supermarket s) {
+        System.out.println("SUPERMERCADO: ");
+        System.out.println(s.getName());
+        System.out.println("CUIT: ");
+        System.out.println(s.getCuit());
+        System.out.println("LISTA DE PRODUCTOS: ");
         for (ProductForSale p : s.getProductListHashSet()) {
             p.toString();
         }
