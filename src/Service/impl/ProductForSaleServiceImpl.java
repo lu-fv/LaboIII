@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class ProductForSaleServiceImpl implements ProductForSaleService {
     private final File file = new File("product.json");
-
+    private SupermarketServiceImpl supermarket;
     public void addProductForSale(Supermarket s) throws IOException {
         Integer opcId;
         Scanner sc = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         ProductForSale newProductForSale = new ProductForSale(mapProducts.get(opcId), newPrice, false);
         s.getProductListHashSet().add(newProductForSale);
 
-        modifySupermarketListProduct(s);
+        supermarket.modifySupermarketListProducts(s);
     }
 
     public Boolean validationId(Integer id, Map<Integer, Product> map) {
