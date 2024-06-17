@@ -5,19 +5,20 @@ import Models.ProductForSale;
 import Models.Supermarket;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface SupermarketService {
     //region ABM-----------------------------------------------------------------
-    Supermarket addSupermarket();
+    void addSupermarket() throws IOException;
 
     void deleteSupermarket() throws IOException;
 
-    public void modifySupermarket(String name);
+    public void modifySupermarket(String name) throws IOException;
 
     void supermarketList(Supermarket s);
 
-    void saveSupermarketInJsonFile(Supermarket s) throws IOException;
+    void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException;
     //endregion
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
