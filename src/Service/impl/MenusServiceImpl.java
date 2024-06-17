@@ -7,10 +7,9 @@ import Service.SupermarketService;
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
-
-    private FoodServiceImpl foodService;
-    private BeverageServiceImpl beverageService;
-    private SupermarketService supermarketService;
+    protected FoodServiceImpl foodService;
+    protected BeverageServiceImpl beverageService;
+    protected SupermarketService supermarketService;
 
     public MenusServiceImpl() {
         this.foodService = new FoodServiceImpl();
@@ -55,11 +54,10 @@ public class MenusServiceImpl implements MenusService {
         Integer opc;
 
         do {
-            System.out.println("======================= OFERTAS.COM ============================");
+            System.out.println("======================= CREAR LISTA ============================");
             System.out.println("\n");
-            System.out.println("            [1] CREAR LISTA DE COMPRAS");
-            System.out.println("            [2] COMPARADOR DE PRECIOS");
-            System.out.println("            [3] EL MAS BARATO");
+            System.out.println("            [1] CREAR LISTA POR SUPERMERCADO");
+            System.out.println("            [2] CREAR LISTA EN GENERAL");
             System.out.println("            [0] SALIR\n");
 
             opc = sc.nextInt();
@@ -85,11 +83,11 @@ public class MenusServiceImpl implements MenusService {
         Integer opc;
 
         do {
-            System.out.println("======================= LISTA DE COMPRAS ============================");
+            System.out.println("======================= BUSQUEDA DE PRODUCTOS ============================");
             System.out.println("\n");
-            System.out.println("            [1] CREAR LISTA POR SUPERMERCADO");
-            System.out.println("            [2] CREAR LISTA EN EL SUPERMERCADO MAS BARATO");
-            System.out.println("            [3] CREAR LISTA CON EL MAS BARATO (indemendientemente del supermercado???????");
+            System.out.println("            [1] POR NOMBRE DE PRODUCTO");
+            System.out.println("            [2] POR PRODUCTOS EN OFERTAS");
+            System.out.println("            [3] POR CATEGORIA");
             System.out.println("            [4] TU LISTA DE COMPRAS");
             System.out.println("            [0] SALIR\n");
 
@@ -97,9 +95,6 @@ public class MenusServiceImpl implements MenusService {
 
             switch (opc) {
                 case 1:
-                    System.out.println("            [1] BUSCAR PRODUCTO POR CATEGORIA");
-                    System.out.println("            [2] BUSCAR OFERTAS");
-                    System.out.println("            [3] TODOS LOS PRODUCTOS");
                     break;
                 case 2:
                     break;
