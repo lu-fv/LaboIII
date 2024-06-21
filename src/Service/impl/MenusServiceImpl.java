@@ -15,7 +15,7 @@ public class MenusServiceImpl implements MenusService {
     protected BeverageServiceImpl beverageService;
     protected SupermarketService supermarketService;
 
-    public MenusServiceImpl() {
+    public MenusServiceImpl() throws IOException {
         this.foodService = new FoodServiceImpl();
         this.beverageService = new BeverageServiceImpl();
         this.supermarketService = new SupermarketServiceImpl();
@@ -251,47 +251,56 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessSupermarketMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-        Supermarket supermarketExist = new Supermarket();
 
-        System.out.println("======================= ABML SUPERMERCADO ============================");
-        do {
-            System.out.println("            [1] CREAR SUPERMERCADO");
-            System.out.println("            [2] MODIFICAR SUPERMERCADO");
-            System.out.println("            [3] ELIMINAR SUPERMERCADO");
-            System.out.println("            [4] AÑADIR PRODUCTO");
-            System.out.println("            [5] MODIFICAR PRECIO");
-            System.out.println("            [6] ELIMINAR PRODUCTO");
-            System.out.println("            [0] SALIR\n");
+        Supermarket supermarketSelect = new Supermarket();
 
-            opc = Integer.parseInt(sc.nextLine());
+        if (supermarketSelect != null || supermarketService.supermarketsListJson().isEmpty()) {
+            System.out.println("======================= ABML SUPERMERCADOS ============================");
+            do {
+                System.out.println("            [1] CREAR SUPERMERCADO");
+                System.out.println("            [2] MODIFICAR SUPERMERCADO");
+                System.out.println("            [3] ELIMINAR SUPERMERCADO");
+                System.out.println("            [4] AÑADIR PRODUCTO");
+                System.out.println("            [5] MODIFICAR PRECIO");
+                System.out.println("            [6] ELIMINAR PRODUCTO");
+                System.out.println("            [0] SALIR\n");
 
-            switch (opc) {
-                case 0:
-                    System.out.println("Volviendo...");
-                    break;
-                case 1:
+                opc = Integer.parseInt(sc.nextLine());
 
-                    break;
-                case 2:
+                switch (opc) {
+                    case 0:
+                        System.out.println("Volviendo...");
+                        break;
+                    case 1:
+                        supermarketService.addSupermarket();
+                        break;
+                    case 2:
+                        supermarketService.modifySupermarket(supermarketSelect.getName());
+                        break;
+                    case 3:
+                        supermarketService.deleteSupermarket();
+                        break;
+                    case 4:
+                        productForSale.addProductForSale(supermarketSelect);
+                        break;
+                    case 5:
 
-                    break;
-                case 3:
+                        break;
+                    case 6:
 
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-
-                    break;
-                case 6:
-
-                    break;
-                default:
-                    System.out.println("Opción no disponible");
-                    break;
+                        break;
+                    default:
+                        System.out.println("Opción no disponible");
+                        break;
+                }
+            } while (opc != 0);
+        } else {
+            System.out.println("El supermercado que desea no se encuentra en el listado. Desea agregarlo? si o no");
+            if (sc.nextLine().equalsIgnoreCase("si")) {
+                supermarketService.addSupermarket();
+            } else {
+                System.out.println("volviendo al menu anterior");
             }
-        } while (opc != 0);
-    }
+        }
 
 }
