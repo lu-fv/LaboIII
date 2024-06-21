@@ -17,7 +17,7 @@ public class MenusServiceImpl implements MenusService {
     protected SupermarketService supermarketService;
     protected ProductForSaleServiceImpl productForSale;
 
-    public MenusServiceImpl() {
+    public MenusServiceImpl() throws IOException {
         this.foodService = new FoodServiceImpl();
         this.beverageService = new BeverageServiceImpl();
         this.supermarketService = new SupermarketServiceImpl();
@@ -258,7 +258,7 @@ public class MenusServiceImpl implements MenusService {
         Integer opc;
         Supermarket supermarketSelect = new Supermarket();
 
-        for (Map.Entry<Integer, Supermarket> entry : supermarketService.supermarketsListJson().entrySet()) {
+        for (Map.Entry<String, Supermarket> entry : supermarketService.supermarketsListJson().entrySet()) {
             System.out.println(entry);
             System.out.println("Presione SI en el supermercado deseado sino presione cualquier tecla");
             if (sc.nextLine().equalsIgnoreCase("si")) {
