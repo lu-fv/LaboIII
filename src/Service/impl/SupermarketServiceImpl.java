@@ -1,5 +1,6 @@
 package Service.impl;
 
+import Models.Product;
 import Models.Supermarket;
 import Service.SupermarketService;
 import com.fasterxml.jackson.core.exc.StreamReadException;
@@ -19,7 +20,7 @@ import java.io.IOException;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
-    private HashMap<String, Supermarket>superMarketList= new HashMap<>(); //cuit y supermercado
+    private HashMap<String, Supermarket> superMarketList = new HashMap<>(); //cuit y supermercado
 
     //region ABM-----------------------------------------------------------------
 
@@ -46,18 +47,18 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public void deleteSupermarket() throws IOException {
         Scanner sr = new Scanner(System.in);
         System.out.println("Ingrese nombre del supermercado a eliminar: ");
-        String name= sr.nextLine();
+        String name = sr.nextLine();
 
-        Supermarket s= search(name);
+        Supermarket s = search(name);
         this.superMarketList.remove(s);
 
-       saveSupermarketInJsonFile(superMarketList);
+        saveSupermarketInJsonFile(superMarketList);
     }
 
     public void modifySupermarketListProducts(Supermarket s) throws IOException {
 
-        for(Map.Entry<String, Supermarket>entry: superMarketList.entrySet() ){
-            if(s.getName().equalsIgnoreCase(entry.getKey())){
+        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+            if (s.getName().equalsIgnoreCase(entry.getKey())) {
                 entry.setValue(s);
             }
         }
@@ -68,7 +69,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     @Override
     public void modifySupermarket(String name) throws IOException {
 
-        Supermarket s= search(name);
+        Supermarket s = search(name);
 
         Integer opc;
         Scanner sr = new Scanner(System.in);
@@ -120,7 +121,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException {
+    public void saveSupermarketInJsonFile(HashMap<String, Supermarket> superList) throws IOException {
         if (!supermarketFile.exists()) {
             supermarketFile.createNewFile();
         }
@@ -133,7 +134,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
     //endregion
 
-    public HashMap<Integer,Supermarket> supermarketsListJson () throws IOException {
+    public HashMap<Integer, Supermarket> supermarketsListJson() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         TypeFactory typeFactory = mapper.getTypeFactory();
         MapType mapType = typeFactory.constructMapType(HashMap.class, Integer.class, Supermarket.class);
@@ -289,7 +290,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         //leo la lista de supermercados del json
         ObjectMapper objectMapperSupermarket = new ObjectMapper();
 
-        try{
+        try {
             List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
             //recorro la lista de supermercados
             for (Supermarket s : listSupermarket) {
@@ -305,12 +306,141 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                     }
                 }
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.getMessage();
             System.out.println("no existe archivo de Supermercados");
 
         }
         return false;
-
     }
+
+    public void RemoveProductForSupermarket(Integer id) {
+        boolean isProduct = false;
+        //leo la lista de supermercados del json
+        ObjectMapper objectMapperSupermarket = new ObjectMapper();
+        try {
+            List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
+
+            //recorro la lista de supermercados
+            for (Supermarket s : listSupermarket) {
+                //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+                if (!s.getProductListHashSet().isEmpty()) {
+                    //recorro el Set de productos de cada supermercado
+                    for (ProductForSale p : s.getProductListHashSet()) {
+                        if (p.getProduct().getID().equals(id)) {
+                            s.getProductListHashSet().remove(p);
+                            isProduct = true;
+                        }
+                    }
+                }
+            }
+            if (isProduct == false) {
+                throw new IllegalArgumentException(" No existe Id numero: " + id);
+            } else {
+                objectMapperSupermarket.writeValue(this.supermarketFile, listSupermarket);
+            }
+        } catch (IOException e) {
+            e.getMessage();
+            System.out.println("no existe archivo de Supermercados");
+        }
+    }
+
+    private void ModifyProduct(ProductForSale productForSale) {
+
+        Integer opc;
+        Scanner sr = new Scanner(System.in);
+        Scanner st = new Scanner(System.in);
+
+        do {
+            System.out.println("ELIGE CAMPO A MODIFICAR");
+            System.out.println("1 - productName");
+            System.out.println("2 - brand");
+            System.out.println("3 - category");
+            System.out.println("4 - price");
+            System.out.println("5 - onSale");
+            System.out.println("6 - salir");
+            opc = sr.nextInt();
+            switch (opc) {
+                case 1:
+                    System.out.println("ingrese nuevo nombre del producto: ");
+                    productForSale.getProduct().setProductName(st.nextLine());
+
+                    break;
+                case 2:
+                    System.out.println("ingrese nueva marca: ");
+                    productForSale.getProduct().setBrand(st.nextLine());
+
+                    break;
+                case 3:
+                    Category category = null;
+                    do {
+                        System.out.println(" Categoria actual: " + productForSale.getProduct().getCategory());
+                        System.out.println(" Ingrese nueva categoria: ");
+                        System.out.println(" Elija alguna de estas categorias: ");
+                        System.out.println(java.util.Arrays.asList(Category.values()));
+                        category = ProductServiceImpl.selectCategory(sr.nextInt());
+                        if (category != null) {
+                            productForSale.getProduct().setCategory(category);
+                        } else {
+                            System.out.println(" Ingrese numero de categoria correcto ");
+                        }
+                    } while (category == null);
+                    break;
+                case 4:
+                    System.out.println("ingrese nuevo precio: ");
+                    productForSale.setPrice(sr.nextDouble());
+
+                    break;
+                case 5:
+                    String subOpc = "";
+                    do {
+                        System.out.println("En oferta? s/n ");
+                        if ("s".equals(sr.hasNext())) {
+                            productForSale.setOnSale(true);
+                        } else if ("n".equals(sr.hasNext())) {
+                            productForSale.setOnSale(false);
+                        } else {
+                            System.out.println(" Elegir opcion 's' o 'n' ");
+                        }
+                    } while (!subOpc.equals("s") || !subOpc.equals("n"));
+                    break;
+                default:
+                    System.out.println("ingrese una opcion valida");
+                    break;
+            }
+
+        } while (opc != 6);
+    }
+
+    public void ModifyProductInSupermarket(Integer id) {
+        boolean isProduct = false;
+
+        ObjectMapper objectMapperSupermarket = new ObjectMapper();
+        try {
+            List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
+
+
+            for (Supermarket s : listSupermarket) {
+
+                if (!s.getProductListHashSet().isEmpty()) {
+
+                    for (ProductForSale p : s.getProductListHashSet()) {
+                        if (p.getProduct().getID().equals(id)) {
+                            this.ModifyProduct(p);
+                            isProduct = true;
+                        }
+                    }
+                }
+            }
+            if (isProduct == false) {
+                throw new IllegalArgumentException(" No existe Id numero: " + id);
+            } else {
+                objectMapperSupermarket.writeValue(this.supermarketFile, listSupermarket);
+            }
+        } catch (IOException e) {
+            e.getMessage();
+            System.out.println("no existe archivo de Supermercados");
+        }
+    }
+
 }
