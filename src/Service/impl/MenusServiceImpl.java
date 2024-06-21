@@ -2,7 +2,6 @@ package Service.impl;
 
 import Enums.Category;
 import Models.Product;
-import Models.ProductForSale;
 import Models.Supermarket;
 import Service.MenusService;
 import Service.SupermarketService;
@@ -15,13 +14,11 @@ public class MenusServiceImpl implements MenusService {
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
     protected SupermarketService supermarketService;
-    protected ProductForSaleServiceImpl productForSale;
 
     public MenusServiceImpl() {
         this.foodService = new FoodServiceImpl();
         this.beverageService = new BeverageServiceImpl();
         this.supermarketService = new SupermarketServiceImpl();
-        this.productForSale = new ProductForSaleServiceImpl();
     }
 
     @Override
@@ -151,7 +148,7 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void privateAccessMenu() throws IOException {
+    public void privateAccessMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
@@ -185,8 +182,7 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-
-        System.out.println("======================= ABML PRODUCTOS ============================");
+        System.out.println("======================= ABML PRODUCTO ============================");
         do {
             System.out.println("            [1] CREAR PRODUCTO");
             System.out.println("            [2] MODIFICAR PRODUCTO");
@@ -226,8 +222,7 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessCreateProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-
-        System.out.println("======================= CREAR PRODUCTO ============================");
+        System.out.println("======================= MENU CREAR PRODUCTO============================");
         do {
             System.out.println("            [1] CREAR ALIMENTO");
             System.out.println("            [2] CREAR BEBIDA");
@@ -253,69 +248,50 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void privateAccessSupermarketMenu() throws IOException {
+    public void privateAccessSupermarketMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-        Supermarket supermarketSelect = new Supermarket();
+        Supermarket supermarketExist = new Supermarket();
 
-        for (Map.Entry<Integer, Supermarket> entry : supermarketService.supermarketsListJson().entrySet()) {
-            System.out.println(entry);
-            System.out.println("Presione SI en el supermercado deseado sino presione cualquier tecla");
-            if (sc.nextLine().equalsIgnoreCase("si")) {
-                supermarketSelect = entry.getValue();
-                break;
+        System.out.println("======================= ABML SUPERMERCADO ============================");
+        do {
+            System.out.println("            [1] CREAR SUPERMERCADO");
+            System.out.println("            [2] MODIFICAR SUPERMERCADO");
+            System.out.println("            [3] ELIMINAR SUPERMERCADO");
+            System.out.println("            [4] AÑADIR PRODUCTO");
+            System.out.println("            [5] MODIFICAR PRECIO");
+            System.out.println("            [6] ELIMINAR PRODUCTO");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+
+                    break;
+                case 6:
+
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
             }
-        }
-
-        if (supermarketSelect != null || supermarketService.supermarketsListJson().isEmpty()) {
-            System.out.println("======================= ABML SUPERMERCADOS ============================");
-            do {
-                System.out.println("            [1] CREAR SUPERMERCADO");
-                System.out.println("            [2] MODIFICAR SUPERMERCADO");
-                System.out.println("            [3] ELIMINAR SUPERMERCADO");
-                System.out.println("            [4] AÑADIR PRODUCTO");
-                System.out.println("            [5] MODIFICAR PRECIO");
-                System.out.println("            [6] ELIMINAR PRODUCTO");
-                System.out.println("            [0] SALIR\n");
-
-                opc = Integer.parseInt(sc.nextLine());
-
-                switch (opc) {
-                    case 0:
-                        System.out.println("Volviendo...");
-                        break;
-                    case 1:
-                        supermarketService.addSupermarket();
-                        break;
-                    case 2:
-                        supermarketService.modifySupermarket(supermarketSelect.getName());
-                        break;
-                    case 3:
-                        supermarketService.deleteSupermarket();
-                        break;
-                    case 4:
-                        productForSale.addProductForSale(supermarketSelect);
-                        break;
-                    case 5:
-
-                        break;
-                    case 6:
-
-                        break;
-                    default:
-                        System.out.println("Opción no disponible");
-                        break;
-                }
-            } while (opc != 0);
-        } else {
-            System.out.println("El supermercado que desea no se encuentra en el listado. Desea agregarlo? si o no");
-            if (sc.nextLine().equalsIgnoreCase("si")) {
-                supermarketService.addSupermarket();
-            } else {
-                System.out.println("volviendo al menu anterior");
-            }
-        }
-
+        } while (opc != 0);
     }
 
 }

@@ -130,7 +130,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-    }
+    };
     //endregion
 
     public HashMap<Integer,Supermarket> supermarketsListJson () throws IOException {
