@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter" />
+    <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_17_14.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProyectoLaboIII.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoLaboIII.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/CartService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/CartService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/MenusService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/MenusService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/ProductForSaleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/ProductForSaleService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/SupermarketService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/SupermarketService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/CartServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/CartServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/ProductForSaleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/ProductForSaleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/ProductForSale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/ProductForSale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/MenusService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MenusService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ProductForSaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ProductForSaleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/impl/ProductForSaleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/ProductForSaleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,20 +60,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lagun/jackson-annotations-2.17.1.jar&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Labo III/ProyectoLaboIII/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "eugenia__validaciones",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/mariu/OneDrive/Escritorio/librerias  JSon/jackson-databind-2.17.1.jar",
+    "onboarding.tips.debug.path": "E:/Labo III/ProyectoLaboIII/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -81,7 +107,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

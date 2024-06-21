@@ -4,7 +4,6 @@ import Models.Product;
 import Models.ProductForSale;
 import Models.Supermarket;
 import Service.ProductForSaleService;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;

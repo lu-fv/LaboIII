@@ -1,9 +1,11 @@
 package Service.impl;
 
+import Enums.Category;
 import Models.Product;
 import Service.MenusService;
 import Service.SupermarketService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
@@ -18,7 +20,7 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void initialMenu() {
+    public void initialMenu() throws IOException {
 
         Scanner sc = new Scanner(System.in);
         Integer opc;
@@ -34,6 +36,7 @@ public class MenusServiceImpl implements MenusService {
 
             switch (opc) {
                 case 1:
+                    clientMenu();
                     break;
                 case 2:
                     privateAccessMenu();
@@ -46,10 +49,10 @@ public class MenusServiceImpl implements MenusService {
             }
 
         } while (opc != 0);
-    }
+    }//listo
 
     @Override
-    public void clientMenu() {
+    public void clientMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
@@ -64,8 +67,10 @@ public class MenusServiceImpl implements MenusService {
 
             switch (opc) {
                 case 1:
+
                     break;
                 case 2:
+                    shoppingListMenu();
                     break;
                 case 0:
                     break;
@@ -78,12 +83,12 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void shoppingListMenu() {
+    public void shoppingListMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
         do {
-            System.out.println("======================= BUSQUEDA DE PRODUCTOS ============================");
+            System.out.println("======================= BUSQUEDA DE PRODUCTOS EN TODOS LOS SUPERMERCADOS ============================");
             System.out.println("\n");
             System.out.println("            [1] POR NOMBRE DE PRODUCTO");
             System.out.println("            [2] POR PRODUCTOS EN OFERTAS");
@@ -95,10 +100,39 @@ public class MenusServiceImpl implements MenusService {
 
             switch (opc) {
                 case 1:
+                    System.out.println("Ingrese el nombre del producto que esta buscando");
+                    String nameProduct = sc.nextLine();
+                    System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS <<<<<<<<<<<<<<<<<<<<<<");
+                    supermarketService.searchSpecialProductsByName(nameProduct).forEach(System.out::println);
                     break;
                 case 2:
+                    System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS EN OFERTA <<<<<<<<<<<<<<<<<<<<<<");
+                    supermarketService.searchSalesProducts().forEach(System.out::println);
                     break;
                 case 3:
+                    System.out.println("Ingrese la categoria que desee : ");
+                    Integer categorySelect;
+                    do {
+                        categorySelect = sc.nextInt();
+                        ProductServiceImpl.showCategories();
+                        switch (categorySelect) {
+                            case 0:
+                                supermarketService.searchProductsByCategory(Category.DAIRY).forEach(System.out::println);
+                                break;
+                            case 1:
+                                supermarketService.searchProductsByCategory(Category.BAKERY).forEach(System.out::println);
+                                break;
+                            case 2:
+                                supermarketService.searchProductsByCategory(Category.GROCERY).forEach(System.out::println);
+                                break;
+                            case 3:
+                                supermarketService.searchProductsByCategory(Category.ALCOHOL).forEach(System.out::println);
+                                break;
+                            default:
+                                System.out.println("Ingrese un numero de categoria correcto");
+                                break;
+                        }
+                    } while (categorySelect != 0 && categorySelect != 1 && categorySelect != 2 && categorySelect != 3);
                     break;
                 case 4:
                     break;
@@ -111,6 +145,7 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
+    @Override
     public void privateAccessMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
@@ -141,6 +176,7 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
+    @Override
     public void privateAccessProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
@@ -180,6 +216,7 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
+    @Override
     public void privateAccessCreateProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
@@ -208,6 +245,7 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
+    @Override
     public void privateAccessSupermarketMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;

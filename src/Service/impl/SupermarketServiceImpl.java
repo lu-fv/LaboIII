@@ -1,9 +1,6 @@
 package Service.impl;
 
-import Models.Food;
-import Models.Product;
 import Models.Supermarket;
-import Service.FoodService;
 import Service.SupermarketService;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;

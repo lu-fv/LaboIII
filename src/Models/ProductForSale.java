@@ -41,8 +41,16 @@ public class ProductForSale {
 
     @Override
     public String toString() {
-        return product +
-                "\nPrice: $" + price;
+        if(this.onSale){
+            return "Descripcion: "+ product +
+                    " - Precio Anterior: [$" + price +
+                    "] Producto en oferta!!!!";
+        }else{
+            return "Descripcion: "+ product +
+                    " - Precio: [$" + price +
+                    "]";
+        }
+
     }
 
     public Double applyDiscount(Integer percentage) {
