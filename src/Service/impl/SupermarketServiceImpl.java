@@ -128,7 +128,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-    }
+    };
     //endregion
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------

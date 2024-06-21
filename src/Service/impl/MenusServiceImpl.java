@@ -2,10 +2,12 @@ package Service.impl;
 
 import Enums.Category;
 import Models.Product;
+import Models.Supermarket;
 import Service.MenusService;
 import Service.SupermarketService;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
@@ -180,7 +182,7 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-
+        System.out.println("======================= ABML PRODUCTO ============================");
         do {
             System.out.println("            [1] CREAR PRODUCTO");
             System.out.println("            [2] MODIFICAR PRODUCTO");
@@ -220,7 +222,7 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessCreateProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-
+        System.out.println("======================= MENU CREAR PRODUCTO============================");
         do {
             System.out.println("            [1] CREAR ALIMENTO");
             System.out.println("            [2] CREAR BEBIDA");
@@ -249,7 +251,9 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessSupermarketMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
+        Supermarket supermarketExist = new Supermarket();
 
+        System.out.println("======================= ABML SUPERMERCADO ============================");
         do {
             System.out.println("            [1] CREAR SUPERMERCADO");
             System.out.println("            [2] MODIFICAR SUPERMERCADO");
