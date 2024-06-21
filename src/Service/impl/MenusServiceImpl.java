@@ -2,7 +2,6 @@ package Service.impl;
 
 import Enums.Category;
 import Models.Product;
-import Models.ProductForSale;
 import Models.Supermarket;
 import Service.MenusService;
 import Service.SupermarketService;
@@ -15,13 +14,11 @@ public class MenusServiceImpl implements MenusService {
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
     protected SupermarketService supermarketService;
-    protected ProductForSaleServiceImpl productForSale;
 
     public MenusServiceImpl() throws IOException {
         this.foodService = new FoodServiceImpl();
         this.beverageService = new BeverageServiceImpl();
         this.supermarketService = new SupermarketServiceImpl();
-        this.productForSale = new ProductForSaleServiceImpl();
     }
 
     @Override
@@ -151,7 +148,7 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void privateAccessMenu() throws IOException {
+    public void privateAccessMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
@@ -185,8 +182,7 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-
-        System.out.println("======================= ABML PRODUCTOS ============================");
+        System.out.println("======================= ABML PRODUCTO ============================");
         do {
             System.out.println("            [1] CREAR PRODUCTO");
             System.out.println("            [2] MODIFICAR PRODUCTO");
@@ -226,8 +222,7 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessCreateProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-
-        System.out.println("======================= CREAR PRODUCTO ============================");
+        System.out.println("======================= MENU CREAR PRODUCTO============================");
         do {
             System.out.println("            [1] CREAR ALIMENTO");
             System.out.println("            [2] CREAR BEBIDA");
@@ -253,19 +248,11 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void privateAccessSupermarketMenu() throws IOException {
+    public void privateAccessSupermarketMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-        Supermarket supermarketSelect = new Supermarket();
 
-        for (Map.Entry<String, Supermarket> entry : supermarketService.supermarketsListJson().entrySet()) {
-            System.out.println(entry);
-            System.out.println("Presione SI en el supermercado deseado sino presione cualquier tecla");
-            if (sc.nextLine().equalsIgnoreCase("si")) {
-                supermarketSelect = entry.getValue();
-                break;
-            }
-        }
+        Supermarket supermarketSelect = new Supermarket();
 
         if (supermarketSelect != null || supermarketService.supermarketsListJson().isEmpty()) {
             System.out.println("======================= ABML SUPERMERCADOS ============================");
@@ -315,7 +302,5 @@ public class MenusServiceImpl implements MenusService {
                 System.out.println("volviendo al menu anterior");
             }
         }
-
-    }
 
 }
