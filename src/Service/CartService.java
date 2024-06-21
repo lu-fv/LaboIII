@@ -6,5 +6,5 @@ import Models.ProductForSale;
 import java.io.IOException;
 
 public interface CartService {
-    public void addProductForSale(ProductForSale p, Integer amount, Cart<ProductForSale> cart) throws IOException;
+    public void addProductForSale(ProductForSale p, Integer amount) throws IOException;
 }

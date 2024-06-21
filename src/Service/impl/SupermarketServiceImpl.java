@@ -1,9 +1,6 @@
 package Service.impl;
 
-import Models.Food;
-import Models.Product;
 import Models.Supermarket;
-import Service.FoodService;
 import Service.SupermarketService;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,29 +11,35 @@ import java.util.*;
 
 import Enums.Category;
 import Models.ProductForSale;
+import com.fasterxml.jackson.databind.type.MapType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import java.io.File;
 import java.io.IOException;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
-    private HashMap<String, Supermarket>superMarketList; //cuit y supermercado
+    private HashMap<String, Supermarket>superMarketList= new HashMap<>(); //cuit y supermercado
 
     //region ABM-----------------------------------------------------------------
+
     @Override
-    public Supermarket addSupermarket() {
+    public void addSupermarket() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("ingrese nombre/denominacion: ");
         String name = sc.nextLine();
         System.out.println("Ingrese direccion: ");
-        String adress = sc.nextLine();
+        String address = sc.nextLine();
         System.out.println("Ingrese telefono: ");
         String phone = sc.nextLine();
         System.out.println("Ingrese clave de indentificacion tributaria: ");
         String cuit = sc.nextLine();
 
-        Supermarket s = new Supermarket(name, adress, phone, cuit);
-        return s;
+        Supermarket s = new Supermarket(name, address, phone, cuit);
+        superMarketList.put(s.getCuit(), s);
+
+        saveSupermarketInJsonFile(superMarketList);
+
     }
 
     @Override
@@ -48,17 +51,22 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         Supermarket s= search(name);
         this.superMarketList.remove(s);
 
-        try{
-            ObjectMapper mapper= new ObjectMapper();
-            mapper.writeValue(supermarketFile, superMarketList);
-        }catch (IOException e){
-            e.printStackTrace();
+       saveSupermarketInJsonFile(superMarketList);
+    }
+
+    public void modifySupermarketListProducts(Supermarket s) throws IOException {
+
+        for(Map.Entry<String, Supermarket>entry: superMarketList.entrySet() ){
+            if(s.getName().equalsIgnoreCase(entry.getKey())){
+                entry.setValue(s);
+            }
         }
 
+        saveSupermarketInJsonFile(superMarketList);
     }
 
     @Override
-    public void modifySupermarket(String name) {
+    public void modifySupermarket(String name) throws IOException {
 
         Supermarket s= search(name);
 
@@ -94,7 +102,8 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         } while (opc != 4);
 
-        
+        saveSupermarketInJsonFile(superMarketList);
+
 
     }
 
@@ -111,18 +120,25 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public void saveSupermarketInJsonFile(Supermarket s) throws IOException {
+    public void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException {
         if (!supermarketFile.exists()) {
             supermarketFile.createNewFile();
         }
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(supermarketFile, s);
+            mapper.writeValue(supermarketFile, superList);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
     //endregion
+
+    public HashMap<Integer,Supermarket> supermarketsListJson () throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        TypeFactory typeFactory = mapper.getTypeFactory();
+        MapType mapType = typeFactory.constructMapType(HashMap.class, Integer.class, Supermarket.class);
+        return mapper.readValue(supermarketFile, mapType);
+    }
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
     @Override
@@ -265,4 +281,36 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         return listProduct;
     }
     //endregion
+
+    public Boolean searchSpecialProductsByNameExist(String name) {
+        //me aseguro que este todo en minuscula para comparar despues con los productos del json
+        name = name.toLowerCase(Locale.ROOT);
+
+        //leo la lista de supermercados del json
+        ObjectMapper objectMapperSupermarket = new ObjectMapper();
+
+        try{
+            List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
+            //recorro la lista de supermercados
+            for (Supermarket s : listSupermarket) {
+                //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+                if (!s.getProductListHashSet().isEmpty()) {
+                    //recorro el Set de productos de cada supermercado
+                    for (ProductForSale p : s.getProductListHashSet()) {
+                        //paso a minuscula el nombre del producto
+                        String nameProductSupermarket = p.getProduct().getProductName().toLowerCase(Locale.ROOT);
+                        if (nameProductSupermarket.contains(name)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }catch (IOException e){
+            e.getMessage();
+            System.out.println("no existe archivo de Supermercados");
+
+        }
+        return false;
+
+    }
 }
