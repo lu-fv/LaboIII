@@ -11,6 +11,8 @@ import java.util.*;
 
 import Enums.Category;
 import Models.ProductForSale;
+import com.fasterxml.jackson.databind.type.MapType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -130,6 +132,13 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         }
     }
     //endregion
+
+    public HashMap<Integer,Supermarket> supermarketsListJson () throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        TypeFactory typeFactory = mapper.getTypeFactory();
+        MapType mapType = typeFactory.constructMapType(HashMap.class, Integer.class, Supermarket.class);
+        return mapper.readValue(supermarketFile, mapType);
+    }
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
     @Override
@@ -272,4 +281,36 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         return listProduct;
     }
     //endregion
+
+    public Boolean searchSpecialProductsByNameExist(String name) {
+        //me aseguro que este todo en minuscula para comparar despues con los productos del json
+        name = name.toLowerCase(Locale.ROOT);
+
+        //leo la lista de supermercados del json
+        ObjectMapper objectMapperSupermarket = new ObjectMapper();
+
+        try{
+            List<Supermarket> listSupermarket = objectMapperSupermarket.readValue(supermarketFile, objectMapperSupermarket.getTypeFactory().constructArrayType(ArrayList.class));
+            //recorro la lista de supermercados
+            for (Supermarket s : listSupermarket) {
+                //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+                if (!s.getProductListHashSet().isEmpty()) {
+                    //recorro el Set de productos de cada supermercado
+                    for (ProductForSale p : s.getProductListHashSet()) {
+                        //paso a minuscula el nombre del producto
+                        String nameProductSupermarket = p.getProduct().getProductName().toLowerCase(Locale.ROOT);
+                        if (nameProductSupermarket.contains(name)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }catch (IOException e){
+            e.getMessage();
+            System.out.println("no existe archivo de Supermercados");
+
+        }
+        return false;
+
+    }
 }

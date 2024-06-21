@@ -19,6 +19,7 @@ public interface SupermarketService {
     void supermarketList(Supermarket s);
 
     void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException;
+    public HashMap<Integer,Supermarket> supermarketsListJson () throws IOException;
     //endregion
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
@@ -35,5 +36,6 @@ public interface SupermarketService {
     List<ProductForSale> searchSpecialProductsByName(String name) throws IOException;
 
     List<ProductForSale> searchProductsByCategory(Category c) throws IOException;
+    public Boolean searchSpecialProductsByNameExist(String name);
     //endregion
 }
