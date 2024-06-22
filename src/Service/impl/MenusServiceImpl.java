@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
+    private static final String privateAccesKey= "1234";
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
     protected SupermarketService supermarketService;
@@ -41,6 +42,18 @@ public class MenusServiceImpl implements MenusService {
                     clientMenu();
                     break;
                 case 2:
+                    Boolean ok= false;
+                    do{
+                        System.out.println("Ingrese la clave de acceso: ");
+                        Scanner scanner= new Scanner(System.in);
+                        String key= scanner.nextLine();
+                        if(key.equalsIgnoreCase(privateAccesKey)){
+                            ok=true;
+                        }else{
+                            System.out.println("Clave incorrecta");
+                        }
+                    }while(ok==false);
+
                     privateAccessMenu();
                     break;
                 case 0:
@@ -251,57 +264,62 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessSupermarketMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
         Integer opc;
+        Supermarket supermarketExist = new Supermarket();
 
-        Supermarket supermarketSelect = new Supermarket();
+        System.out.println("======================= ABML SUPERMERCADO ============================");
+        do {
+            System.out.println("            [1] CREAR SUPERMERCADO");
+            System.out.println("            [2] MODIFICAR SUPERMERCADO");
+            System.out.println("            [3] ELIMINAR SUPERMERCADO");
+            System.out.println("            [4] LISTADO DE SUPERMERCADOS");
+            System.out.println("            [5] AÑADIR PRODUCTO");
+            System.out.println("            [6] MODIFICAR PRECIO");
+            System.out.println("            [7] ELIMINAR PRODUCTO");
+            System.out.println("            [0] SALIR\n");
 
-        if (supermarketSelect != null || supermarketService.supermarketsListJson().isEmpty()) {
-            System.out.println("======================= ABML SUPERMERCADOS ============================");
-            do {
-                System.out.println("            [1] CREAR SUPERMERCADO");
-                System.out.println("            [2] MODIFICAR SUPERMERCADO");
-                System.out.println("            [3] ELIMINAR SUPERMERCADO");
-                System.out.println("            [4] AÑADIR PRODUCTO");
-                System.out.println("            [5] MODIFICAR PRECIO");
-                System.out.println("            [6] ELIMINAR PRODUCTO");
-                System.out.println("            [0] SALIR\n");
+            opc = Integer.parseInt(sc.nextLine());
 
-                opc = Integer.parseInt(sc.nextLine());
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+                    supermarketService.addSupermarket();
+                    break;
+                case 2:
+                    System.out.println("Ingrese el nombre del supermercado a modificar: ");
+                    String name= sc.nextLine();
+                    if(supermarketService.search(name)==null){
+                        System.out.println("el supermercado que desea modificar no existe en la base de datos");
+                    }else{
+                        supermarketService.modifySupermarket(name);
+                    }
+                    break;
+                case 3:
+                    System.out.println("Ingrese el nombre del supermercado a eliminar: ");
+                    String superName=sc.nextLine();
+                    if(supermarketService.search(superName)==null){
+                        System.out.println("el supermercado que desea modificar no existe en la base de datos");
+                    }else{
+                        supermarketService.deleteSupermarket(supermarketService.search(superName));
+                    }
+                    break;
+                case 4:
+                    supermarketService.supermarketList();
 
-                switch (opc) {
-                    case 0:
-                        System.out.println("Volviendo...");
-                        break;
-                    case 1:
-                        supermarketService.addSupermarket();
-                        break;
-                    case 2:
-                        supermarketService.modifySupermarket(supermarketSelect.getName());
-                        break;
-                    case 3:
-                        supermarketService.deleteSupermarket();
-                        break;
-                    case 4:
-                      //  productForSale.addProductForSale(supermarketSelect);
-                        break;
-                    case 5:
+                    break;
+                case 5:
 
-                        break;
-                    case 6:
+                    break;
+                case 6:
 
-                        break;
-                    default:
-                        System.out.println("Opción no disponible");
-                        break;
-                }
-            } while (opc != 0);
-        } else {
-            System.out.println("El supermercado que desea no se encuentra en el listado. Desea agregarlo? si o no");
-            if (sc.nextLine().equalsIgnoreCase("si")) {
-                supermarketService.addSupermarket();
-            } else {
-                System.out.println("volviendo al menu anterior");
+                    break;
+                case 7:
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
             }
-        }
-
+        } while (opc != 0);
     }
 }
