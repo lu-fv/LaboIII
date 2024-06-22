@@ -12,11 +12,11 @@ public interface SupermarketService {
     //region ABM-----------------------------------------------------------------
     void addSupermarket() throws IOException;
 
-    void deleteSupermarket() throws IOException;
+    void deleteSupermarket(Supermarket s) throws IOException;
 
     public void modifySupermarket(String name) throws IOException;
 
-    void supermarketList(Supermarket s);
+    void supermarketList();
 
     void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException;
     public HashMap<String,Supermarket> supermarketsListJson () throws IOException;
