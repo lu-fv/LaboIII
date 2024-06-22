@@ -4,6 +4,7 @@ import Enums.Category;
 import Models.Product;
 import Models.ProductForSale;
 import Models.Supermarket;
+import Service.CartService;
 import Service.ProductForSaleService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -20,6 +22,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     private final File file = new File("product.json");
 
     private SupermarketServiceImpl supermarket;
+    private CartService cartService;
     private HashMap<String, Supermarket> superMarketList = supermarket.supermarketsListJson();
 
     public ProductForSaleServiceImpl() throws IOException {
@@ -168,6 +171,29 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
             e.getMessage();
             System.out.println("no existe archivo de Supermercados ");
         }
+    }
+
+    public void addCartFromListProductForSale(List<ProductForSale> list) throws IOException {
+        Integer numProduct;
+        Scanner sc = new Scanner(System.in);
+        String continueAdd = "S";
+        do {
+            System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS <<<<<<<<<<<<<<<<<<<<<<");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("[" + (i + 1) + "] - " + list.get(i));
+            }
+            System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion...");
+            numProduct = sc.nextInt();
+            if (numProduct > 0 && numProduct < list.size()) {
+                //si ingresa una opcion correcta del listado procedemos a pedir la cantidad de ese producto para añadir al carrito
+                System.out.println("Ingrese la cantidad que desea del producto " + list.get(numProduct - 1).getProduct().getProductName());
+                cartService.addProductForSale(list.get(numProduct - 1), sc.nextInt());
+                System.out.println("Producto agregado al carrito. Desea seguir agregando productos de este listado? s/n");
+                continueAdd = sc.nextLine();
+            } else {
+                System.out.println("Ha seleccionado una opcion incorrecta de producto!. Intenelo nuevamente.");
+            }
+        } while (numProduct <= 0 || numProduct >= list.size() || continueAdd.equalsIgnoreCase("s"));
     }
 
 }

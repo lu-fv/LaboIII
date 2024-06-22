@@ -195,6 +195,8 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         return productForCategory;
     }
 
+
+
     //endregion
 
     //region BÚSQUEDA GENERAL----------------------------------------------------

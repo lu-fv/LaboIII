@@ -5,6 +5,7 @@ import Models.ProductForSale;
 import Models.Supermarket;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public interface ProductForSaleService {
@@ -13,4 +14,5 @@ public interface ProductForSaleService {
     void RemoveProductForSaleForSupermarket(Supermarket sp, Integer id) throws IOException;
     void ModifyProduct(ProductForSale productForSale);
     void ModifyProductForSaleInSupermarket(Supermarket sp, Integer id);
+    void addCartFromListProductForSale(List<ProductForSale> list) throws IOException;
 }

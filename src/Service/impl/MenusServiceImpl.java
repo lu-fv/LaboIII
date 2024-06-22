@@ -1,23 +1,31 @@
 package Service.impl;
 
 import Enums.Category;
+import Models.ProductForSale;
 import Models.Supermarket;
+import Service.CartService;
 import Service.MenusService;
+import Service.ProductForSaleService;
 import Service.SupermarketService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
-    private static final String privateAccesKey= "1234";
+    private static final String privateAccesKey = "1234";
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
     protected SupermarketService supermarketService;
+    protected CartService cartService;
+    protected ProductForSaleService productForSaleService;
 
     public MenusServiceImpl() throws IOException {
         this.foodService = new FoodServiceImpl();
         this.beverageService = new BeverageServiceImpl();
         this.supermarketService = new SupermarketServiceImpl();
+        this.cartService = new CartServiceImpl();
     }
 
     @Override
@@ -40,17 +48,17 @@ public class MenusServiceImpl implements MenusService {
                     clientMenu();
                     break;
                 case 2:
-                    Boolean ok= false;
-                    do{
+                    Boolean ok = false;
+                    do {
                         System.out.println("Ingrese la clave de acceso: ");
-                        Scanner scanner= new Scanner(System.in);
-                        String key= scanner.nextLine();
-                        if(key.equalsIgnoreCase(privateAccesKey)){
-                            ok=true;
-                        }else{
+                        Scanner scanner = new Scanner(System.in);
+                        String key = scanner.nextLine();
+                        if (key.equalsIgnoreCase(privateAccesKey)) {
+                            ok = true;
+                        } else {
                             System.out.println("Clave incorrecta");
                         }
-                    }while(ok==false);
+                    } while (ok == false);
 
                     privateAccessMenu();
                     break;
@@ -107,47 +115,109 @@ public class MenusServiceImpl implements MenusService {
             System.out.println("            [2] POR PRODUCTOS EN OFERTAS");
             System.out.println("            [3] POR CATEGORIA");
             System.out.println("            [4] TU LISTA DE COMPRAS");
+            System.out.println("            [5] MODIFICAR TU LISTA DE COMPRAS");
             System.out.println("            [0] SALIR\n");
 
             opc = sc.nextInt();
 
             switch (opc) {
                 case 1:
+                    //region Busqueda por nombre de producto en TODOS los supermercados
                     System.out.println("Ingrese el nombre del producto que esta buscando");
                     String nameProduct = sc.nextLine();
-                    System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS <<<<<<<<<<<<<<<<<<<<<<");
-                    supermarketService.searchSpecialProductsByName(nameProduct).forEach(System.out::println);
+                    List<ProductForSale> productsList = supermarketService.searchSpecialProductsByName(nameProduct);
+                    if (!productsList.isEmpty()) {
+                        productForSaleService.addCartFromListProductForSale(productsList);
+                    } else {
+                        System.out.println("El supermercado aun no tiene productos con esa descripcion");
+                    }
+                    //endregion
                     break;
                 case 2:
+                    //region Busqueda por oferta en TODOS los supermercados
+                    Integer numProductSale;
+                    List<ProductForSale> productsInSale = supermarketService.searchSalesProducts();
                     System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS EN OFERTA <<<<<<<<<<<<<<<<<<<<<<");
-                    supermarketService.searchSalesProducts().forEach(System.out::println);
+                    if (!productsInSale.isEmpty()) {
+                        productForSaleService.addCartFromListProductForSale(productsInSale);
+                    } else {
+                        System.out.println("El supermercado aun no tiene productos en oferta");
+                    }
+                    //endregion
                     break;
                 case 3:
+                    //region Busqueda de productos por categoria en TODOS los supermercados
                     System.out.println("Ingrese la categoria que desee : ");
                     Integer categorySelect;
                     do {
-                        categorySelect = sc.nextInt();
                         ProductServiceImpl.showCategories();
+                        categorySelect = sc.nextInt();
                         switch (categorySelect) {
                             case 0:
-                                supermarketService.searchProductsByCategory(Category.DAIRY).forEach(System.out::println);
+                                List<ProductForSale> listDairy = supermarketService.searchProductsByCategory(Category.DAIRY);
+                                if (!listDairy.isEmpty()) {
+                                    productForSaleService.addCartFromListProductForSale(listDairy);
+                                }
                                 break;
                             case 1:
-                                supermarketService.searchProductsByCategory(Category.BAKERY).forEach(System.out::println);
+                                List<ProductForSale> listBakery = supermarketService.searchProductsByCategory(Category.BAKERY);
+                                if (!listBakery.isEmpty()) {
+                                    productForSaleService.addCartFromListProductForSale(listBakery);
+                                }
                                 break;
                             case 2:
-                                supermarketService.searchProductsByCategory(Category.GROCERY).forEach(System.out::println);
+                                List<ProductForSale> listGrocery = supermarketService.searchProductsByCategory(Category.GROCERY);
+                                if (!listGrocery.isEmpty()) {
+                                    productForSaleService.addCartFromListProductForSale(listGrocery);
+                                }
                                 break;
                             case 3:
-                                supermarketService.searchProductsByCategory(Category.ALCOHOL).forEach(System.out::println);
+                                List<ProductForSale> listAlcohol = supermarketService.searchProductsByCategory(Category.ALCOHOL);
+                                if (!listAlcohol.isEmpty()) {
+                                    productForSaleService.addCartFromListProductForSale(listAlcohol);
+                                }
                                 break;
                             default:
                                 System.out.println("Ingrese un numero de categoria correcto");
                                 break;
                         }
                     } while (categorySelect != 0 && categorySelect != 1 && categorySelect != 2 && categorySelect != 3);
+                    //endregion
                     break;
                 case 4:
+                    //region Mostrar carrito y grabar
+                    cartService.showCartsProductList();
+                    System.out.println("Desea confirmar el carrito?. s/n");
+                    if (sc.nextLine().equalsIgnoreCase("s")) {
+                        cartService.saveCartList();
+                    } else {
+                        System.out.println("Continue agregando productos.");
+                    }
+                    //endregion
+                    break;
+                case 5:
+                    //region Modificar algo del carrito
+                    do {
+                        System.out.println("[1] Desea eliminar un producto");
+                        System.out.println("[2] Desea modificar cantidad de un  producto");
+                        System.out.println("[0] Salir");
+                        opc = sc.nextInt();
+
+                        switch (opc) {
+                            case 1:
+                                cartService.deleteSomeProductOfCart();
+                                break;
+                            case 2:
+                                cartService.modifyCartList();
+                                break;
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("Ingrese una opcion correcta");
+                                break;
+                        }
+                    } while (opc != 0);
+                    //endregion
                     break;
                 case 0:
                     break;
@@ -156,42 +226,51 @@ public class MenusServiceImpl implements MenusService {
                     break;
             }
         } while (opc != 0);
-    }
+    }//LISTO SOLO FALTA PROBAR
 
     public void shoppingListMenuBySupermarket() throws IOException {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
-        do {
-            System.out.println("======================= BUSQUEDA DE PRODUCTOS POR SUPERMERCADO ============================");
-            System.out.println("\n");
-            System.out.println("            [1] POR NOMBRE DE PRODUCTO");
-            System.out.println("            [2] POR PRODUCTOS EN OFERTAS");
-            System.out.println("            [3] POR CATEGORIA");
-            System.out.println("            [4] TU LISTA DE COMPRAS");
-            System.out.println("            [0] SALIR\n");
+        System.out.println("Ingrese el nombre del supermercado deseado");
+        for (Map.Entry<String,Supermarket> entry : supermarketService.supermarketsListJson().entrySet()){
+            System.out.println(entry);
+        }
 
-            opc = sc.nextInt();
+        Supermarket supermarketSelect = supermarketService.search(sc.nextLine());
+        if(supermarketSelect != null){
+            do {
+                System.out.println("======================= BUSQUEDA DE PRODUCTOS POR SUPERMERCADO ============================");
+                System.out.println("\n");
+                System.out.println("            [1] POR NOMBRE DE PRODUCTO");
+                System.out.println("            [2] POR PRODUCTOS EN OFERTAS");
+                System.out.println("            [3] POR CATEGORIA");
+                System.out.println("            [4] TU LISTA DE COMPRAS");
+                System.out.println("            [0] SALIR\n");
 
-            switch (opc) {
-                case 1:
+                opc = sc.nextInt();
 
-                    break;
-                case 2:
+                switch (opc) {
+                    case 1:
 
-                    break;
-                case 3:
+                        break;
+                    case 2:
 
-                    break;
-                case 4:
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Ingrese una opcion correcta!");
-                    break;
-            }
-        } while (opc != 0);
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Ingrese una opcion correcta!");
+                        break;
+                }
+            } while (opc != 0);
+        }
+
     }
 
     @Override
@@ -322,19 +401,19 @@ public class MenusServiceImpl implements MenusService {
                     break;
                 case 2:
                     System.out.println("Ingrese el nombre del supermercado a modificar: ");
-                    String name= sc.nextLine();
-                    if(supermarketService.search(name)==null){
+                    String name = sc.nextLine();
+                    if (supermarketService.search(name) == null) {
                         System.out.println("el supermercado que desea modificar no existe en la base de datos");
-                    }else{
+                    } else {
                         supermarketService.modifySupermarket(name);
                     }
                     break;
                 case 3:
                     System.out.println("Ingrese el nombre del supermercado a eliminar: ");
-                    String superName=sc.nextLine();
-                    if(supermarketService.search(superName)==null){
+                    String superName = sc.nextLine();
+                    if (supermarketService.search(superName) == null) {
                         System.out.println("el supermercado que desea modificar no existe en la base de datos");
-                    }else{
+                    } else {
                         supermarketService.deleteSupermarket(supermarketService.search(superName));
                     }
                     break;

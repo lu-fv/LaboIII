@@ -19,15 +19,15 @@ public interface SupermarketService {
     void supermarketList();
 
     void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException;
-    public HashMap<String,Supermarket> supermarketsListJson () throws IOException;
+    HashMap<String,Supermarket> supermarketsListJson () throws IOException;
     //endregion
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
     Supermarket search(String name) throws IOException;
+    List<ProductForSale> SerchByCategory(Supermarket supermarket, Category category);
 
     void showListSupermarket(Supermarket supermarket);
 
-    List<ProductForSale> SerchByCategory(Supermarket supermarket ,Category category);
     //endregion
 
     //region BÚSQUEDA GENERAL----------------------------------------------------
