@@ -148,7 +148,6 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void privateAccessMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
@@ -248,7 +247,6 @@ public class MenusServiceImpl implements MenusService {
     }
 
     @Override
-    public void privateAccessSupermarketMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
@@ -282,6 +280,7 @@ public class MenusServiceImpl implements MenusService {
                         break;
                     case 4:
                         productForSale.addProductForSale(supermarketSelect);
+                      //  productForSale.addProductForSale(supermarketSelect);
                         break;
                     case 5:
 
@@ -303,4 +302,5 @@ public class MenusServiceImpl implements MenusService {
             }
         }
 
+}
 }
