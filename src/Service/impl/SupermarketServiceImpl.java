@@ -1,10 +1,7 @@
 package Service.impl;
 
-import Models.Product;
 import Models.Supermarket;
 import Service.SupermarketService;
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;

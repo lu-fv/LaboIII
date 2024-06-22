@@ -1,13 +1,11 @@
 package Service.impl;
 
 import Enums.Category;
-import Models.Product;
 import Models.Supermarket;
 import Service.MenusService;
 import Service.SupermarketService;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
@@ -64,7 +62,7 @@ public class MenusServiceImpl implements MenusService {
             }
 
         } while (opc != 0);
-    }//listo
+    }//LISTO
 
     @Override
     public void clientMenu() throws IOException {
@@ -82,7 +80,7 @@ public class MenusServiceImpl implements MenusService {
 
             switch (opc) {
                 case 1:
-
+                    shoppingListMenuBySupermarket();
                     break;
                 case 2:
                     shoppingListMenu();
@@ -95,7 +93,7 @@ public class MenusServiceImpl implements MenusService {
             }
 
         } while (opc != 0);
-    }
+    }//LISTO
 
     @Override
     public void shoppingListMenu() throws IOException {
@@ -160,6 +158,42 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
+    public void shoppingListMenuBySupermarket() throws IOException {
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("======================= BUSQUEDA DE PRODUCTOS POR SUPERMERCADO ============================");
+            System.out.println("\n");
+            System.out.println("            [1] POR NOMBRE DE PRODUCTO");
+            System.out.println("            [2] POR PRODUCTOS EN OFERTAS");
+            System.out.println("            [3] POR CATEGORIA");
+            System.out.println("            [4] TU LISTA DE COMPRAS");
+            System.out.println("            [0] SALIR\n");
+
+            opc = sc.nextInt();
+
+            switch (opc) {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Ingrese una opcion correcta!");
+                    break;
+            }
+        } while (opc != 0);
+    }
+
     @Override
     public void privateAccessMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -189,7 +223,7 @@ public class MenusServiceImpl implements MenusService {
                     break;
             }
         } while (opc != 0);
-    }
+    }//LISTO
 
     @Override
     public void privateAccessProductMenu() {

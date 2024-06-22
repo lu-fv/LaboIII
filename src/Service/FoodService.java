@@ -7,20 +7,20 @@ import java.util.List;
 
 public interface FoodService {
     //add
-    public Food add(Food food);
+    Food add(Food food);
 
     //addAll
-    public void addAll(List<Food> foodList);
+    void addAll(List<Food> foodList);
 
     //alta
-    public Food create();
+    Food create();
 
     //baja
-    public Food delete();
+    Food delete();
 
     //modificación
-    public Food modify();
+    Food modify();
 
     //listado
-    public void showAll();
+    void showAll();
 }

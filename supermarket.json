@@ -1,0 +1,23 @@
+{
+  "30-59036076-3": {
+    "name": "VEA",
+    "address": "Av. Pedro Luro n 3901",
+    "phone": "0810-999-9832",
+    "cuit": "30-59036076-3",
+    "productListHashSet": []
+  },
+  "30-55149749-2": {
+    "name": "TOLEDO",
+    "address": "Av. Colon n 3350",
+    "phone": "0800-333-3266",
+    "cuit": "30-55149749-2",
+    "productListHashSet": []
+  },
+  "30-68731043-4": {
+    "name": "CARREFOUR",
+    "address": "Catamarca n 1965",
+    "phone": "0800-444-8484",
+    "cuit": "30-68731043-4",
+    "productListHashSet": []
+  }
+}

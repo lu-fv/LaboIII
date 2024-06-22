@@ -1,9 +1,6 @@
 package Service.impl;
 
 import Enums.Category;
-import Models.Food;
-import Models.Product;
-
 import java.util.*;
 
 public class ProductServiceImpl {

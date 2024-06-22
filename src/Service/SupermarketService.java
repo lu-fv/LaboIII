@@ -14,7 +14,7 @@ public interface SupermarketService {
 
     void deleteSupermarket(Supermarket s) throws IOException;
 
-    public void modifySupermarket(String name) throws IOException;
+    void modifySupermarket(String name) throws IOException;
 
     void supermarketList();
 

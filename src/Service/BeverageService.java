@@ -5,10 +5,10 @@ import Models.Beverage;
 import java.util.List;
 
 public interface BeverageService {
-    public Beverage add(Beverage beverage);
-    public void addAll(List<Beverage> beverageList);
-    public Beverage create();
-    public Beverage modify();
-    public Beverage delete();
-    public void showAll();
+    Beverage add(Beverage beverage);
+    void addAll(List<Beverage> beverageList);
+    Beverage create();
+    Beverage modify();
+    Beverage delete();
+    void showAll();
 }

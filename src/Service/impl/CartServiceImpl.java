@@ -3,11 +3,9 @@ package Service.impl;
 import Models.Cart;
 import Models.ProductForSale;
 import Service.CartService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class CartServiceImpl implements CartService {
