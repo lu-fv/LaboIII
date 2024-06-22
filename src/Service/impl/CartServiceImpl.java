@@ -47,12 +47,12 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    public void showCartsProductList(){
-        if(!cart.getCart().isEmpty()){
-            for (Map.Entry<ProductForSale,Integer> entry : cart.getCart().entrySet()){
+    public void showCartsProductList() {
+        if (!cart.getCart().isEmpty()) {
+            for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
                 System.out.println(entry);
             }
-        }else{
+        } else {
             System.out.println("Aun no a agregado productos al carrito!");
         }
 
@@ -60,7 +60,7 @@ public class CartServiceImpl implements CartService {
 
     public void saveCartList() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(cartFile,cart.getCart());
+        mapper.writeValue(cartFile, cart.getCart());
         System.out.println("Carrito guardado exitosamente!!!");
     }
 
@@ -68,46 +68,47 @@ public class CartServiceImpl implements CartService {
         Scanner sc = new Scanner(System.in);
         Boolean flag = false;
         ProductForSale product = new ProductForSale();
-        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()){
+        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
             System.out.println(entry);
         }
         System.out.println("Ingrese el id del producto que desea eliminar...");
-        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()){
-            if(entry.getKey().getProduct().getID() == sc.nextInt()){
+        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
+            if (entry.getKey().getProduct().getID() == sc.nextInt()) {
                 product = entry.getKey();
                 flag = true;
             }
         }
-        if(flag){
-            System.out.println("Ustede desea eliminar el siguiente producto "+ product + ".Es correcto? s/n");
-            if (sc.nextLine().equalsIgnoreCase("s")){
+        if (flag) {
+            System.out.println("Ustede desea eliminar el siguiente producto " + product + ".Es correcto? s/n");
+            if (sc.nextLine().equalsIgnoreCase("s")) {
                 cart.getCart().remove(product);
                 System.out.println("Producto eliminado exitosamente");
                 saveCartList();
             }
-        }else{
+        } else {
             System.out.println("No ha ingresado un numero correcto de id");
         }
 
     }
+
     public void modifyCartList() throws IOException {
         Scanner sc = new Scanner(System.in);
         Boolean flag = false;
         ProductForSale product = new ProductForSale();
-        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()){
+        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
             System.out.println(entry);
         }
         System.out.println("Ingrese el id del producto que desea modificar la cantidad...");
-        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()){
-            if(entry.getKey().getProduct().getID() == sc.nextInt()){
+        for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
+            if (entry.getKey().getProduct().getID() == sc.nextInt()) {
                 System.out.println("Ingrese la cantidad deseada...");
                 entry.setValue(sc.nextInt());
                 flag = true;
             }
         }
-        if(!flag){
+        if (!flag) {
             System.out.println("No ha ingresado un numero correcto de id");
-        }else{
+        } else {
             System.out.println("Cantidad de producto modificada exitosamente");
             saveCartList();
         }

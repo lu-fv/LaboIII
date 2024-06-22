@@ -14,27 +14,28 @@ public interface SupermarketService {
 
     void deleteSupermarket(Supermarket s) throws IOException;
 
+    void modifySupermarketListProducts(Supermarket s) throws IOException;
+
     void modifySupermarket(String name) throws IOException;
 
     void supermarketList();
 
     void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException;
+
     HashMap<String,Supermarket> supermarketsListJson () throws IOException;
     //endregion
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
     Supermarket search(String name) throws IOException;
-    List<ProductForSale> SerchByCategory(Supermarket supermarket, Category category);
-
     void showListSupermarket(Supermarket supermarket);
-
+    List<ProductForSale> serchByCategoryInSupermarket(Supermarket supermarket, Category category);
+    List<ProductForSale> serchProductInSaleInSupermarket(Supermarket supermarket);
+    List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name);
     //endregion
 
     //region BÚSQUEDA GENERAL----------------------------------------------------
     List<ProductForSale> searchSalesProducts() throws IOException;
-
     List<ProductForSale> searchSpecialProductsByName(String name) throws IOException;
-
     List<ProductForSale> searchProductsByCategory(Category c) throws IOException;
     public Boolean searchSpecialProductsByNameExist(String name);
     //endregion
