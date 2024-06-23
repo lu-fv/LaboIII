@@ -12,12 +12,11 @@ import java.util.Scanner;
 
 public class CartServiceImpl implements CartService {
     private final File cartFile = new File("cart.json");
-    public Cart<ProductForSale> cart = new Cart<>();
-
+    private Cart<ProductForSale> cart = new Cart<>();
     public Cart<ProductForSale> getCart() {
         return cart;
     }
-
+    @Override
     public void addProductForSale(ProductForSale p, Integer amount) throws IOException {
         //si esta vacio el carrito lo agrego simplemente
         if (cart.getCart().isEmpty()) {
@@ -46,7 +45,7 @@ public class CartServiceImpl implements CartService {
             }
         }
     }
-
+    @Override
     public void showCartsProductList() {
         if (!cart.getCart().isEmpty()) {
             for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
@@ -57,13 +56,13 @@ public class CartServiceImpl implements CartService {
         }
 
     }
-
+    @Override
     public void saveCartList() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(cartFile, cart.getCart());
         System.out.println("Carrito guardado exitosamente!!!");
     }
-
+    @Override
     public void deleteSomeProductOfCart() throws IOException {
         Scanner sc = new Scanner(System.in);
         Boolean flag = false;
@@ -90,7 +89,7 @@ public class CartServiceImpl implements CartService {
         }
 
     }
-
+    @Override
     public void modifyCartList() throws IOException {
         Scanner sc = new Scanner(System.in);
         Boolean flag = false;

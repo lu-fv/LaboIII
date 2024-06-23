@@ -12,8 +12,10 @@ import Models.ProductForSale;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import javax.swing.text.StyledEditorKit;
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
@@ -27,16 +29,47 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     @Override
     public void addSupermarket() throws IOException {
         Scanner sc = new Scanner(System.in);
+        String name;
+        boolean alfa;
         System.out.println("ingrese nombre/denominacion: ");
-        String name = sc.nextLine();
+        do {
+            name = sc.nextLine();
+            alfa = Pattern.matches("^[a-zA-Z]*$", name);
+            if (!alfa) {
+                System.out.println("Ingrese solo caracteres por favor");
+            }
+        } while (!alfa);
+
         if (search(name) == null) {
             System.out.println("Ingrese direccion: ");
             String address = sc.nextLine();
             System.out.println("Ingrese telefono: ");
-            String phone = sc.nextLine();
-            System.out.println("Ingrese clave de indentificacion tributaria: ");
-            String cuit = sc.nextLine();
+            String phone;
+            do {
+                phone = sc.nextLine();
+                alfa = Pattern.matches("^[a-zA-Z]*$", phone);
+                if (alfa) {
+                    System.out.println("Ingrese solo numeros por favor");
+                }
+                if (phone.length() < 10) {
+                    System.out.println("Ingrese la cantidad de numeros correctos");
+                }
+            } while (alfa || phone.length() < 10);
 
+            System.out.println("Ingrese clave de indentificacion tributaria: ");
+            String cuit;
+            String newCuit;
+            do {
+                cuit = sc.nextLine();
+                newCuit = cuit.replaceAll("[-]", "");
+                alfa = Pattern.matches("^[a-zA-Z]*$", newCuit);
+                if (alfa) {
+                    System.out.println("Ingrese solo numeros por favor");
+                }
+                if(newCuit.length() < 12 || newCuit.length() > 13){
+                    System.out.println("Ingrese un cuit correcto");
+                }
+            } while (alfa || newCuit.length() < 12 || newCuit.length() > 13);
             Supermarket s = new Supermarket(name, address, phone, cuit);
             superMarketList.put(s.getCuit(), s);
 
@@ -184,6 +217,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         }
     }
+
     @Override
     public List<ProductForSale> serchByCategoryInSupermarket(Supermarket supermarket, Category category) {
 
@@ -195,6 +229,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         }
         return productForCategory;
     }
+
     @Override
     public List<ProductForSale> serchProductInSaleInSupermarket(Supermarket supermarket) {
 
@@ -206,6 +241,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         }
         return productsInSale;
     }
+
     @Override
     public List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name) {
 

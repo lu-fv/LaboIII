@@ -28,6 +28,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     public ProductForSaleServiceImpl() throws IOException {
     }
 
+    @Override
     public void addProductForSale(Supermarket s) throws IOException {
         Integer opcId;
         Scanner sc = new Scanner(System.in);
@@ -60,6 +61,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         supermarket.modifySupermarketListProducts(s);
     }
 
+    @Override
     public Boolean validationId(Integer id, Map<Integer, Product> map) {
         Boolean flag = false;
         for (Map.Entry<Integer, Product> entry : map.entrySet()) {
@@ -70,6 +72,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         return flag;
     }
 
+    @Override
     public void RemoveProductForSaleForSupermarket(Supermarket sp, Integer id) throws IOException {
 
         Scanner st = new Scanner(System.in);
@@ -89,7 +92,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         }
     }
 
-
+    @Override
     public void ModifyProduct(ProductForSale productForSale) {
 
         Integer opc;
@@ -145,11 +148,11 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         } while (opc != 5);
     }
 
+    @Override
     public void ModifyProductForSaleInSupermarket(Supermarket sp, Integer id) {
         boolean isProduct = false;
         Scanner sc = new Scanner(System.in);
         try {
-
             for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductListHashSet()) {
                 if (p.getProduct().getID().equals(id)) {
                     this.ModifyProduct(p);
@@ -173,10 +176,12 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         }
     }
 
+    @Override
     public void addCartFromListProductForSale(List<ProductForSale> list) throws IOException {
         Integer numProduct;
         Scanner sc = new Scanner(System.in);
         String continueAdd = "S";
+
         do {
             System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS <<<<<<<<<<<<<<<<<<<<<<");
             for (int i = 0; i < list.size(); i++) {
@@ -194,6 +199,16 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
                 System.out.println("Ha seleccionado una opcion incorrecta de producto!. Intenelo nuevamente.");
             }
         } while (numProduct <= 0 || numProduct >= list.size() || continueAdd.equalsIgnoreCase("s"));
+    }
+
+    @Override
+    public ProductForSale searchProductoForSaleById(Supermarket s, Integer id) {
+        for (ProductForSale p : superMarketList.get(s.getCuit()).getProductListHashSet()){
+            if(p.getProduct().getID() == id){
+                return p;
+            }
+        }
+        return null;
     }
 
 }

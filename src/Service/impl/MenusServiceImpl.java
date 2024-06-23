@@ -81,7 +81,7 @@ public class MenusServiceImpl implements MenusService {
             }
 
         } while (opc != 0);
-    }//LISTO
+    }//LISTO CON CONTRASEÑA VALIDADA/TRES INTENTOS
     @Override
     public void clientMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -497,7 +497,8 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessSupermarketMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-        Supermarket supermarketExist = new Supermarket();
+        Supermarket supermarketExist;
+        ProductForSale product;
 
         System.out.println("======================= ABML SUPERMERCADO ============================");
         do {
@@ -517,9 +518,12 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Volviendo...");
                     break;
                 case 1:
+                    //region Crear un nuevo supermercado
                     supermarketService.addSupermarket();
+                    //endregion
                     break;
                 case 2:
+                    //region Modificar un supermercado ya existente
                     System.out.println("Ingrese el nombre del supermercado a modificar: ");
                     String name = sc.nextLine();
                     if (supermarketService.search(name) == null) {
@@ -527,8 +531,10 @@ public class MenusServiceImpl implements MenusService {
                     } else {
                         supermarketService.modifySupermarket(name);
                     }
+                    //endregion
                     break;
                 case 3:
+                    //region Eliminar un supermercado existente
                     System.out.println("Ingrese el nombre del supermercado a eliminar: ");
                     String superName = sc.nextLine();
                     if (supermarketService.search(superName) == null) {
@@ -536,12 +542,15 @@ public class MenusServiceImpl implements MenusService {
                     } else {
                         supermarketService.deleteSupermarket(supermarketService.search(superName));
                     }
+                    //endregion
                     break;
                 case 4:
+                    //region Listado de supermercados existentes
                     supermarketService.supermarketList();
-
+                    //endregion
                     break;
                 case 5:
+                    //region Agregar producto vendible a un supermercado existente
                     System.out.println("Ingrese el nombre del supermercado: ");
                     name = sc.nextLine();
                     if (supermarketService.search(name) == null) {
@@ -549,25 +558,45 @@ public class MenusServiceImpl implements MenusService {
                     } else {
                         productForSaleService.addProductForSale(supermarketService.search(name));
                     }
+                    //endregion
                     break;
                 case 6:
+                    //region Modificar Precio del Producto Vendible de un supermercado existente
                     System.out.println("Ingrese el nombre del supermercado: ");
                     name = sc.nextLine();
-                    if (supermarketService.search(name) == null) {
+                    supermarketExist = supermarketService.search(name);
+                    if (supermarketExist == null) {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        //necesito buscar un producto por id en una lista de un supermercado en particular
-                        supermarketService.search(name).getProductListHashSet().contains(name);
-                        // productForSaleService.ModifyProductForSaleInSupermarket(supermarketService.search(name), );
+                        product = productForSaleService.searchProductoForSaleById(supermarketExist,sc.nextInt());
+                        if(product == null){
+                            System.out.println("No existe el Id ingresado dentro del listado del supermercado "+ supermarketExist);
+                        }else{
+                            System.out.println("Ingrese el precio nuevo : ");
+                            product.setPrice(sc.nextDouble());
+                            supermarketService.modifySupermarketListProducts(supermarketExist);
+                        }
                     }
+                    //endregion de un superme
                     break;
                 case 7:
+                    //region Eliminar producto vendible de un supermercado existente
+                    System.out.println("Ingrese el nombre del supermercado: ");
+                    name = sc.nextLine();
+                    supermarketExist = supermarketService.search(name);
+                    if (supermarketExist == null) {
+                        System.out.println("el supermercado que desea no existe en la base de datos");
+                    } else {
+                        System.out.println("Ingrese el id del producto que desea modificar...");
+                        productForSaleService.RemoveProductForSaleForSupermarket(supermarketExist,sc.nextInt());
+                    }
+                   //endregion
                     break;
                 default:
                     System.out.println("Opción no disponible");
                     break;
             }
         } while (opc != 0);
-    } //FALTA
+    } //LISTO FALTA PROBAR
 }

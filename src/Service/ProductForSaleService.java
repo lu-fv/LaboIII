@@ -15,4 +15,5 @@ public interface ProductForSaleService {
     void ModifyProduct(ProductForSale productForSale);
     void ModifyProductForSaleInSupermarket(Supermarket sp, Integer id);
     void addCartFromListProductForSale(List<ProductForSale> list) throws IOException;
+    ProductForSale searchProductoForSaleById(Supermarket s, Integer id);
 }
