@@ -11,9 +11,10 @@ import java.util.Map;
 public interface ProductForSaleService {
     void addProductForSale(Supermarket s) throws IOException;
     Boolean validationId(Integer id, Map<Integer, Product> map);
-    void RemoveProductForSaleForSupermarket(Supermarket sp, Integer id) throws IOException;
-    void ModifyProduct(ProductForSale productForSale);
-    void ModifyProductForSaleInSupermarket(Supermarket sp, Integer id);
+    void removeProductForSaleForSupermarket(Supermarket sp, Integer id) throws IOException;
+    void modifyProduct(ProductForSale productForSale);
+    void modifyProductForSaleInSupermarket(Supermarket sp, Integer id);
     void addCartFromListProductForSale(List<ProductForSale> list) throws IOException;
     ProductForSale searchProductoForSaleById(Supermarket s, Integer id);
+    boolean isDouble (String price);
 }

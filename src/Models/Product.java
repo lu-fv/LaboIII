@@ -51,9 +51,9 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return "Producto: " + productName +
-                "\nId: " + ID +
-                "\nMarca: " + brand +
-                "\nCategoría: " + category.getType();
+        return "         PRODUCTO: " + productName +
+                "\n            ID: " + ID +
+                "\n         Marca: " + brand +
+                "\n     Categoría: " + category.getType();
     }
 }

@@ -45,16 +45,18 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             String address = sc.nextLine();
             System.out.println("Ingrese telefono: ");
             String phone;
+            String newPhone;
             do {
                 phone = sc.nextLine();
-                alfa = Pattern.matches("^[a-zA-Z]*$", phone);
+                newPhone = phone.replaceAll("[-]", "");
+                alfa = Pattern.matches("^[a-zA-Z]*$", newPhone);
                 if (alfa) {
                     System.out.println("Ingrese solo numeros por favor");
                 }
-                if (phone.length() < 10) {
+                if (newPhone.length() < 10) {
                     System.out.println("Ingrese la cantidad de numeros correctos");
                 }
-            } while (alfa || phone.length() < 10);
+            } while (alfa || newPhone.length() < 10);
 
             System.out.println("Ingrese clave de indentificacion tributaria: ");
             String cuit;
@@ -66,10 +68,10 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                 if (alfa) {
                     System.out.println("Ingrese solo numeros por favor");
                 }
-                if(newCuit.length() < 12 || newCuit.length() > 13){
+                if (newCuit.length() != 11) {
                     System.out.println("Ingrese un cuit correcto");
                 }
-            } while (alfa || newCuit.length() < 12 || newCuit.length() > 13);
+            } while (alfa || newCuit.length() != 11);
             Supermarket s = new Supermarket(name, address, phone, cuit);
             superMarketList.put(s.getCuit(), s);
 
@@ -90,11 +92,10 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         if (sc.nextLine().equalsIgnoreCase("s")) {
             this.superMarketList.remove(s.getCuit());
             saveSupermarketInJsonFile(superMarketList);
-            System.out.println("El supermercado " + s.getName() + " fue dado de baja exitosamente");
+            System.out.println("El supermercado " + s.getName() + " fue dado de baja exitosamente!!!");
         } else {
-            System.out.println("volviendo al menu anterior");
+            System.out.println("Volviendo al menu anterior");
         }
-
     }
 
     @Override
@@ -146,16 +147,18 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                 case 3:
                     System.out.println("Ingrese nuevo telefono: ");
                     String phone;
+                    String newPhone;
                     do {
-                        phone  = sr.nextLine();
-                        alfa = Pattern.matches("^[a-zA-Z]*$", phone);
+                        phone = sr.nextLine();
+                        newPhone = phone.replaceAll("[-]", "");
+                        alfa = Pattern.matches("^[a-zA-Z]*$", newPhone);
                         if (alfa) {
                             System.out.println("Ingrese solo numeros por favor");
                         }
-                        if (phone.length() < 10) {
+                        if (newPhone.length() < 10) {
                             System.out.println("Ingrese la cantidad de numeros correctos");
                         }
-                    } while (alfa || phone.length() < 10);
+                    } while (alfa || newPhone.length() < 10);
                     s.setPhone(phone);
                     break;
                 case 4:
@@ -169,22 +172,22 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                         if (alfa) {
                             System.out.println("Ingrese solo numeros por favor");
                         }
-                        if(newCuit.length() < 12 || newCuit.length() > 13){
+                        if (newCuit.length() != 11) {
                             System.out.println("Ingrese un cuit correcto");
                         }
-                    } while (alfa || newCuit.length() < 12 || newCuit.length() > 13);
+                    } while (alfa || newCuit.length() != 11);
                     s.setCuit(cuit);
                 case 5:
                     break;
                 default:
-                    System.out.println("ingrese una opcion valida");
+                    System.out.println("Ingrese una opcion valida");
                     break;
             }
 
         } while (opc != 5);
 
         saveSupermarketInJsonFile(superMarketList);
-        System.out.println("datos guardados exitosamente");
+        System.out.println("Datos guardados exitosamente!!!");
 
     }
 
@@ -246,7 +249,6 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public void showListSupermarket(Supermarket supermarket) {
         if (supermarket != null) {
             System.out.println(supermarket);
-
         }
     }
 

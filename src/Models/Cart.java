@@ -37,9 +37,8 @@ public class Cart<T> {
 
     @Override
     public String toString() {
-        return "Cart{" +
-                "totalPrice=" + totalPrice +
-                ", cart=" + cart +
-                '}';
+        return "           TU CARRITO DE COMPRAS:" +
+                "         Precio total:" + totalPrice +
+                "\n Lista de productos:" + cart;
     }
 }

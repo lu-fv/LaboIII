@@ -6,6 +6,7 @@ import Models.ProductForSale;
 import Models.Supermarket;
 import Service.CartService;
 import Service.ProductForSaleService;
+import Service.SupermarketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
@@ -19,11 +20,19 @@ import java.util.Scanner;
 
 
 public class ProductForSaleServiceImpl implements ProductForSaleService {
-    private final File file = new File("product.json");
+    private final File fileProduct = new File("product.json");
 
-    private SupermarketServiceImpl supermarket;
+    private SupermarketService supermarket;
     private CartService cartService;
-    private HashMap<String, Supermarket> superMarketList = supermarket.supermarketsListJson();
+    private HashMap<String, Supermarket> superMarketList;
+    private Map<Integer, Product> mapProducts;
+
+    public ProductForSaleServiceImpl(SupermarketServiceImpl supermarket, CartServiceImpl cartService) throws IOException {
+        this.supermarket = supermarket;
+        this.cartService = cartService;
+        this.superMarketList = supermarket.supermarketsListJson();
+        this.mapProducts = productFromJsonToMap();
+    }
 
     public ProductForSaleServiceImpl() throws IOException {
     }
@@ -32,14 +41,6 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     public void addProductForSale(Supermarket s) throws IOException {
         Integer opcId;
         Scanner sc = new Scanner(System.in);
-
-        ObjectMapper mapper = new ObjectMapper();
-        Map<Integer, Product> mapProducts = new HashMap<>();
-
-        TypeFactory typeFactory = mapper.getTypeFactory();
-        MapType mapType = typeFactory.constructMapType(HashMap.class, Integer.class, Product.class);
-
-        mapProducts = mapper.readValue(file, mapType);
 
         for (Map.Entry<Integer, Product> entry : mapProducts.entrySet()) {
             System.out.println(entry);
@@ -53,7 +54,13 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         } while (!validationId(opcId, mapProducts));
 
         System.out.println(" Ingrese el precio del producto nuevo : ");
-        Double newPrice = sc.nextDouble();
+        Double newPrice;
+        do {
+            newPrice = sc.nextDouble();
+            if(!isDouble(newPrice.toString())){
+                System.out.println("Ingrese el precio correctamente como decimal");
+            }
+        } while (!isDouble(newPrice.toString()));
 
         ProductForSale newProductForSale = new ProductForSale(mapProducts.get(opcId), newPrice, false);
         s.getProductListHashSet().add(newProductForSale);
@@ -73,19 +80,19 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     }
 
     @Override
-    public void RemoveProductForSaleForSupermarket(Supermarket sp, Integer id) throws IOException {
+    public void removeProductForSaleForSupermarket(Supermarket sp, Integer id) throws IOException {
 
         Scanner st = new Scanner(System.in);
 
         for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductListHashSet()) {
             if (p.getProduct().getID() == id) {
-                System.out.println(" Producto a eliminar: " + p);
-                System.out.println(" Es el producto a eliminar? s/n");
+                System.out.println(" PRODUCTO A ELIMINAR: " + p);
+                System.out.println(" Es el producto que desea eliminar? s/n");
                 if (st.nextLine().equalsIgnoreCase("s")) {
                     superMarketList.get(sp.getCuit()).getProductListHashSet().remove(p);
                     supermarket.saveSupermarketInJsonFile(superMarketList);
                 } else {
-                    System.out.println(" volver a menu opciones ");
+                    System.out.println(" Volviendo al menu opciones ");
                 }
             }
 
@@ -93,29 +100,29 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     }
 
     @Override
-    public void ModifyProduct(ProductForSale productForSale) {
+    public void modifyProduct(ProductForSale productForSale) {
 
         Integer opc;
 
         Scanner st = new Scanner(System.in);
 
         do {
-            System.out.println(" Producto a modificar: " + productForSale);
-            System.out.println("ELIGE CAMPO A MODIFICAR");
-            System.out.println("1 - Nombre de producto: ");
-            System.out.println("2 - Marca: ");
-            System.out.println("3 - Categoria: ");
-            System.out.println("4 - Precio: ");
-            System.out.println("5 - Salir ");
+            System.out.println("       PRODUCTO A MODIFICAR: " + productForSale);
+            System.out.println("            1 - Nombre de producto: ");
+            System.out.println("            2 - Marca: ");
+            System.out.println("            3 - Categoria: ");
+            System.out.println("            4 - Precio: ");
+            System.out.println("            5 - Salir ");
+            System.out.println("     Seleccione la opcion deseada: ");
             opc = st.nextInt();
             switch (opc) {
                 case 1:
-                    System.out.println("ingrese nuevo nombre del producto: ");
+                    System.out.println("Ingrese nuevo nombre del producto: ");
                     productForSale.getProduct().setProductName(st.nextLine());
 
                     break;
                 case 2:
-                    System.out.println("ingrese nueva marca: ");
+                    System.out.println("Ingrese nueva marca: ");
                     productForSale.getProduct().setBrand(st.nextLine());
 
                     break;
@@ -135,13 +142,20 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
                     } while (category == null);
                     break;
                 case 4:
-                    System.out.println("ingrese nuevo precio: ");
-                    productForSale.setPrice(st.nextDouble());
+                    System.out.println("Ingrese nuevo precio: ");
+                    Double newPrice;
+                    do{
+                        newPrice = st.nextDouble();
+                        if(!isDouble(newPrice.toString())){
+                            System.out.println("Ingrese el precio correctamente como decimal");
+                        }
+                    }while (!isDouble(newPrice.toString()));
+                    productForSale.setPrice(newPrice);
 
                     break;
 
                 default:
-                    System.out.println(" ingrese una opcion valida ");
+                    System.out.println(" Ingrese una opcion valida ");
                     break;
             }
 
@@ -149,13 +163,13 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     }
 
     @Override
-    public void ModifyProductForSaleInSupermarket(Supermarket sp, Integer id) {
+    public void modifyProductForSaleInSupermarket(Supermarket sp, Integer id) {
         boolean isProduct = false;
         Scanner sc = new Scanner(System.in);
         try {
             for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductListHashSet()) {
                 if (p.getProduct().getID().equals(id)) {
-                    this.ModifyProduct(p);
+                    this.modifyProduct(p);
                     isProduct = true;
                     System.out.println(" Producto modificado: " + p);
                 }
@@ -171,7 +185,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
                 }
             }
         } catch (IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             System.out.println("no existe archivo de Supermercados ");
         }
     }
@@ -203,12 +217,31 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
 
     @Override
     public ProductForSale searchProductoForSaleById(Supermarket s, Integer id) {
-        for (ProductForSale p : superMarketList.get(s.getCuit()).getProductListHashSet()){
-            if(p.getProduct().getID() == id){
+        for (ProductForSale p : superMarketList.get(s.getCuit()).getProductListHashSet()) {
+            if (p.getProduct().getID() == id) {
                 return p;
             }
         }
         return null;
+    }
+
+    private Map<Integer, Product> productFromJsonToMap() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        TypeFactory typeFactory = mapper.getTypeFactory();
+        MapType mapType = typeFactory.constructMapType(HashMap.class, Integer.class, Product.class);
+
+        return mapper.readValue(fileProduct, mapType);
+    }
+
+    @Override
+    public boolean isDouble(String price) {
+        try {
+            Double.parseDouble(price);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
 }

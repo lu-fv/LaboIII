@@ -72,12 +72,12 @@ public class Supermarket{
 
     @Override
     public String toString() {
-        return "Supermarket{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", cuit='" + cuit + '\'' +
-                ", productListHashSet=" + productListHashSet +
-                '}';
+        return "         SUPERMERCADO:\n" +
+                "Nombre:      '" + name + "'\n" +
+                "Direccion:   " + address + "\n" +
+                "Telefono:    " + phone + "\n" +
+                "CUIT:        " + cuit + "\n" +
+                "        LISTADO DE PRODUCTOS DEL SUPERMERCADO " + name + ":\n" + productListHashSet;
+
     }
 }

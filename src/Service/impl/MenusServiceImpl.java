@@ -589,7 +589,7 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        productForSaleService.RemoveProductForSaleForSupermarket(supermarketExist,sc.nextInt());
+                        productForSaleService.removeProductForSaleForSupermarket(supermarketExist,sc.nextInt());
                     }
                    //endregion
                     break;
