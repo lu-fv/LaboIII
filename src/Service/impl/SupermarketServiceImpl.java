@@ -31,28 +31,39 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         Scanner sc = new Scanner(System.in);
         String name;
         boolean alfa;
+
         System.out.println("Ingrese nombre/denominacion: ");
         do {
+            //ingresa el nombre por teclado
             name = sc.nextLine();
+            //valido que sean caracteres, retorna true si lo son
             alfa = Pattern.matches("^[a-zA-Z]*$", name);
             if (!alfa) {
+                //si es false envio mensaje y vuelve a intentar hasta que sea correcto
                 System.out.println("Ingrese solo caracteres por favor");
             }
         } while (!alfa);
 
         if (search(name) == null) {
+            //busco que no exista un supermercado con ese nombre
             System.out.println("Ingrese direccion: ");
             String address = sc.nextLine();
+            //ingresa direccion por teclado sin validar
             System.out.println("Ingrese telefono: ");
-            String phone;
-            String newPhone;
+            String phone;//variable para ingresar el telefono
+            String newPhone;//variable para validar telefono
             do {
+                //Ingresa telefono por teclado
                 phone = sc.nextLine();
-                newPhone = phone.replaceAll("[-]", "");
+                //convierto el telefono a string para validar y le quito los guiones por si lo ingresa como un 0800
+                newPhone = phone.toString().replaceAll("[-]", "");
+
                 alfa = Pattern.matches("^[a-zA-Z]*$", newPhone);
+                //retorna true si ingresan letras
                 if (alfa) {
                     System.out.println("Ingrese solo numeros por favor");
                 }
+                //valido que sea una cantidad minima de numeros
                 if (newPhone.length() < 10) {
                     System.out.println("Ingrese la cantidad de numeros correctos");
                 }
@@ -62,21 +73,35 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             String cuit;
             String newCuit;
             do {
+                //Ingresa CUIT
                 cuit = sc.nextLine();
+                //Elimino los guiones del cuit para validar que sean numeros
                 newCuit = cuit.replaceAll("[-]", "");
+                //alfa es true si son caracteres
                 alfa = Pattern.matches("^[a-zA-Z]*$", newCuit);
+                //informo si ingresa letras que ingrese numeros
                 if (alfa) {
                     System.out.println("Ingrese solo numeros por favor");
                 }
+                //informo si no tiene la longitud correcta de un CUIT
                 if (newCuit.length() != 11) {
                     System.out.println("Ingrese un cuit correcto");
                 }
-            } while (alfa || newCuit.length() != 11);
-            Supermarket s = new Supermarket(name, address, phone, cuit);
-            superMarketList.put(s.getCuit(), s);
+            } while (alfa || newCuit.length() != 11);//el while continua hasta que no se ingrese correctamente
 
-            saveSupermarketInJsonFile(superMarketList);
-            System.out.println("Nuevo Supermercado agregado con exito");
+            //verifico que el cuit no se encuentre en el listado simplemente para poder informar con leyenda que ya se encuentra
+            if(superMarketList.containsKey(cuit)){
+                System.out.println("El CUIT ya se encuentra en el listado de supermercado");
+            }else{
+                //instanciamos el nuevo supermercado
+                Supermarket s = new Supermarket(name, address, phone, cuit);
+                //agregamos al map de lista de supermercados
+                superMarketList.put(s.getCuit(), s);
+                //y grabamos en el json informando que se grabo con exito
+                saveSupermarketInJsonFile(superMarketList);
+                System.out.println("Nuevo Supermercado agregado con exito");
+            }
+
         } else {
             System.out.println("El supermercado que desea dar de alta ya existe en la base, con los siguientes datos:");
             System.out.println(search(name));
@@ -88,10 +113,14 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public void deleteSupermarket(Supermarket s) throws IOException {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Desea eliminar el supermerdado " + s.getName() + "? s/n");
+        //pregunto si desea eliminar el supermercado y muestro para verificar datos correctos
+        System.out.println("Desea eliminar el supermerdado " + s.getName() + "[CUIT: " + s.getCuit() +"] ? s/n");
         if (sc.nextLine().equalsIgnoreCase("s")) {
+            //en caso de afirmacion procedo a eliminar
             this.superMarketList.remove(s.getCuit());
+            //guardo la modificacion en el json
             saveSupermarketInJsonFile(superMarketList);
+            //informo el movimiento
             System.out.println("El supermercado " + s.getName() + " fue dado de baja exitosamente!!!");
         } else {
             System.out.println("Volviendo al menu anterior");
@@ -237,17 +266,20 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public Supermarket search(String name) {
         Supermarket supermarket = null;
 
+        //busca supermercado por nombre en el map general del json
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             if (entry.getValue().getName().equalsIgnoreCase(name)) {
                 supermarket = entry.getValue();
             }
         }
+        //si encuentra retorna supermercado sino retorna null
         return supermarket;
     }
 
     @Override
     public void showListSupermarket(Supermarket supermarket) {
         if (supermarket != null) {
+            // muestra la lista de supermercados si existe
             System.out.println(supermarket);
         }
     }
@@ -255,6 +287,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     @Override
     public List<ProductForSale> serchByCategoryInSupermarket(Supermarket supermarket, Category category) {
 
+        //creo una lista de productos que coincidan con la categoria enviada por parametro
         List<ProductForSale> productForCategory = new ArrayList<>();
         for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductListHashSet()) {
             if (p.getProduct().getCategory() == (category)) {
@@ -267,6 +300,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     @Override
     public List<ProductForSale> serchProductInSaleInSupermarket(Supermarket supermarket) {
 
+        //recorro y armo una lista de productos que esten en oferta
         List<ProductForSale> productsInSale = new ArrayList<>();
         for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductListHashSet()) {
             if (p.getOnSale()) {
@@ -279,6 +313,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     @Override
     public List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name) {
 
+        //recorro y busco productos que contengan en su descripcion lo pasado por parametro
         List<ProductForSale> products = new ArrayList<>();
         for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductListHashSet()) {
             if (p.getProduct().getProductName().contains(name)) {

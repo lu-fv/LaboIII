@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/ProductForSale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/ProductForSale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Supermarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Supermarket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ProductForSaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ProductForSaleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/impl/ProductForSaleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/ProductForSaleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/supermarket.json" beforeDir="false" afterPath="$PROJECT_DIR$/supermarket.json" afterDir="false" />
-    </list>
+    <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -42,41 +42,41 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         Integer opcId;
         Scanner sc = new Scanner(System.in);
 
+        //Recorro el Map de productos para luego poder elegir que producto agregar al supermercado
+        //esa lista mapProducts la obtengo de productos.json que esta como constante dentro de productForSaleImpl
         for (Map.Entry<Integer, Product> entry : mapProducts.entrySet()) {
             System.out.println(entry);
         }
         System.out.println(" ELija el id del producto que desea agregar: ");
+        //valido que sea un id correcto
         do {
             opcId = sc.nextInt();
-            if (!validationId(opcId, mapProducts)) {
+            if (!validationId(opcId)) {
                 System.out.println(" Ingrese por favor un Id correcto!!! ");
             }
-        } while (!validationId(opcId, mapProducts));
+        } while (!validationId(opcId));
 
         System.out.println(" Ingrese el precio del producto nuevo : ");
         Double newPrice;
+        //valido que sea un Double
         do {
             newPrice = sc.nextDouble();
-            if(!isDouble(newPrice.toString())){
+            if (!isDouble(newPrice.toString())) {
                 System.out.println("Ingrese el precio correctamente como decimal");
             }
         } while (!isDouble(newPrice.toString()));
 
+        //creo una instancia de producto vendible
         ProductForSale newProductForSale = new ProductForSale(mapProducts.get(opcId), newPrice, false);
+        //agrego producto vendible a la lista del supermercado
         s.getProductListHashSet().add(newProductForSale);
-
+        //uso la funcion que agrega el supermercado modificado y guarda en el json
         supermarket.modifySupermarketListProducts(s);
     }
 
     @Override
-    public Boolean validationId(Integer id, Map<Integer, Product> map) {
-        Boolean flag = false;
-        for (Map.Entry<Integer, Product> entry : map.entrySet()) {
-            if (entry.getKey().equals(id)) {
-                flag = true;
-            }
-        }
-        return flag;
+    public Boolean validationId(Integer id) {
+        return mapProducts.containsKey(id);
     }
 
     @Override
@@ -84,12 +84,16 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
 
         Scanner st = new Scanner(System.in);
 
+        //recorro el Set de productos vendibles del supermercado en busca del id del producto a eliminar
         for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductListHashSet()) {
             if (p.getProduct().getID() == id) {
-                System.out.println(" PRODUCTO A ELIMINAR: " + p);
+                //cuando encuentro muestro para rectificar que sea el producto correcto a eliminar
+                System.out.println(" PRODUCTO A ELIMINAR: " + p.getProduct().getProductName() + "[" + p.getProduct().getBrand() + "]");
                 System.out.println(" Es el producto que desea eliminar? s/n");
                 if (st.nextLine().equalsIgnoreCase("s")) {
+                    //si se confirma la eliminacion procedo a removerlo
                     superMarketList.get(sp.getCuit()).getProductListHashSet().remove(p);
+                    //guardo el supermercado
                     supermarket.saveSupermarketInJsonFile(superMarketList);
                 } else {
                     System.out.println(" Volviendo al menu opciones ");
@@ -119,12 +123,10 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
                 case 1:
                     System.out.println("Ingrese nuevo nombre del producto: ");
                     productForSale.getProduct().setProductName(st.nextLine());
-
                     break;
                 case 2:
                     System.out.println("Ingrese nueva marca: ");
                     productForSale.getProduct().setBrand(st.nextLine());
-
                     break;
                 case 3:
                     Category category = null;
@@ -144,16 +146,14 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
                 case 4:
                     System.out.println("Ingrese nuevo precio: ");
                     Double newPrice;
-                    do{
+                    do {
                         newPrice = st.nextDouble();
-                        if(!isDouble(newPrice.toString())){
+                        if (!isDouble(newPrice.toString())) {
                             System.out.println("Ingrese el precio correctamente como decimal");
                         }
-                    }while (!isDouble(newPrice.toString()));
+                    } while (!isDouble(newPrice.toString()));
                     productForSale.setPrice(newPrice);
-
                     break;
-
                 default:
                     System.out.println(" Ingrese una opcion valida ");
                     break;
@@ -167,21 +167,28 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         boolean isProduct = false;
         Scanner sc = new Scanner(System.in);
         try {
+            //recorro el Set de productos vendibles del supermercado
             for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductListHashSet()) {
+                //busco por id pasado por parametro
                 if (p.getProduct().getID().equals(id)) {
+                    //modifico el producto con el metodo modifyProduct que pregunta que desea cambiar
                     this.modifyProduct(p);
+                    //cambio el flag para identificar que se modifico correctamente
                     isProduct = true;
-                    System.out.println(" Producto modificado: " + p);
+                    //muestro los cambios
+                    System.out.println("Producto modificado: " + p);
                 }
             }
             if (!isProduct) {
-                throw new IllegalArgumentException(" No existe Id numero: " + id);
+                throw new IllegalArgumentException("No existe Id numero: " + id);
             } else {
-                System.out.println(" Desea guardar los cambios? s/n ");
+                //pregunto si desea guardar los cambios
+                System.out.println("Desea guardar los cambios? s/n ");
                 if (sc.nextLine().equalsIgnoreCase("s")) {
+                    //guardo los cambios
                     supermarket.saveSupermarketInJsonFile(superMarketList);
                 } else {
-                    System.out.println(" vuelva al menu de opciones ");
+                    System.out.println("Vuelva al menu de opciones ");
                 }
             }
         } catch (IOException e) {
@@ -197,12 +204,14 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         String continueAdd = "S";
 
         do {
+            //muestro los productos de la lista mostrando con numeros que se relacionan con el i (indice)
             System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS <<<<<<<<<<<<<<<<<<<<<<");
             for (int i = 0; i < list.size(); i++) {
                 System.out.println("[" + (i + 1) + "] - " + list.get(i));
             }
             System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion...");
             numProduct = sc.nextInt();
+            //valido que la opcion ingresada coincide con alguno de los productos mostrados que va de 1 a size de la lista
             if (numProduct > 0 && numProduct < list.size()) {
                 //si ingresa una opcion correcta del listado procedemos a pedir la cantidad de ese producto para añadir al carrito
                 System.out.println("Ingrese la cantidad que desea del producto " + list.get(numProduct - 1).getProduct().getProductName());
@@ -212,16 +221,20 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
             } else {
                 System.out.println("Ha seleccionado una opcion incorrecta de producto!. Intenelo nuevamente.");
             }
+            //el do While continua mientras no ingreses una opcion correcta o si deseas seguir agregando productos a la lista
         } while (numProduct <= 0 || numProduct >= list.size() || continueAdd.equalsIgnoreCase("s"));
     }
 
     @Override
     public ProductForSale searchProductoForSaleById(Supermarket s, Integer id) {
+        //recorro el set en busca del id de producto
         for (ProductForSale p : superMarketList.get(s.getCuit()).getProductListHashSet()) {
             if (p.getProduct().getID() == id) {
+                //retorno producto
                 return p;
             }
         }
+        //si termina el for y no lo encuentra retorna null
         return null;
     }
 
@@ -237,9 +250,11 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     @Override
     public boolean isDouble(String price) {
         try {
+            //si es un double retorna true
             Double.parseDouble(price);
             return true;
         } catch (NumberFormatException nfe) {
+            // si entra a la excepcion es porque no es double por lo que retorno false
             return false;
         }
     }
