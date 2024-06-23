@@ -31,7 +31,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         Scanner sc = new Scanner(System.in);
         String name;
         boolean alfa;
-        System.out.println("ingrese nombre/denominacion: ");
+        System.out.println("Ingrese nombre/denominacion: ");
         do {
             name = sc.nextLine();
             alfa = Pattern.matches("^[a-zA-Z]*$", name);
@@ -116,32 +116,64 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         Integer opc;
         Scanner sr = new Scanner(System.in);
         Scanner st = new Scanner(System.in);
+        boolean alfa;
 
         do {
             System.out.println("ELIGE CAMPO A MODIFICAR");
-            System.out.println("1 - nombre");
-            System.out.println("2 - domicilio");
-            System.out.println("3 - telefono");
+            System.out.println("1 - Nombre");
+            System.out.println("2 - Domicilio");
+            System.out.println("3 - Telefono");
             System.out.println("4 - CUIT");
-            System.out.println("5 - salir");
+            System.out.println("5 - Salir");
             opc = sr.nextInt();
             switch (opc) {
                 case 1:
-                    System.out.println("ingrese nuevo nombre: ");
-                    String supermarketName = st.nextLine();
+                    System.out.println("Ingrese nuevo nombre: ");
+                    String supermarketName;
+                    do {
+                        supermarketName = st.nextLine();
+                        alfa = Pattern.matches("^[a-zA-Z]*$", supermarketName);
+                        if (!alfa) {
+                            System.out.println("Ingrese solo caracteres por favor");
+                        }
+                    } while (!alfa);
                     s.setName(supermarketName);
                     break;
                 case 2:
-                    System.out.println("ingrese nuevo domicilio: ");
+                    System.out.println("Ingrese nuevo domicilio: ");
                     s.setAddress(sr.nextLine());
                     break;
                 case 3:
-                    System.out.println("ingrese nuevo telefono: ");
-                    s.setPhone(sr.nextLine());
+                    System.out.println("Ingrese nuevo telefono: ");
+                    String phone;
+                    do {
+                        phone  = sr.nextLine();
+                        alfa = Pattern.matches("^[a-zA-Z]*$", phone);
+                        if (alfa) {
+                            System.out.println("Ingrese solo numeros por favor");
+                        }
+                        if (phone.length() < 10) {
+                            System.out.println("Ingrese la cantidad de numeros correctos");
+                        }
+                    } while (alfa || phone.length() < 10);
+                    s.setPhone(phone);
                     break;
                 case 4:
                     System.out.println("Ingrese nueva CUIT: ");
-                    s.setCuit(sr.nextLine());
+                    String cuit;
+                    String newCuit;
+                    do {
+                        cuit = sr.nextLine();
+                        newCuit = cuit.replaceAll("[-]", "");
+                        alfa = Pattern.matches("^[a-zA-Z]*$", newCuit);
+                        if (alfa) {
+                            System.out.println("Ingrese solo numeros por favor");
+                        }
+                        if(newCuit.length() < 12 || newCuit.length() > 13){
+                            System.out.println("Ingrese un cuit correcto");
+                        }
+                    } while (alfa || newCuit.length() < 12 || newCuit.length() > 13);
+                    s.setCuit(cuit);
                 case 5:
                     break;
                 default:
