@@ -1,19 +1,26 @@
 package Service.impl;
 
+import Models.Supermarket;
 import Service.MenusService;
-import Service.SupermarketService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenusServiceImpl implements MenusService {
-
     private FoodServiceImpl foodService;
     private BeverageServiceImpl beverageService;
     private SupermarketServiceImpl supermarketService;
 
     public MenusServiceImpl() {
-        this.foodService = new FoodServiceImpl();
-        this.beverageService = new BeverageServiceImpl();
+        try {
+            foodService = ProductPersistenceImpl.startFoodService();
+            beverageService = ProductPersistenceImpl.startBeverageService();
+            foodService.startID();
+            beverageService.startID();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         this.supermarketService = new SupermarketServiceImpl();
     }
 
@@ -166,10 +173,10 @@ public class MenusServiceImpl implements MenusService {
                     privateAccessCreateProductMenu();
                     break;
                 case 2:
-                    foodService.modify();
+                    privateAccessModifyProductMenu();
                     break;
                 case 3:
-                    foodService.delete();
+                    privateAccessDeleteProductMenu();
                     break;
                 case 4:
                     System.out.println("=BEBIDAS============");
@@ -200,10 +207,18 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Volviendo...");
                     break;
                 case 1:
-                    foodService.create();
+                    try {
+                        foodService.create();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al intentar guardar los cambios");
+                    }
                     break;
-                case 2:
-                    beverageService.create();
+                case 2: //Agregar throws y try-catch correspondientes
+                    try {
+                        beverageService.create();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al intentar guardar los cambios");
+                    }
                     break;
                 default:
                     System.out.println("Opción no disponible");
@@ -212,17 +227,58 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
-    public void privateAccessSupermarketMenu() {
+    public void privateAccessModifyProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
 
         do {
-            System.out.println("            [1] CREAR SUPERMERCADO");
-            System.out.println("            [2] MODIFICAR SUPERMERCADO");
-            System.out.println("            [3] ELIMINAR SUPERMERCADO");
-            System.out.println("            [4] AÑADIR PRODUCTO");
-            System.out.println("            [5] MODIFICAR PRECIO");
-            System.out.println("            [6] ELIMINAR PRODUCTO");
+            System.out.println("            [1] MODIFICAR ALIMENTO");
+            System.out.println("            [2] MODIFICAR BEBIDA");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+                    try {
+                        if (foodService.modify(ProductServiceImpl.askForID()) != null) {
+                            System.out.println("Información modificada");
+                        } else {
+                            System.out.println("ID no encontrado");
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al intentar guardar los cambios");
+                    }
+
+                    break;
+                case 2: //Agregar throws y try-catch correspondientes
+                    try {
+                        if (beverageService.modify(ProductServiceImpl.askForID()) != null) {
+                            System.out.println("Información modificada");
+                        } else {
+                            System.out.println("ID no encontrado");
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al intentar guardar los cambios");
+                    }
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
+            }
+        } while (opc != 0);
+    }
+
+    public void privateAccessDeleteProductMenu() { //AGREGAR BÚSQUEDA DE PRODUCTO EN SUPERMERCADOS
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("            [1] ELIMINAR ALIMENTO");
+            System.out.println("            [2] ELIMINAR BEBIDA");
             System.out.println("            [0] SALIR\n");
 
             opc = Integer.parseInt(sc.nextLine());
@@ -237,16 +293,36 @@ public class MenusServiceImpl implements MenusService {
                 case 2:
 
                     break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
+            }
+        } while (opc != 0);
+    }
+
+    public void privateAccessSupermarketMenu() {
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("            [1] CREAR SUPERMERCADO");
+            System.out.println("            [2] MI SUPERMERCADO");
+            System.out.println("            [3] ELIMINAR SUPERMERCADO");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+                    privateAccessThisSupermarketMenu(null);
+                    break;
                 case 3:
-
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-
-                    break;
-                case 6:
 
                     break;
                 default:
@@ -255,5 +331,40 @@ public class MenusServiceImpl implements MenusService {
             }
         } while (opc != 0);
     }
+
+    public void privateAccessThisSupermarketMenu(Supermarket supermarket) {
+        Scanner sc = new Scanner(System.in);
+        Integer opc;
+
+        do {
+            System.out.println("            [1] VER SUPERMERCADO");
+            System.out.println("            [2] MODIFICAR SUPERMERCADO");
+            System.out.println("            [3] AÑADIR PRODUCTO");
+            System.out.println("            [4] MODIFICAR PRECIO");
+            System.out.println("            [5] ELIMINAR PRODUCTO");
+            System.out.println("            [0] SALIR\n");
+
+            opc = Integer.parseInt(sc.nextLine());
+
+            switch (opc) {
+                case 0:
+                    System.out.println("Volviendo...");
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+                    supermarketService.modifySupermarket(supermarket);
+                    break;
+                case 3:
+
+                    break;
+                default:
+                    System.out.println("Opción no disponible");
+                    break;
+            }
+        } while (opc != 0);
+    }
+
 
 }

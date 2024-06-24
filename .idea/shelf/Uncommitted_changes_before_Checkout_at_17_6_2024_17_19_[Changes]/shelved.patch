@@ -1,0 +1,107 @@
+Index: src/Service/impl/MenusServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Service.impl;\r\n\r\nimport Models.Product;\r\nimport Service.MenusService;\r\nimport Service.SupermarketService;\r\n\r\nimport java.util.Scanner;\r\n\r\npublic class MenusServiceImpl implements MenusService {\r\n\r\n    private FoodServiceImpl foodService;\r\n    private BeverageServiceImpl beverageService;\r\n    private SupermarketService supermarketService;\r\n\r\n    public MenusServiceImpl() {\r\n        this.foodService = new FoodServiceImpl();\r\n        this.beverageService = new BeverageServiceImpl();\r\n        this.supermarketService = new SupermarketServiceImpl();\r\n    }\r\n\r\n    @Override\r\n    public void initialMenu() {\r\n\r\n        Scanner sc = new Scanner(System.in);\r\n        Integer opc;\r\n\r\n        do {\r\n            System.out.println(\"================= MENU PRINCIPAL ======================\");\r\n            System.out.println(\"\\n\");\r\n            System.out.println(\"            [1] MENU USUARIO\");\r\n            System.out.println(\"            [2] ACCESO PRIVADO\");\r\n            System.out.println(\"            [0] SALIR\\n\");\r\n\r\n            opc = sc.nextInt();\r\n\r\n            switch (opc) {\r\n                case 1:\r\n                    break;\r\n                case 2:\r\n                    privateAccessMenu();\r\n                    break;\r\n                case 0:\r\n                    break;\r\n                default:\r\n                    System.out.println(\"Ingrese una opcion correcta!\");\r\n                    break;\r\n            }\r\n\r\n        } while (opc != 0);\r\n    }\r\n\r\n    @Override\r\n    public void clientMenu() {\r\n        Scanner sc = new Scanner(System.in);\r\n        Integer opc;\r\n\r\n        do {\r\n            System.out.println(\"======================= OFERTAS.COM ============================\");\r\n            System.out.println(\"\\n\");\r\n            System.out.println(\"            [1] CREAR LISTA DE COMPRAS\");\r\n            System.out.println(\"            [2] COMPARADOR DE PRECIOS\");\r\n            System.out.println(\"            [3] EL MAS BARATO\");\r\n            System.out.println(\"            [0] SALIR\\n\");\r\n\r\n            opc = sc.nextInt();\r\n\r\n            switch (opc) {\r\n                case 1:\r\n                    break;\r\n                case 2:\r\n                    break;\r\n                case 0:\r\n                    break;\r\n                default:\r\n                    System.out.println(\"Ingrese una opcion correcta!\");\r\n                    break;\r\n            }\r\n\r\n        } while (opc != 0);\r\n    }\r\n\r\n    @Override\r\n    public void shoppingListMenu() {\r\n        Scanner sc = new Scanner(System.in);\r\n        Integer opc;\r\n\r\n        do {\r\n            System.out.println(\"======================= LISTA DE COMPRAS ============================\");\r\n            System.out.println(\"\\n\");\r\n            System.out.println(\"            [1] CREAR LISTA POR SUPERMERCADO\");\r\n            System.out.println(\"            [2] CREAR LISTA EN EL SUPERMERCADO MAS BARATO\");\r\n            System.out.println(\"            [3] CREAR LISTA CON EL MAS BARATO (indemendientemente del supermercado???????\");\r\n            System.out.println(\"            [4] TU LISTA DE COMPRAS\");\r\n            System.out.println(\"            [0] SALIR\\n\");\r\n\r\n            opc = sc.nextInt();\r\n\r\n            switch (opc) {\r\n                case 1:\r\n                    System.out.println(\"            [1] BUSCAR PRODUCTO POR CATEGORIA\");\r\n                    System.out.println(\"            [2] BUSCAR OFERTAS\");\r\n                    System.out.println(\"            [3] TODOS LOS PRODUCTOS\");\r\n                    break;\r\n                case 2:\r\n                    break;\r\n                case 3:\r\n                    break;\r\n                case 4:\r\n                    break;\r\n                case 0:\r\n                    break;\r\n                default:\r\n                    System.out.println(\"Ingrese una opcion correcta!\");\r\n                    break;\r\n            }\r\n        } while (opc != 0);\r\n    }\r\n\r\n    public void privateAccessMenu() {\r\n        Scanner sc = new Scanner(System.in);\r\n        Integer opc;\r\n\r\n        do {\r\n            System.out.println(\"======================= ADMINISTRACIÓN ============================\");\r\n            System.out.println(\"\\n\");\r\n            System.out.println(\"            [1] PRODUCTOS\");\r\n            System.out.println(\"            [2] SUPERMERCADOS\");\r\n            System.out.println(\"            [0] SALIR\\n\");\r\n\r\n            opc = Integer.parseInt(sc.nextLine());\r\n\r\n            switch (opc) {\r\n                case 0:\r\n                    System.out.println(\"Volviendo...\");\r\n                    break;\r\n                case 1:\r\n                    privateAccessProductMenu();\r\n                    break;\r\n                case 2:\r\n                    privateAccessSupermarketMenu();\r\n                    break;\r\n                default:\r\n                    System.out.println(\"Opción no disponible\");\r\n                    break;\r\n            }\r\n        } while (opc != 0);\r\n    }\r\n\r\n    public void privateAccessProductMenu() {\r\n        Scanner sc = new Scanner(System.in);\r\n        Integer opc;\r\n\r\n        do {\r\n            System.out.println(\"            [1] CREAR PRODUCTO\");\r\n            System.out.println(\"            [2] MODIFICAR PRODUCTO\");\r\n            System.out.println(\"            [3] ELIMINAR PRODUCTO\");\r\n            System.out.println(\"            [4] VER PRODUCTOS\");\r\n            System.out.println(\"            [0] SALIR\\n\");\r\n\r\n            opc = Integer.parseInt(sc.nextLine());\r\n\r\n            switch (opc) {\r\n                case 0:\r\n                    System.out.println(\"Volviendo...\");\r\n                    break;\r\n                case 1:\r\n                    privateAccessCreateProductMenu();\r\n                    break;\r\n                case 2:\r\n                    foodService.modify();\r\n                    break;\r\n                case 3:\r\n                    foodService.delete();\r\n                    break;\r\n                case 4:\r\n                    System.out.println(\"=BEBIDAS============\");\r\n                    beverageService.showAll();\r\n                    System.out.println(\"=COMIDAS============\");\r\n                    foodService.showAll();\r\n                    break;\r\n                default:\r\n                    System.out.println(\"Opción no disponible\");\r\n                    break;\r\n            }\r\n        } while (opc != 0);\r\n    }\r\n\r\n    public void privateAccessCreateProductMenu() {\r\n        Scanner sc = new Scanner(System.in);\r\n        Integer opc;\r\n\r\n        do {\r\n            System.out.println(\"            [1] CREAR ALIMENTO\");\r\n            System.out.println(\"            [2] CREAR BEBIDA\");\r\n            System.out.println(\"            [0] SALIR\\n\");\r\n\r\n            opc = Integer.parseInt(sc.nextLine());\r\n\r\n            switch (opc) {\r\n                case 0:\r\n                    System.out.println(\"Volviendo...\");\r\n                    break;\r\n                case 1:\r\n                    foodService.create();\r\n                    break;\r\n                case 2:\r\n                    beverageService.create();\r\n                    break;\r\n                default:\r\n                    System.out.println(\"Opción no disponible\");\r\n                    break;\r\n            }\r\n        } while (opc != 0);\r\n    }\r\n\r\n    public void privateAccessSupermarketMenu() {\r\n        Scanner sc = new Scanner(System.in);\r\n        Integer opc;\r\n\r\n        do {\r\n            System.out.println(\"            [1] CREAR SUPERMERCADO\");\r\n            System.out.println(\"            [2] MODIFICAR SUPERMERCADO\");\r\n            System.out.println(\"            [3] ELIMINAR SUPERMERCADO\");\r\n            System.out.println(\"            [4] AÑADIR PRODUCTO\");\r\n            System.out.println(\"            [5] MODIFICAR PRECIO\");\r\n            System.out.println(\"            [6] ELIMINAR PRODUCTO\");\r\n            System.out.println(\"            [0] SALIR\\n\");\r\n\r\n            opc = Integer.parseInt(sc.nextLine());\r\n\r\n            switch (opc) {\r\n                case 0:\r\n                    System.out.println(\"Volviendo...\");\r\n                    break;\r\n                case 1:\r\n\r\n                    break;\r\n                case 2:\r\n\r\n                    break;\r\n                case 3:\r\n\r\n                    break;\r\n                case 4:\r\n\r\n                    break;\r\n                case 5:\r\n\r\n                    break;\r\n                case 6:\r\n\r\n                    break;\r\n                default:\r\n                    System.out.println(\"Opción no disponible\");\r\n                    break;\r\n            }\r\n        } while (opc != 0);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Service/impl/MenusServiceImpl.java b/src/Service/impl/MenusServiceImpl.java
+--- a/src/Service/impl/MenusServiceImpl.java	(revision 2edf9d865de8bb735ccf5085a4cf9a7b4a92e1f5)
++++ b/src/Service/impl/MenusServiceImpl.java	(date 1718655526914)
+@@ -213,17 +213,15 @@
+         } while (opc != 0);
+     }
+ 
++
+     public void privateAccessSupermarketMenu() {
+         Scanner sc = new Scanner(System.in);
+         Integer opc;
+ 
+         do {
+             System.out.println("            [1] CREAR SUPERMERCADO");
+-            System.out.println("            [2] MODIFICAR SUPERMERCADO");
++            System.out.println("            [2] MI SUPERMERCADO");
+             System.out.println("            [3] ELIMINAR SUPERMERCADO");
+-            System.out.println("            [4] AÑADIR PRODUCTO");
+-            System.out.println("            [5] MODIFICAR PRECIO");
+-            System.out.println("            [6] ELIMINAR PRODUCTO");
+             System.out.println("            [0] SALIR\n");
+ 
+             opc = Integer.parseInt(sc.nextLine());
+@@ -236,18 +234,43 @@
+ 
+                     break;
+                 case 2:
+-
++                    privateAccessThisSupermarketMenu();
+                     break;
+                 case 3:
+ 
+                     break;
+-                case 4:
++                default:
++                    System.out.println("Opción no disponible");
++                    break;
++            }
++        } while (opc != 0);
++    }
++
++    public void privateAccessThisSupermarketMenu() {
++        Scanner sc = new Scanner(System.in);
++        Integer opc;
++
++        do {
++            System.out.println("            [1] VER SUPERMERCADO");
++            System.out.println("            [2] MODIFICAR SUPERMERCADO");
++            System.out.println("            [3] AÑADIR PRODUCTO");
++            System.out.println("            [4] MODIFICAR PRECIO");
++            System.out.println("            [5] ELIMINAR PRODUCTO");
++            System.out.println("            [0] SALIR\n");
++
++            opc = Integer.parseInt(sc.nextLine());
++
++            switch (opc) {
++                case 0:
++                    System.out.println("Volviendo...");
++                    break;
++                case 1:
+ 
+                     break;
+-                case 5:
++                case 2:
+ 
+                     break;
+-                case 6:
++                case 3:
+ 
+                     break;
+                 default:
+Index: src/Models/Food.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Models;\r\n\r\nimport Enums.Category;\r\n\r\npublic class Food extends Product {\r\n    //ATTRIBUTES-----------------------------------------\r\n    private Boolean perishable;\r\n\r\n    //CONSTRUCTORS---------------------------------------\r\n    public Food() {\r\n\r\n    }\r\n\r\n    public Food(Integer ID, String productName, String brand, Category category, Boolean perishable) {\r\n        super(ID, productName, brand, category);\r\n        this.perishable = perishable;\r\n    }\r\n\r\n    //GETTERS & SETTERS----------------------------------\r\n    public Boolean getPerishable() {\r\n        return perishable;\r\n    }\r\n\r\n    public void setPerishable(Boolean perishable) {\r\n        this.perishable = perishable;\r\n    }\r\n\r\n    //TO STRING------------------------------------------\r\n    @Override\r\n    public String toString() {\r\n        return super.toString() +\r\n                (perishable ? \"\\nAlimento perecedero\" : \"\\nAlimento no perecedero\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Models/Food.java b/src/Models/Food.java
+--- a/src/Models/Food.java	(revision 2edf9d865de8bb735ccf5085a4cf9a7b4a92e1f5)
++++ b/src/Models/Food.java	(date 1718655526933)
+@@ -13,7 +13,7 @@
+ 
+     public Food(Integer ID, String productName, String brand, Category category, Boolean perishable) {
+         super(ID, productName, brand, category);
+-        this.perishable = perishable;
++        this.setPerishable(perishable);
+     }
+ 
+     //GETTERS & SETTERS----------------------------------
+@@ -22,6 +22,9 @@
+     }
+ 
+     public void setPerishable(Boolean perishable) {
++        if (perishable == null) {
++            throw new NullPointerException("Falta dato: Es o no perecedero");
++        }
+         this.perishable = perishable;
+     }
+ 

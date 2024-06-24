@@ -1,0 +1,59 @@
+<changelist name="Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1" date="1718655535618" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 17/6/2024 17:18 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Service/ProductForSaleService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/ProductForSaleService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/SupermarketServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Service/SupermarketService.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Service/SupermarketService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/SupermarketService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Models/Supermarket.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Models/Supermarket.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/Supermarket.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Models/ProductForSale.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Models/ProductForSale.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/ProductForSale.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Service/impl/ProductForSaleServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/ProductForSaleServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/MenusServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Models/Food.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Models/Food.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/Food.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Main.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/Main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/SupermarketServiceImpl$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$1.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_6_2024_17_18_[Changes]1/SupermarketServiceImpl$1.class" />
+  </binary>
+</changelist>

@@ -1,6 +1,7 @@
 package Models;
 
 import Enums.Category;
+import Utils.Verification;
 
 public class Food extends Product {
     //ATTRIBUTES-----------------------------------------
@@ -13,7 +14,7 @@ public class Food extends Product {
 
     public Food(Integer ID, String productName, String brand, Category category, Boolean perishable) {
         super(ID, productName, brand, category);
-        this.perishable = perishable;
+        this.setPerishable(perishable);
     }
 
     //GETTERS & SETTERS----------------------------------
@@ -22,6 +23,11 @@ public class Food extends Product {
     }
 
     public void setPerishable(Boolean perishable) {
+        try {
+            Verification.isEmpty(perishable);
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Completar datos: Perecedero");
+        }
         this.perishable = perishable;
     }
 

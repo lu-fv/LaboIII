@@ -2,8 +2,10 @@ package Service.impl;
 
 import Enums.Category;
 import Models.Beverage;
+import Models.Food;
 import Service.BeverageService;
 
+import java.io.IOException;
 import java.util.*;
 
 public class BeverageServiceImpl implements BeverageService {
@@ -13,9 +15,19 @@ public class BeverageServiceImpl implements BeverageService {
         this.beverages = new HashMap<>();
     }
 
+    public Map<Integer, Beverage> getBeverages() {
+        return beverages;
+    }
+
+    public void setBeverages(Map<Integer, Beverage> beverages) {
+        this.beverages = beverages;
+    }
+
     @Override
-    public Beverage add(Beverage beverage) {
-        return beverages.put(beverage.getID(), beverage);
+    public Beverage add(Beverage beverage) throws IOException {
+        beverages.put(beverage.getID(), beverage);
+        ProductPersistenceImpl.saveBeverages(this);
+        return beverage;
     }
 
     @Override
@@ -26,16 +38,25 @@ public class BeverageServiceImpl implements BeverageService {
     }
 
     @Override
-    public Beverage create() {
-        try {
-            return this.add(new Beverage(ProductServiceImpl.createID(),
-                    ProductServiceImpl.createName(),
-                    ProductServiceImpl.createBrand(),
-                    ProductServiceImpl.createCategory(),
-                    createLitres()));
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ingreso de datos erroneo");
-        }
+    public Beverage create() throws IOException {
+        Boolean retry;
+        Integer id = null;
+        do {
+            retry = false;
+            try {
+                id = ProductServiceImpl.createID();
+                return this.add(new Beverage(id,
+                        ProductServiceImpl.createName(),
+                        ProductServiceImpl.createBrand(),
+                        ProductServiceImpl.createCategory(),
+                        createLitres()));
+            } catch (IllegalArgumentException e) {
+                System.out.println("\n" + e.getMessage());
+                retry = true;
+                ProductServiceImpl.deleteID(id);
+            }
+        } while (retry);
+        return null;
     }
 
     private Double createLitres() {
@@ -45,45 +66,32 @@ public class BeverageServiceImpl implements BeverageService {
             System.out.println("Contenido en litros");
             litres = Double.parseDouble(scanner.nextLine());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ingreso de datos erroneo");
+            throw new NumberFormatException("¡¡Error!! Cantidad de litros inválida");
         }
 
         return litres;
     }
 
     @Override
-    public Beverage modify() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese id");
-        Integer id = Integer.parseInt(scanner.nextLine());
+    public Beverage modify(Integer id) throws IOException {
         Beverage beverage;
-        if ((beverage = beverages.get(id)) != null) {
-            System.out.println("Nombre:");
-            String name = scanner.nextLine();
-            beverage.setProductName(name);
-
-            System.out.println("Marca:");
-            String brand = scanner.nextLine();
-            beverage.setBrand(brand);
-
-            System.out.println("Id categoría:");
-            ProductServiceImpl.showCategories();
-            Integer categoryId = Integer.parseInt(scanner.nextLine());
-            Category category = ProductServiceImpl.selectCategory(categoryId);
-            beverage.setCategory(category);
-
-            beverage.setLitres(createLitres());
-            return beverages.put(beverage.getID(), beverage);
-        } else {
-            return null;
-        }
+        do {
+            try {
+                if ((beverage = beverages.get(id)) != null) { //Si encuentro la bebida
+                    ProductServiceImpl.modify(beverage); //Modifico los productos de la superclase Product
+                    beverage.setLitres(createLitres()); //Modifico los atributos propios de la clase Beverage
+                    return this.add(beverage); //Retorno la bebida modificada y reemplazada en el map
+                } else {
+                    return null; //Retorno null
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true); //Repito hasta que no haya problemas
     }
 
     @Override
-    public Beverage delete() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese id");
-        Integer id = Integer.parseInt(scanner.nextLine());
+    public Beverage delete(Integer id) {
         return beverages.remove(id);
     }
 
@@ -91,6 +99,12 @@ public class BeverageServiceImpl implements BeverageService {
     public void showAll() {
         for (Map.Entry<Integer, Beverage> entry : beverages.entrySet()) {
             System.out.println(entry.getValue() + "\n");
+        }
+    }
+
+    public void startID() {
+        for (Map.Entry<Integer, Beverage> entry : beverages.entrySet()) {
+            ProductServiceImpl.add(entry.getKey());
         }
     }
 }
