@@ -21,7 +21,6 @@ import java.util.Scanner;
 
 public class ProductForSaleServiceImpl implements ProductForSaleService {
     private final File fileProduct = new File("product.json");
-
     private SupermarketService supermarket;
     private CartService cartService;
     private HashMap<String, Supermarket> superMarketList;

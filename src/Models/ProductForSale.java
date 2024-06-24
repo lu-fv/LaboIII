@@ -4,6 +4,7 @@ public class ProductForSale {
     private Product product;
     private Double price;
     private Boolean onSale;
+    private Integer discountPercent = 30;
 
     public ProductForSale() {
 
@@ -39,12 +40,20 @@ public class ProductForSale {
         this.onSale = onSale;
     }
 
+    public Integer getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(Integer discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
     @Override
     public String toString() {
         if(this.onSale){
             return "Descripcion (Producto en oferta): "+ product +
                     " - Precio Anterior: [$" + price +
-                    "] - Precio en Oferta [$"; ///funcion que retorne el precio en oferta
+                    "] - Precio en Oferta [$" + applyDiscount(getDiscountPercent()) + "]";
         }else{
             return "Descripcion: "+ product +
                     " - Precio: [$" + price +
@@ -54,6 +63,6 @@ public class ProductForSale {
     }
 
     public Double applyDiscount(Integer percentage) {
-        return this.price - percentage * this.price / 100;
+        return this.price - percentage.doubleValue() * this.price / 100;
     }
 }

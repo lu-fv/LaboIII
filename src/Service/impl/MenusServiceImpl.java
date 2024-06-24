@@ -4,10 +4,7 @@ import Enums.Category;
 import Exceptions.ExceptionIncorrectPassword;
 import Models.ProductForSale;
 import Models.Supermarket;
-import Service.CartService;
-import Service.MenusService;
-import Service.ProductForSaleService;
-import Service.SupermarketService;
+import Service.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,12 +19,14 @@ public class MenusServiceImpl implements MenusService {
     protected SupermarketService supermarketService;
     protected CartService cartService;
     protected ProductForSaleService productForSaleService;
+    protected ProductServiceImpl productService;
 
     public MenusServiceImpl() throws IOException {
         this.foodService = new FoodServiceImpl();
         this.beverageService = new BeverageServiceImpl();
         this.supermarketService = new SupermarketServiceImpl();
         this.cartService = new CartServiceImpl();
+        this.productService = new ProductServiceImpl();
     }
 
     @Override
@@ -64,12 +63,12 @@ public class MenusServiceImpl implements MenusService {
                             }
                             attempts--;
                         } while (attempts > 0 && ok == false);
-                        if(!ok){
+                        if (!ok) {
                             throw new ExceptionIncorrectPassword("Todas las contraseñas ingresadas son incorrectas. Llame al 111");
-                        }else{
+                        } else {
                             privateAccessMenu();
                         }
-                    }catch(ExceptionIncorrectPassword e){
+                    } catch (ExceptionIncorrectPassword e) {
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -82,6 +81,7 @@ public class MenusServiceImpl implements MenusService {
 
         } while (opc != 0);
     }//LISTO CON CONTRASEÑA VALIDADA/TRES INTENTOS
+
     @Override
     public void clientMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -104,6 +104,7 @@ public class MenusServiceImpl implements MenusService {
                     shoppingListMenu();
                     break;
                 case 0:
+                    System.out.println("\n\n\n\n\n");
                     break;
                 default:
                     System.out.println("Ingrese una opcion correcta!");
@@ -112,6 +113,7 @@ public class MenusServiceImpl implements MenusService {
 
         } while (opc != 0);
     }//LISTO
+
     @Override
     public void shoppingListMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -237,6 +239,7 @@ public class MenusServiceImpl implements MenusService {
                     //endregion
                     break;
                 case 0:
+                    System.out.println("\n\n\n\n\n");
                     break;
                 default:
                     System.out.println("Ingrese una opcion correcta!");
@@ -244,6 +247,7 @@ public class MenusServiceImpl implements MenusService {
             }
         } while (opc != 0);
     }//LISTO SOLO FALTA PROBAR
+
     @Override
     public void shoppingListMenuBySupermarket() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -386,6 +390,7 @@ public class MenusServiceImpl implements MenusService {
                         //endregion
                         break;
                     case 0:
+                        System.out.println("\n\n\n\n\n");
                         break;
                     default:
                         System.out.println("Ingrese una opcion correcta!");
@@ -396,6 +401,7 @@ public class MenusServiceImpl implements MenusService {
             System.out.println("Se ha ingresado un nombre incorrecto! Vuelva a intentarlo.");
         }
     }//LISTO SOLO FALTA PROBAR
+
     @Override
     public void privateAccessMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -413,6 +419,7 @@ public class MenusServiceImpl implements MenusService {
             switch (opc) {
                 case 0:
                     System.out.println("Volviendo...");
+                    System.out.println("\n\n\n\n\n");
                     break;
                 case 1:
                     privateAccessProductMenu();
@@ -426,6 +433,7 @@ public class MenusServiceImpl implements MenusService {
             }
         } while (opc != 0);
     }//LISTO
+
     @Override
     public void privateAccessProductMenu() {
         Scanner sc = new Scanner(System.in);
@@ -443,6 +451,7 @@ public class MenusServiceImpl implements MenusService {
             switch (opc) {
                 case 0:
                     System.out.println("Volviendo...");
+                    System.out.println("\n\n\n\n\n");
                     break;
                 case 1:
                     privateAccessCreateProductMenu();
@@ -465,6 +474,7 @@ public class MenusServiceImpl implements MenusService {
             }
         } while (opc != 0);
     }//FALTA VALIDACIONES...
+
     @Override
     public void privateAccessCreateProductMenu() {
         Scanner sc = new Scanner(System.in);
@@ -480,6 +490,7 @@ public class MenusServiceImpl implements MenusService {
             switch (opc) {
                 case 0:
                     System.out.println("Volviendo...");
+                    System.out.println("\n\n\n\n\n");
                     break;
                 case 1:
                     foodService.create();
@@ -493,6 +504,7 @@ public class MenusServiceImpl implements MenusService {
             }
         } while (opc != 0);
     }//LISTO
+
     @Override
     public void privateAccessSupermarketMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -509,6 +521,8 @@ public class MenusServiceImpl implements MenusService {
             System.out.println("            [5] AÑADIR PRODUCTO");
             System.out.println("            [6] MODIFICAR PRECIO");
             System.out.println("            [7] ELIMINAR PRODUCTO");
+            System.out.println("            [8] APLICAR OFERTA");
+            System.out.println("            [9] SACAR OFERTA");
             System.out.println("            [0] SALIR\n");
 
             opc = Integer.parseInt(sc.nextLine());
@@ -516,6 +530,7 @@ public class MenusServiceImpl implements MenusService {
             switch (opc) {
                 case 0:
                     System.out.println("Volviendo...");
+                    System.out.println("\n\n\n\n\n");
                     break;
                 case 1:
                     //region Crear un nuevo supermercado
@@ -569,10 +584,10 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        product = productForSaleService.searchProductoForSaleById(supermarketExist,sc.nextInt());
-                        if(product == null){
-                            System.out.println("No existe el Id ingresado dentro del listado del supermercado "+ supermarketExist);
-                        }else{
+                        product = productForSaleService.searchProductoForSaleById(supermarketExist, sc.nextInt());
+                        if (product == null) {
+                            System.out.println("No existe el Id ingresado dentro del listado del supermercado " + supermarketExist);
+                        } else {
                             System.out.println("Ingrese el precio nuevo : ");
                             product.setPrice(sc.nextDouble());
                             supermarketService.modifySupermarketListProducts(supermarketExist);
@@ -589,9 +604,33 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        productForSaleService.removeProductForSaleForSupermarket(supermarketExist,sc.nextInt());
+                        productForSaleService.removeProductForSaleForSupermarket(supermarketExist, sc.nextInt());
                     }
-                   //endregion
+                    //endregion
+                    break;
+                case 8:
+                    //region Aplicar Oferta
+                    System.out.println("Ingrese el nombre del supermercado: ");
+                    name = sc.nextLine();
+                    supermarketExist = supermarketService.search(name);
+                    if (supermarketExist == null) {
+                        System.out.println("el supermercado que desea no existe en la base de datos");
+                    } else {
+                        menuDiscountOn(supermarketExist);
+                    }
+                    //endregion
+                    break;
+                case 9:
+                    //region Sacar Oferta
+                    System.out.println("Ingrese el nombre del supermercado: ");
+                    name = sc.nextLine();
+                    supermarketExist = supermarketService.search(name);
+                    if (supermarketExist == null) {
+                        System.out.println("el supermercado que desea no existe en la base de datos");
+                    } else {
+                        menuDiscountOff(supermarketExist);
+                    }
+                    //endregion
                     break;
                 default:
                     System.out.println("Opción no disponible");
@@ -599,4 +638,132 @@ public class MenusServiceImpl implements MenusService {
             }
         } while (opc != 0);
     } //LISTO FALTA PROBAR
+
+    public void menuDiscountOn(Supermarket s) {
+        Integer opc = null;
+        Category c;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("            APLICAR OFERTA: ");
+            System.out.println("          [1] - Por Categoria");
+            System.out.println("          [2] - Por producto puntual");
+            System.out.println("          [3] - Por Marca");
+            System.out.println("          [0] - Salir");
+            System.out.println("          Ingrese una opcion:");
+
+            switch (opc) {
+                case 1:
+                    ProductServiceImpl.showCategories();
+                    System.out.println("Ingrese la categoria deseada:");
+                    c = ProductServiceImpl.selectCategory(sc.nextInt());
+                    if(c != null){
+                        System.out.println("Ingrese el porcentaje de descuento deseado:");
+                        Integer percent = sc.nextInt();
+                        for( ProductForSale p: s.getProductListHashSet()){
+                            if(p.getProduct().getCategory() == c){
+                                p.setDiscountPercent(percent);
+                                p.setOnSale(true);
+                                System.out.println(p);
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.println("Ingrese el ID del producto:");
+                    Integer idSelect = sc.nextInt();
+                    if (productForSaleService.validationId(idSelect)){
+                        System.out.println("Ingrese el porcentaje de descuento deseado:");
+                        Integer percent = sc.nextInt();
+                        for (ProductForSale p : s.getProductListHashSet()){
+                            if( p.getProduct().getID().equals(idSelect)){
+                                p.setDiscountPercent(percent);
+                                p.setOnSale(true);
+                                System.out.println(p);
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.println("Ingrese la marca:");
+                    String brandSelect = sc.nextLine();
+                    Boolean flag = false;
+                    System.out.println("Ingrese el porcentaje de descuento deseado:");
+                    Integer percent = sc.nextInt();
+                    for(ProductForSale p : s.getProductListHashSet()){
+                        if(p.getProduct().getBrand().equalsIgnoreCase(brandSelect)){
+                           p.setDiscountPercent(percent);
+                           p.setOnSale(true);
+                            System.out.println(p);
+                            flag = true;
+                        }
+                    }
+                    if(!flag){
+                        System.out.println("No existen productos con esa marca");
+                    }
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Ingrese una opcion correcta");
+                    break;
+            }
+        } while (opc != 0);
+    }
+
+    public void menuDiscountOff(Supermarket s) {
+        Scanner sc = new Scanner(System.in);
+        Category c;
+        Integer opc = null;
+        do {
+            System.out.println("            RETIRAR OFERTA: ");
+            System.out.println("          [1] - Por Categoria");
+            System.out.println("          [2] - Por producto puntual");
+            System.out.println("          [3] - Por Marca");
+            System.out.println("          [0] - Salir");
+            System.out.println("          Ingrese una opcion:");
+
+            switch (opc) {
+                case 1:
+                    ProductServiceImpl.showCategories();
+                    System.out.println("Ingrese la categoria deseada:");
+                    c = ProductServiceImpl.selectCategory(sc.nextInt());
+                    if(c != null){
+                        for( ProductForSale p: s.getProductListHashSet()){
+                            if(p.getProduct().getCategory() == c){
+                                p.setOnSale(false);
+                            }
+                        }
+                        System.out.println("Oferta eliminada");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Ingrese el ID del producto:");
+                    Integer idSelect = sc.nextInt();
+                    if (productForSaleService.validationId(idSelect)){
+                        for (ProductForSale p : s.getProductListHashSet()){
+                            if( p.getProduct().getID().equals(idSelect)){
+                                p.setOnSale(false);
+                            }
+                        }
+                        System.out.println("Oferta eliminada");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Ingrese la marca:");
+                    String brandSelect = sc.nextLine();
+                    for(ProductForSale p : s.getProductListHashSet()){
+                        if(p.getProduct().getBrand().equalsIgnoreCase(brandSelect)){
+                            p.setOnSale(false);
+                        }
+                    }
+                    System.out.println("Oferta eliminada");
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Ingrese una opcion correcta!");
+                    break;
+            }
+        } while (opc != 0);
+    }
 }

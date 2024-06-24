@@ -1,10 +1,11 @@
 package Service.impl;
 
 import Enums.Category;
+import Service.ProductService;
 
 import java.util.*;
 
-public class ProductServiceImpl {
+public class ProductServiceImpl implements ProductService {
     private static Set<Integer> idHashSet = new HashSet<>();
 
     //CREAR--------------------------------------------------------------

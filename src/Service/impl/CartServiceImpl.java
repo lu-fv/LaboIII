@@ -70,7 +70,7 @@ public class CartServiceImpl implements CartService {
         for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
             System.out.println(entry);
         }
-        System.out.println("Ingrese el id del producto que desea eliminar...");
+        System.out.println("Ingrese el ID del producto que desea eliminar...");
         for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
             if (entry.getKey().getProduct().getID() == sc.nextInt()) {
                 product = entry.getKey();
@@ -81,11 +81,11 @@ public class CartServiceImpl implements CartService {
             System.out.println("Ustede desea eliminar el siguiente producto " + product + ".Es correcto? s/n");
             if (sc.nextLine().equalsIgnoreCase("s")) {
                 cart.getCart().remove(product);
-                System.out.println("Producto eliminado exitosamente");
+                System.out.println("\nProducto eliminado exitosamente");
                 saveCartList();
             }
         } else {
-            System.out.println("No ha ingresado un numero correcto de id");
+            System.out.println("\nNo ha ingresado un numero correcto de id");
         }
 
     }
