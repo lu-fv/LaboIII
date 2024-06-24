@@ -1,5 +1,6 @@
 package Models;
 import Enums.Category;
+import Utils.Verification;
 
 public abstract class Product {
     private Integer ID;
@@ -30,7 +31,12 @@ public abstract class Product {
     }
 
     public void setProductName(String productName) {
-        this.productName = productName;
+        try {
+            Verification.isEmpty(productName);
+            this.productName = productName;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Completar nombre");
+        }
     }
 
     public String getBrand() {
@@ -38,7 +44,12 @@ public abstract class Product {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        try {
+            Verification.isEmpty(brand);
+            this.brand = brand;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Completar marca");
+        }
     }
 
     public Category getCategory() {
@@ -46,14 +57,19 @@ public abstract class Product {
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        try {
+            Verification.isNull(category);
+            this.category = category;
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException("Ninguna categoría fue seleccionada");
+        }
     }
 
     @Override
     public String toString() {
-        return "         PRODUCTO: " + productName +
-                "\n            ID: " + ID +
-                "\n         Marca: " + brand +
-                "\n     Categoría: " + category.getType();
+        return "Producto: " + productName +
+                "\nId: " + ID +
+                "\nMarca: " + brand +
+                "\nCategoría: " + category.getType();
     }
 }

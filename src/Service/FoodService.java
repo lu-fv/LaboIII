@@ -2,25 +2,25 @@ package Service;
 
 import Models.Food;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 
 public interface FoodService {
     //add
-    Food add(Food food);
+    public Food add(Food food) throws IOException;
 
     //addAll
-    void addAll(List<Food> foodList);
+    public void addAll(List<Food> foodList);
 
     //alta
-    Food create();
+    public Food create() throws IOException;
 
     //baja
-    Food delete();
+    public Food delete(Integer id);
 
     //modificación
-    Food modify();
+    public Food modify(Integer id) throws IOException;
 
     //listado
-    void showAll();
+    public void showAll();
 }

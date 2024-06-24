@@ -1,11 +1,10 @@
 package Enums;
 
 public enum Category {
-    DAIRY(0, "Lacteos"),
-    BAKERY(1, "Panaderia"),
-    GROCERY(2, "Alimentos"),
-    ALCOHOL(3, "Bebidas alcoholicas"),
-    ALCOHOL_FREE(4,"Bebidas sin alcohol");
+    DAIRY(0, "Lácteos"),
+    BAKERY(1, "Panadería"),
+    GROCERY(2, "Almacén"),
+    ALCOHOL(3, "Bebidas alcohólicas");
 
 
     private Integer id;

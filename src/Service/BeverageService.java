@@ -2,13 +2,14 @@ package Service;
 
 import Models.Beverage;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface BeverageService {
-    Beverage add(Beverage beverage);
-    void addAll(List<Beverage> beverageList);
-    Beverage create();
-    Beverage modify();
-    Beverage delete();
-    void showAll();
+    public Beverage add(Beverage beverage) throws IOException;
+    public void addAll(List<Beverage> beverageList);
+    public Beverage create() throws IOException;
+    public Beverage modify(Integer id) throws IOException;
+    public Beverage delete(Integer id);
+    public void showAll();
 }
