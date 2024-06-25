@@ -4,7 +4,7 @@ public enum Category {
     DAIRY(0, "Lácteos"),
     BAKERY(1, "Panadería"),
     GROCERY(2, "Almacén"),
-    ALCOHOL(3, "Bebidas alcohólicas");
+    ALCOHOL(3, "Alcohol");
 
 
     private Integer id;

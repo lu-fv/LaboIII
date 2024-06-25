@@ -2,6 +2,7 @@ package Service.impl;
 
 import Enums.Category;
 import Models.Food;
+import Models.Supermarket;
 import Service.FoodService;
 import Utils.Verification;
 
@@ -28,6 +29,7 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService {
     public Food add(Food food) throws IOException {
         foods.put(food.getID(), food);
         ProductPersistenceImpl.saveFoods(this);
+        //ProductPersistenceImpl.saveProducts(foods, null);
         return food;
     }
 
@@ -90,25 +92,78 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService {
     //MODIFICAR
     @Override
     public Food modify(Integer id) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        Integer opc = null;
+        Food food = null;
         do {
             try {
-                Food food;
                 if ((food = foods.get(id)) != null) { //Si encuentro el alimento
-                    ProductServiceImpl.modify(food); //Modifico los atributos de la superclase Product
-                    food.setPerishable(createPerishable()); //Modifico los atributos propios de la clase Food
-                    return this.add(food); //Retorno el alimento modificado y reemplazado en el map
+                    System.out.println("> Datos actuales:");
+                    System.out.println(food + "\n");
+                    System.out.println("            [1] Modificar nombre");
+                    System.out.println("            [2] Modificar marca");
+                    System.out.println("            [3] Modificar categoría");
+                    System.out.println("            [4] Modificar perecedero/no perecedero");
+                    System.out.println("            [0] Salir");
+
+                    opc = Integer.parseInt(sc.nextLine()); //Pregunto qué se quiere cambiar
+
+                    if (opc == 4) {
+                        food.setPerishable(createPerishable()); //Modifico los atributos propios de la clase Food
+                    } else {
+                        ProductServiceImpl.modify(food, opc); //Modifico los atributos de la superclase Product
+                    }
                 } else { //Si no encuentro el alimento
                     return null; //Retorno null
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        } while (true); //Repito hasta que no haya problemas
+            if (opc == 0) {
+                return this.add(food); //Retorno el alimento modificado y reemplazado en el map
+            }
+        } while (true);
     }
 
     //ELIMINAR
     @Override
-    public Food delete(Integer id) {
+    public Food delete(Integer id) throws IOException { //AGREGAR PERSISTENCIA Y CONFIRMAR ELIMINACIÓN
+        Scanner sc = new Scanner(System.in);
+        Boolean retry;
+        Integer opc = null;
+        Food food = null;
+        if ((food = foods.get(id)) != null) {
+            SupermarketServiceImpl s = new SupermarketServiceImpl();
+            if (!s.searchSpecialProductsByNameExist(food.getProductName())) {
+                System.out.println(food);
+                System.out.println("\nEliminar este producto");
+                System.out.println("1.Sí");
+                System.out.println("2.No");
+                do {
+                    retry = false;
+                    try {
+                        opc = Integer.parseInt(sc.nextLine());
+                        Verification.isOutOfBounds(opc, 1, 2);
+
+                        if (opc == 1) {
+                            return remove(id);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("¡¡Error!! No se ingresó ninguna opción");
+                        retry = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Opción no disponible");
+                        retry = true;
+                    }
+                } while (retry);
+
+            }
+        }
+        return null;
+    }
+
+    public Food remove(Integer id) {
+        ProductServiceImpl.deleteID(id);
         return foods.remove(id);
     }
 

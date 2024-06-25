@@ -1,10 +1,11 @@
 package Models;
 
 import Enums.Category;
+import Interface.Warning;
 import Utils.Verification;
 import org.jetbrains.annotations.NotNull;
 
-public class Beverage extends Product{
+public class Beverage extends Product implements Warning {
     //ATTRIBUTES------------------------------------------
     private Double litres;
 
@@ -44,6 +45,11 @@ public class Beverage extends Product{
     @Override
     public String toString() {
         return super.toString() +
-                "\nContenido: " + litres + " lt";
+                "\nContenido: " + litres + " lt" +
+                (this.getCategory() == Category.ALCOHOL ? "\n" + warning() : "");
+    }
+
+    private String warning() {
+        return "ATENCIÓN: Producto con alcohol. Prohibido para menores.";
     }
 }

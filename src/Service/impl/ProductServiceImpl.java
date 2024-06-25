@@ -113,26 +113,38 @@ public class ProductServiceImpl implements ProductService {
     }
 
     //MODIFICAR----------------------------------------------------------
-    public static void modify(Product product) {
+    public static void modify(Product product, Integer opc) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nombre:");
-        String name = scanner.nextLine();
-        product.setProductName(name);
 
-        System.out.println("Marca:");
-        String brand = scanner.nextLine();
-        product.setBrand(brand);
-
-        try {
-            System.out.println("Id categoría:");
-            ProductServiceImpl.showCategories();
-            Integer categoryId = Integer.parseInt(scanner.nextLine());
-            Category category = ProductServiceImpl.selectCategory(categoryId);
-            product.setCategory(category);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("¡¡Error!! ID inválido");
+        switch (opc) {
+            case 0:
+                System.out.println("Volviendo...");
+                break;
+            case 1:
+                System.out.println("Nombre:");
+                String name = scanner.nextLine();
+                product.setProductName(name);
+                break;
+            case 2:
+                System.out.println("Marca:");
+                String brand = scanner.nextLine();
+                product.setBrand(brand);
+                break;
+            case 3:
+                try {
+                    System.out.println("Id categoría:");
+                    ProductServiceImpl.showCategories();
+                    Integer categoryId = Integer.parseInt(scanner.nextLine());
+                    Category category = ProductServiceImpl.selectCategory(categoryId);
+                    product.setCategory(category);
+                } catch (NumberFormatException e) {
+                    throw new NumberFormatException("¡¡Error!! ID inválido");
+                }
+                break;
+            default:
+                System.out.println("Opción no disponible");
+                break;
         }
-
     }
 
     public static Integer askForID() {

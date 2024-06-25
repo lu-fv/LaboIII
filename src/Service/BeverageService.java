@@ -10,6 +10,6 @@ public interface BeverageService {
     public void addAll(List<Beverage> beverageList);
     public Beverage create() throws IOException;
     public Beverage modify(Integer id) throws IOException;
-    public Beverage delete(Integer id);
+    public Beverage delete(Integer id) throws IOException;
     public void showAll();
 }

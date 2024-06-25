@@ -504,7 +504,7 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("Hubo un error al intentar guardar los cambios");
                     }
                     break;
-                case 2: //Agregar throws y try-catch correspondientes
+                case 2:
                     try {
                         beverageService.create();
                     } catch (IOException e) {
@@ -515,6 +515,11 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Opción no disponible");
                     break;
             }
+            /*try {
+                ProductPersistenceImpl.saveProducts(foodService.getFoods(), beverageService.getBeverages());
+            } catch (IOException e) {
+                System.out.println("Hubo un error al intentar guardar los cambios");
+            }*/
         } while (opc != 0);
     }
 
@@ -545,7 +550,7 @@ public class MenusServiceImpl implements MenusService {
                     }
 
                     break;
-                case 2: //Agregar throws y try-catch correspondientes
+                case 2:
                     try {
                         if (beverageService.modify(ProductServiceImpl.askForID()) != null) {
                             System.out.println("Información modificada");
@@ -566,6 +571,7 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessDeleteProductMenu() { //AGREGAR BÚSQUEDA DE PRODUCTO EN SUPERMERCADOS
         Scanner sc = new Scanner(System.in);
         Integer opc;
+        Integer id;
 
         do {
             System.out.println("            [1] ELIMINAR ALIMENTO");
@@ -579,10 +585,36 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Volviendo...");
                     break;
                 case 1:
-
+                    try {
+                        System.out.println("ID:");
+                        id = Integer.parseInt(sc.nextLine());
+                        if (foodService.delete(id) != null) {
+                            System.out.println("Producto eliminado");
+                        } else {
+                            System.out.println("El producto no pudo ser eliminado");
+                            System.out.println("Si se trata de un error, corrobore que\nexista y que no esté en ningún supermercado");
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Error");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Ingreso de datos erroneo");
+                    }
                     break;
                 case 2:
-
+                    try {
+                        System.out.println("ID:");
+                        id = Integer.parseInt(sc.nextLine());
+                        if (beverageService.delete(id) != null) {
+                            System.out.println("Producto eliminado");
+                        } else {
+                            System.out.println("El producto no pudo ser eliminado");
+                            System.out.println("Si se trata de un error, corrobore que\nexista y que no esté en ningún supermercado");
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Error");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Ingreso de datos erroneo");
+                    }
                     break;
                 default:
                     System.out.println("Opción no disponible");
@@ -742,11 +774,11 @@ public class MenusServiceImpl implements MenusService {
                     ProductServiceImpl.showCategories();
                     System.out.println("Ingrese la categoria deseada:");
                     c = ProductServiceImpl.selectCategory(sc.nextInt());
-                    if(c != null){
+                    if (c != null) {
                         System.out.println("Ingrese el porcentaje de descuento deseado:");
                         Integer percent = sc.nextInt();
-                        for( ProductForSale p: s.getProductListHashSet()){
-                            if(p.getProduct().getCategory() == c){
+                        for (ProductForSale p : s.getProductListHashSet()) {
+                            if (p.getProduct().getCategory() == c) {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
                                 System.out.println(p);
@@ -757,11 +789,11 @@ public class MenusServiceImpl implements MenusService {
                 case 2:
                     System.out.println("Ingrese el ID del producto:");
                     Integer idSelect = sc.nextInt();
-                    if (productForSaleService.validationId(idSelect)){
+                    if (productForSaleService.validationId(idSelect)) {
                         System.out.println("Ingrese el porcentaje de descuento deseado:");
                         Integer percent = sc.nextInt();
-                        for (ProductForSale p : s.getProductListHashSet()){
-                            if( p.getProduct().getID().equals(idSelect)){
+                        for (ProductForSale p : s.getProductListHashSet()) {
+                            if (p.getProduct().getID().equals(idSelect)) {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
                                 System.out.println(p);
@@ -775,15 +807,15 @@ public class MenusServiceImpl implements MenusService {
                     Boolean flag = false;
                     System.out.println("Ingrese el porcentaje de descuento deseado:");
                     Integer percent = sc.nextInt();
-                    for(ProductForSale p : s.getProductListHashSet()){
-                        if(p.getProduct().getBrand().equalsIgnoreCase(brandSelect)){
-                           p.setDiscountPercent(percent);
-                           p.setOnSale(true);
+                    for (ProductForSale p : s.getProductListHashSet()) {
+                        if (p.getProduct().getBrand().equalsIgnoreCase(brandSelect)) {
+                            p.setDiscountPercent(percent);
+                            p.setOnSale(true);
                             System.out.println(p);
                             flag = true;
                         }
                     }
-                    if(!flag){
+                    if (!flag) {
                         System.out.println("No existen productos con esa marca");
                     }
                     break;
@@ -813,9 +845,9 @@ public class MenusServiceImpl implements MenusService {
                     ProductServiceImpl.showCategories();
                     System.out.println("Ingrese la categoria deseada:");
                     c = ProductServiceImpl.selectCategory(sc.nextInt());
-                    if(c != null){
-                        for( ProductForSale p: s.getProductListHashSet()){
-                            if(p.getProduct().getCategory() == c){
+                    if (c != null) {
+                        for (ProductForSale p : s.getProductListHashSet()) {
+                            if (p.getProduct().getCategory() == c) {
                                 p.setOnSale(false);
                             }
                         }
@@ -825,9 +857,9 @@ public class MenusServiceImpl implements MenusService {
                 case 2:
                     System.out.println("Ingrese el ID del producto:");
                     Integer idSelect = sc.nextInt();
-                    if (productForSaleService.validationId(idSelect)){
-                        for (ProductForSale p : s.getProductListHashSet()){
-                            if( p.getProduct().getID().equals(idSelect)){
+                    if (productForSaleService.validationId(idSelect)) {
+                        for (ProductForSale p : s.getProductListHashSet()) {
+                            if (p.getProduct().getID().equals(idSelect)) {
                                 p.setOnSale(false);
                             }
                         }
@@ -837,8 +869,8 @@ public class MenusServiceImpl implements MenusService {
                 case 3:
                     System.out.println("Ingrese la marca:");
                     String brandSelect = sc.nextLine();
-                    for(ProductForSale p : s.getProductListHashSet()){
-                        if(p.getProduct().getBrand().equalsIgnoreCase(brandSelect)){
+                    for (ProductForSale p : s.getProductListHashSet()) {
+                        if (p.getProduct().getBrand().equalsIgnoreCase(brandSelect)) {
                             p.setOnSale(false);
                         }
                     }

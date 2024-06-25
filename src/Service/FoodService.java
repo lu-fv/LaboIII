@@ -16,7 +16,7 @@ public interface FoodService {
     public Food create() throws IOException;
 
     //baja
-    public Food delete(Integer id);
+    public Food delete(Integer id) throws IOException;
 
     //modificación
     public Food modify(Integer id) throws IOException;
