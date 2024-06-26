@@ -1,32 +1,12 @@
 {
   "foods": {
     "123": {
-      "productName": "Pan Lactal",
+      "type": "food",
+      "productName": "Pan",
       "brand": "Bimbo",
-      "category": "BAKERY",
+      "category": "GROCERY",
       "perishable": true,
       "id": 123
-    },
-    "888": {
-      "productName": "Cereales",
-      "brand": "Zucarita",
-      "category": "GROCERY",
-      "perishable": false,
-      "id": 888
-    },
-    "567": {
-      "productName": "Cereales",
-      "brand": "Nesquik",
-      "category": "GROCERY",
-      "perishable": false,
-      "id": 567
-    },
-    "7": {
-      "productName": "Papas",
-      "brand": "Pringles",
-      "category": "GROCERY",
-      "perishable": true,
-      "id": 7
     }
   }
 }

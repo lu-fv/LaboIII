@@ -3,7 +3,9 @@ package Models;
 import Enums.Category;
 import Utils.Verification;
 
-public class Food extends Product {
+import java.io.Serializable;
+
+public class Food extends Product implements Serializable {
     //ATTRIBUTES-----------------------------------------
     private Boolean perishable;
 

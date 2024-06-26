@@ -1,5 +1,6 @@
 package Models;
 
+
 public class ProductForSale {
     private Product product;
     private Double price;

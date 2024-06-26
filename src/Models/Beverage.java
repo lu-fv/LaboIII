@@ -4,7 +4,9 @@ import Enums.Category;
 import Interface.Warning;
 import Utils.Verification;
 
-public class Beverage extends Product implements Warning {
+import java.io.Serializable;
+
+public class Beverage extends Product implements Warning, Serializable {
     //ATTRIBUTES------------------------------------------
     private Double litres;
 

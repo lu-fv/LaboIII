@@ -7,9 +7,10 @@ import Service.BeverageService;
 import Utils.Verification;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
-public class BeverageServiceImpl implements BeverageService {
+public class BeverageServiceImpl implements BeverageService, Serializable {
     private Map<Integer, Beverage> beverages;
 
     public BeverageServiceImpl() {

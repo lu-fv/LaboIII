@@ -7,9 +7,10 @@ import Service.FoodService;
 import Utils.Verification;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
-public class FoodServiceImpl extends ProductServiceImpl implements FoodService {
+public class FoodServiceImpl extends ProductServiceImpl implements FoodService, Serializable {
     private Map<Integer, Food> foods;
 
     public FoodServiceImpl() {
