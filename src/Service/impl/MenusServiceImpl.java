@@ -16,10 +16,10 @@ public class MenusServiceImpl implements MenusService {
     private static final String privateAccesKey = "1234";
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
-    protected SupermarketService supermarketService;
-    protected CartService cartService;
-    protected ProductForSaleService productForSaleService;
-    protected ProductServiceImpl productService;
+    protected SupermarketService supermarketService = new SupermarketServiceImpl();;
+    protected CartService cartService = new CartServiceImpl();
+    protected ProductForSaleService productForSaleService = new ProductForSaleServiceImpl();
+    protected ProductServiceImpl productService = new ProductServiceImpl();
 
     public MenusServiceImpl() throws IOException {
         try {
@@ -31,9 +31,6 @@ public class MenusServiceImpl implements MenusService {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        this.supermarketService = new SupermarketServiceImpl();
-        this.cartService = new CartServiceImpl();
-        this.productService = new ProductServiceImpl();
     }
 
     @Override
@@ -445,8 +442,9 @@ public class MenusServiceImpl implements MenusService {
     public void privateAccessProductMenu() {
         Scanner sc = new Scanner(System.in);
         Integer opc;
-        System.out.println("======================= ABML PRODUCTO ============================");
+
         do {
+            System.out.println("======================= ABML PRODUCTO ============================");
             System.out.println("            [1] CREAR PRODUCTO");
             System.out.println("            [2] MODIFICAR PRODUCTO");
             System.out.println("            [3] ELIMINAR PRODUCTO");
@@ -487,6 +485,7 @@ public class MenusServiceImpl implements MenusService {
         Integer opc;
 
         do {
+            System.out.println("======================= MENU CREAR PRODUCTO ============================");
             System.out.println("            [1] CREAR ALIMENTO");
             System.out.println("            [2] CREAR BEBIDA");
             System.out.println("            [0] SALIR\n");
@@ -528,6 +527,7 @@ public class MenusServiceImpl implements MenusService {
         Integer opc;
 
         do {
+            System.out.println("======================= MENU MODIFICAR PRODUCTO ============================");
             System.out.println("            [1] MODIFICAR ALIMENTO");
             System.out.println("            [2] MODIFICAR BEBIDA");
             System.out.println("            [0] SALIR\n");
@@ -574,6 +574,7 @@ public class MenusServiceImpl implements MenusService {
         Integer id;
 
         do {
+            System.out.println("======================= MENU ELIMINAR PRODUCTO ============================");
             System.out.println("            [1] ELIMINAR ALIMENTO");
             System.out.println("            [2] ELIMINAR BEBIDA");
             System.out.println("            [0] SALIR\n");
@@ -630,8 +631,9 @@ public class MenusServiceImpl implements MenusService {
         Supermarket supermarketExist;
         ProductForSale product;
 
-        System.out.println("======================= ABML SUPERMERCADO ============================");
+
         do {
+            System.out.println("======================= ABML SUPERMERCADO ============================");
             System.out.println("            [1] CREAR SUPERMERCADO");
             System.out.println("            [2] MODIFICAR SUPERMERCADO");
             System.out.println("            [3] ELIMINAR SUPERMERCADO");
@@ -757,7 +759,7 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     } //LISTO FALTA PROBAR
 
-    public void menuDiscountOn(Supermarket s) {
+    public void menuDiscountOn(Supermarket s) throws IOException {
         Integer opc = null;
         Category c;
         Scanner sc = new Scanner(System.in);
@@ -768,6 +770,7 @@ public class MenusServiceImpl implements MenusService {
             System.out.println("          [3] - Por Marca");
             System.out.println("          [0] - Salir");
             System.out.println("          Ingrese una opcion:");
+            opc = sc.nextInt();
 
             switch (opc) {
                 case 1:
@@ -777,7 +780,7 @@ public class MenusServiceImpl implements MenusService {
                     if (c != null) {
                         System.out.println("Ingrese el porcentaje de descuento deseado:");
                         Integer percent = sc.nextInt();
-                        for (ProductForSale p : s.getProductListHashSet()) {
+                        for (ProductForSale p : s.getProductList()) {
                             if (p.getProduct().getCategory() == c) {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
@@ -792,7 +795,7 @@ public class MenusServiceImpl implements MenusService {
                     if (productForSaleService.validationId(idSelect)) {
                         System.out.println("Ingrese el porcentaje de descuento deseado:");
                         Integer percent = sc.nextInt();
-                        for (ProductForSale p : s.getProductListHashSet()) {
+                        for (ProductForSale p : s.getProductList()) {
                             if (p.getProduct().getID().equals(idSelect)) {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
@@ -807,7 +810,7 @@ public class MenusServiceImpl implements MenusService {
                     Boolean flag = false;
                     System.out.println("Ingrese el porcentaje de descuento deseado:");
                     Integer percent = sc.nextInt();
-                    for (ProductForSale p : s.getProductListHashSet()) {
+                    for (ProductForSale p : s.getProductList()) {
                         if (p.getProduct().getBrand().equalsIgnoreCase(brandSelect)) {
                             p.setDiscountPercent(percent);
                             p.setOnSale(true);
@@ -828,7 +831,7 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
-    public void menuDiscountOff(Supermarket s) {
+    public void menuDiscountOff(Supermarket s) throws IOException {
         Scanner sc = new Scanner(System.in);
         Category c;
         Integer opc = null;
@@ -846,7 +849,7 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Ingrese la categoria deseada:");
                     c = ProductServiceImpl.selectCategory(sc.nextInt());
                     if (c != null) {
-                        for (ProductForSale p : s.getProductListHashSet()) {
+                        for (ProductForSale p : s.getProductList()) {
                             if (p.getProduct().getCategory() == c) {
                                 p.setOnSale(false);
                             }
@@ -858,7 +861,7 @@ public class MenusServiceImpl implements MenusService {
                     System.out.println("Ingrese el ID del producto:");
                     Integer idSelect = sc.nextInt();
                     if (productForSaleService.validationId(idSelect)) {
-                        for (ProductForSale p : s.getProductListHashSet()) {
+                        for (ProductForSale p : s.getProductList()) {
                             if (p.getProduct().getID().equals(idSelect)) {
                                 p.setOnSale(false);
                             }
@@ -869,7 +872,7 @@ public class MenusServiceImpl implements MenusService {
                 case 3:
                     System.out.println("Ingrese la marca:");
                     String brandSelect = sc.nextLine();
-                    for (ProductForSale p : s.getProductListHashSet()) {
+                    for (ProductForSale p : s.getProductList()) {
                         if (p.getProduct().getBrand().equalsIgnoreCase(brandSelect)) {
                             p.setOnSale(false);
                         }

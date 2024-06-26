@@ -1,8 +1,6 @@
 package Models;
 import  java.lang.String;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 //import java.util.Set;
 
 public class Supermarket{
@@ -10,7 +8,7 @@ public class Supermarket{
     private String address;
     private String phone;
     private String cuit;
-    private Set<ProductForSale> productListHashSet = new HashSet<>();
+    private List<ProductForSale> productList = new ArrayList<>();
 
     public Supermarket() {
     }
@@ -22,12 +20,12 @@ public class Supermarket{
         this.cuit = cuit;
     }
 
-    public Supermarket(String name, String address, String phone, String cuit, Set<ProductForSale> productListHashSet) {
+    public Supermarket(String name, String address, String phone, String cuit, List<ProductForSale> productList) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.cuit = cuit;
-        this.productListHashSet = productListHashSet;
+        this.productList = productList;
     }
 
     public String getName() {
@@ -62,12 +60,12 @@ public class Supermarket{
         this.cuit = cuit;
     }
 
-    public Set<ProductForSale> getProductListHashSet() {
-        return productListHashSet;
+    public List<ProductForSale> getProductList() {
+        return productList;
     }
 
-    public void setProductListHashSet(Set<ProductForSale> productListHashSet) {
-        this.productListHashSet = productListHashSet;
+    public void setProductList(List<ProductForSale> productList) {
+        this.productList = productList;
     }
 
     @Override
@@ -77,7 +75,7 @@ public class Supermarket{
                 "Direccion:   " + address + "\n" +
                 "Telefono:    " + phone + "\n" +
                 "CUIT:        " + cuit + "\n" +
-                "        LISTADO DE PRODUCTOS DEL SUPERMERCADO " + name + ":\n" + productListHashSet;
+                "        LISTADO DE PRODUCTOS DEL SUPERMERCADO " + name + ":\n" + productList;
 
     }
 }

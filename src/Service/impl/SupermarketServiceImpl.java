@@ -2,6 +2,7 @@ package Service.impl;
 
 import Models.Supermarket;
 import Service.SupermarketService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -9,17 +10,15 @@ import java.util.*;
 
 import Enums.Category;
 import Models.ProductForSale;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 
-import javax.swing.text.StyledEditorKit;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
-    private HashMap<String, Supermarket> superMarketList = supermarketsListJson(); //cuit y supermercado //cuit y supermercado
+    private final HashMap<String, Supermarket> superMarketList = supermarketsListJson(); //cuit y supermercado //cuit y supermercado
 
     public SupermarketServiceImpl() throws IOException {
     }
@@ -56,7 +55,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                 //Ingresa telefono por teclado
                 phone = sc.nextLine();
                 //convierto el telefono a string para validar y le quito los guiones por si lo ingresa como un 0800
-                newPhone = phone.toString().replaceAll("[-]", "");
+                newPhone = phone.replaceAll("-", "");
 
                 alfa = Pattern.matches("^[a-zA-Z]*$", newPhone);
                 //retorna true si ingresan letras
@@ -76,7 +75,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                 //Ingresa CUIT
                 cuit = sc.nextLine();
                 //Elimino los guiones del cuit para validar que sean numeros
-                newCuit = cuit.replaceAll("[-]", "");
+                newCuit = cuit.replaceAll("-", "");
                 //alfa es true si son caracteres
                 alfa = Pattern.matches("^[a-zA-Z]*$", newCuit);
                 //informo si ingresa letras que ingrese numeros
@@ -90,9 +89,9 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             } while (alfa || newCuit.length() != 11);//el while continua hasta que no se ingrese correctamente
 
             //verifico que el cuit no se encuentre en el listado simplemente para poder informar con leyenda que ya se encuentra
-            if(superMarketList.containsKey(cuit)){
+            if (superMarketList.containsKey(cuit)) {
                 System.out.println("El CUIT ya se encuentra en el listado de supermercado");
-            }else{
+            } else {
                 //instanciamos el nuevo supermercado
                 Supermarket s = new Supermarket(name, address, phone, cuit);
                 //agregamos al map de lista de supermercados
@@ -114,7 +113,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         Scanner sc = new Scanner(System.in);
 
         //pregunto si desea eliminar el supermercado y muestro para verificar datos correctos
-        System.out.println("Desea eliminar el supermerdado " + s.getName() + "[CUIT: " + s.getCuit() +"] ? s/n");
+        System.out.println("Desea eliminar el supermerdado " + s.getName() + "[CUIT: " + s.getCuit() + "] ? s/n");
         if (sc.nextLine().equalsIgnoreCase("s")) {
             //en caso de afirmacion procedo a eliminar
             this.superMarketList.remove(s.getCuit());
@@ -131,7 +130,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public void modifySupermarketListProducts(Supermarket s) throws IOException {
 
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
-            if (s.getName().equalsIgnoreCase(entry.getKey())) {
+            if (s.getName().equalsIgnoreCase(entry.getValue().getName())) {
                 entry.setValue(s);
             }
         }
@@ -179,7 +178,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                     String newPhone;
                     do {
                         phone = sr.nextLine();
-                        newPhone = phone.replaceAll("[-]", "");
+                        newPhone = phone.replaceAll("-", "");
                         alfa = Pattern.matches("^[a-zA-Z]*$", newPhone);
                         if (alfa) {
                             System.out.println("Ingrese solo numeros por favor");
@@ -196,7 +195,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                     String newCuit;
                     do {
                         cuit = sr.nextLine();
-                        newCuit = cuit.replaceAll("[-]", "");
+                        newCuit = cuit.replaceAll("-", "");
                         alfa = Pattern.matches("^[a-zA-Z]*$", newCuit);
                         if (alfa) {
                             System.out.println("Ingrese solo numeros por favor");
@@ -230,7 +229,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             System.out.println("telefono:   " + entry.getValue().getPhone());
             System.out.println("CUIT:       " + entry.getValue().getCuit());
             System.out.println("        LISTADO DE PRODUCTOS DEL SUPERMERCADO " + entry.getValue().getName() + ":");
-            for (ProductForSale p : entry.getValue().getProductListHashSet()) {
+            for (ProductForSale p : entry.getValue().getProductList()) {
                 System.out.println(p);
             }
         }
@@ -239,9 +238,6 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
     @Override
     public void saveSupermarketInJsonFile(HashMap<String, Supermarket> superList) throws IOException {
-        if (!supermarketFile.exists()) {
-            supermarketFile.createNewFile();
-        }
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(supermarketFile, superList);
@@ -250,14 +246,11 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         }
     }
 
-    ;
-
     @Override
     public HashMap<String, Supermarket> supermarketsListJson() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        TypeFactory typeFactory = mapper.getTypeFactory();
-        MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, Supermarket.class);
-        return mapper.readValue(supermarketFile, mapType);
+        TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
+        };
+        return new ObjectMapper().readValue(supermarketFile, typeReferenceMap);
     }
     //endregion
 
@@ -289,7 +282,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         //creo una lista de productos que coincidan con la categoria enviada por parametro
         List<ProductForSale> productForCategory = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductListHashSet()) {
+        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
             if (p.getProduct().getCategory() == (category)) {
                 productForCategory.add(p);
             }
@@ -302,7 +295,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         //recorro y armo una lista de productos que esten en oferta
         List<ProductForSale> productsInSale = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductListHashSet()) {
+        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
             if (p.getOnSale()) {
                 productsInSale.add(p);
             }
@@ -315,7 +308,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         //recorro y busco productos que contengan en su descripcion lo pasado por parametro
         List<ProductForSale> products = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductListHashSet()) {
+        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
             if (p.getProduct().getProductName().contains(name)) {
                 products.add(p);
             }
@@ -333,9 +326,9 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         //recorro la lista de supermercados
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductListHashSet().isEmpty()) {
+            if (!entry.getValue().getProductList().isEmpty()) {
                 //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductListHashSet()) {
+                for (ProductForSale p : entry.getValue().getProductList()) {
                     if (p.getOnSale()) {
                         //agrego a la lista los productos que esten en oferta
                         listProduct.add(p);
@@ -357,9 +350,9 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         //recorro la lista de supermercados
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductListHashSet().isEmpty()) {
+            if (!entry.getValue().getProductList().isEmpty()) {
                 //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductListHashSet()) {
+                for (ProductForSale p : entry.getValue().getProductList()) {
                     if (p.getProduct().getProductName().contains(name)) {
                         //agrego a la lista los productos que esten en oferta
                         listProduct.add(p);
@@ -378,9 +371,9 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         //recorro la lista de supermercados
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductListHashSet().isEmpty()) {
+            if (!entry.getValue().getProductList().isEmpty()) {
                 //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductListHashSet()) {
+                for (ProductForSale p : entry.getValue().getProductList()) {
                     if (p.getProduct().getCategory() == (c)) {
                         //agrego a la lista los productos que esten en oferta
                         listProduct.add(p);
@@ -400,9 +393,9 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         //recorro la lista de supermercados
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductListHashSet().isEmpty()) {
+            if (!entry.getValue().getProductList().isEmpty()) {
                 //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductListHashSet()) {
+                for (ProductForSale p : entry.getValue().getProductList()) {
                     //paso a minuscula el nombre del producto
                     String nameProductSupermarket = p.getProduct().getProductName().toLowerCase(Locale.ROOT);
                     if (nameProductSupermarket.contains(name)) {

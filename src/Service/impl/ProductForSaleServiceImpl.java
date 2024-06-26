@@ -1,37 +1,22 @@
 package Service.impl;
 
 import Enums.Category;
-import Models.Product;
-import Models.ProductForSale;
-import Models.Supermarket;
+import Models.*;
 import Service.CartService;
 import Service.ProductForSaleService;
 import Service.SupermarketService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class ProductForSaleServiceImpl implements ProductForSaleService {
-    private final File fileProduct = new File("product.json");
-    private SupermarketService supermarket;
-    private CartService cartService;
-    private HashMap<String, Supermarket> superMarketList;
-    private Map<Integer, Product> mapProducts;
+    //private final File fileProduct = new File("product.json");
+    private final SupermarketService supermarket = new SupermarketServiceImpl();
 
-    public ProductForSaleServiceImpl(SupermarketServiceImpl supermarket, CartServiceImpl cartService) throws IOException {
-        this.supermarket = supermarket;
-        this.cartService = cartService;
-        this.superMarketList = supermarket.supermarketsListJson();
-        this.mapProducts = productFromJsonToMap();
-    }
+    private final CartService cartService = new CartServiceImpl();
+
+    private final HashMap<String, Supermarket> superMarketList = new HashMap<>();
+
 
     public ProductForSaleServiceImpl() throws IOException {
     }
@@ -43,7 +28,10 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
 
         //Recorro el Map de productos para luego poder elegir que producto agregar al supermercado
         //esa lista mapProducts la obtengo de productos.json que esta como constante dentro de productForSaleImpl
-        for (Map.Entry<Integer, Product> entry : mapProducts.entrySet()) {
+        for (Map.Entry<Integer, Food> entry : ProductPersistenceImpl.startFoodService().getFoods().entrySet()) {
+            System.out.println(entry);
+        }
+        for (Map.Entry<Integer, Beverage> entry : ProductPersistenceImpl.startBeverageService().getBeverages().entrySet()) {
             System.out.println(entry);
         }
         System.out.println(" ELija el id del producto que desea agregar: ");
@@ -65,17 +53,24 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
             }
         } while (!isDouble(newPrice.toString()));
 
+        ProductForSale newProductForSale = null;
         //creo una instancia de producto vendible
-        ProductForSale newProductForSale = new ProductForSale(mapProducts.get(opcId), newPrice, false);
+        if (ProductPersistenceImpl.startBeverageService().getBeverages().containsKey(opcId)) {
+            newProductForSale = new ProductForSale(ProductPersistenceImpl.startBeverageService().getBeverages().get(opcId), newPrice, false);
+        }
+        if (ProductPersistenceImpl.startFoodService().getFoods().containsKey(opcId)) {
+            newProductForSale = new ProductForSale(ProductPersistenceImpl.startFoodService().getFoods().get(opcId), newPrice, false);
+        }
+
         //agrego producto vendible a la lista del supermercado
-        s.getProductListHashSet().add(newProductForSale);
+        s.getProductList().add(newProductForSale);
         //uso la funcion que agrega el supermercado modificado y guarda en el json
         supermarket.modifySupermarketListProducts(s);
     }
 
     @Override
-    public Boolean validationId(Integer id) {
-        return mapProducts.containsKey(id);
+    public Boolean validationId(Integer id) throws IOException {
+        return ProductPersistenceImpl.startBeverageService().getBeverages().containsKey(id) || ProductPersistenceImpl.startFoodService().getFoods().containsKey(id);
     }
 
     @Override
@@ -84,14 +79,14 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         Scanner st = new Scanner(System.in);
 
         //recorro el Set de productos vendibles del supermercado en busca del id del producto a eliminar
-        for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductListHashSet()) {
+        for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductList()) {
             if (p.getProduct().getID() == id) {
                 //cuando encuentro muestro para rectificar que sea el producto correcto a eliminar
                 System.out.println(" PRODUCTO A ELIMINAR: " + p.getProduct().getProductName() + "[" + p.getProduct().getBrand() + "]");
                 System.out.println(" Es el producto que desea eliminar? s/n");
                 if (st.nextLine().equalsIgnoreCase("s")) {
                     //si se confirma la eliminacion procedo a removerlo
-                    superMarketList.get(sp.getCuit()).getProductListHashSet().remove(p);
+                    superMarketList.get(sp.getCuit()).getProductList().remove(p);
                     //guardo el supermercado
                     supermarket.saveSupermarketInJsonFile(superMarketList);
                 } else {
@@ -133,7 +128,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
                         System.out.println(" Categoria actual: " + productForSale.getProduct().getCategory());
                         System.out.println(" Ingrese nueva categoria: ");
                         System.out.println(" Elija alguna de estas categorias: ");
-                        System.out.println(java.util.Arrays.asList(Category.values()));
+                        System.out.println(Arrays.asList(Category.values()));
                         category = ProductServiceImpl.selectCategory(st.nextInt());
                         if (category != null) {
                             productForSale.getProduct().setCategory(category);
@@ -167,7 +162,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         Scanner sc = new Scanner(System.in);
         try {
             //recorro el Set de productos vendibles del supermercado
-            for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductListHashSet()) {
+            for (ProductForSale p : superMarketList.get(sp.getCuit()).getProductList()) {
                 //busco por id pasado por parametro
                 if (p.getProduct().getID().equals(id)) {
                     //modifico el producto con el metodo modifyProduct que pregunta que desea cambiar
@@ -227,7 +222,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     @Override
     public ProductForSale searchProductoForSaleById(Supermarket s, Integer id) {
         //recorro el set en busca del id de producto
-        for (ProductForSale p : superMarketList.get(s.getCuit()).getProductListHashSet()) {
+        for (ProductForSale p : superMarketList.get(s.getCuit()).getProductList()) {
             if (p.getProduct().getID() == id) {
                 //retorno producto
                 return p;
@@ -237,14 +232,14 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         return null;
     }
 
-    private Map<Integer, Product> productFromJsonToMap() throws IOException {
+    /*private Map<Integer, Product> productFromJsonToMap() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
         TypeFactory typeFactory = mapper.getTypeFactory();
         MapType mapType = typeFactory.constructMapType(HashMap.class, Integer.class, Product.class);
 
         return mapper.readValue(fileProduct, mapType);
-    }
+    }*/
 
     @Override
     public boolean isDouble(String price) {

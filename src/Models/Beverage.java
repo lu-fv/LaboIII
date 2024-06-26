@@ -3,7 +3,6 @@ package Models;
 import Enums.Category;
 import Interface.Warning;
 import Utils.Verification;
-import org.jetbrains.annotations.NotNull;
 
 public class Beverage extends Product implements Warning {
     //ATTRIBUTES------------------------------------------
@@ -28,7 +27,7 @@ public class Beverage extends Product implements Warning {
         return litres;
     }
 
-    @NotNull
+    //@NotNull
     public void setLitres(Double litres) {
         try {
             Verification.isNegative(litres);
