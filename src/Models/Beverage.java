@@ -28,7 +28,7 @@ public class Beverage extends Product implements Warning {
         return litres;
     }
 
-    @NotNull
+ @NotNull
     public void setLitres(Double litres) {
         try {
             Verification.isNegative(litres);

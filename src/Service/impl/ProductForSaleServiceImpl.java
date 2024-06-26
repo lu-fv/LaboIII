@@ -25,12 +25,14 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     private CartService cartService;
     private HashMap<String, Supermarket> superMarketList;
     private Map<Integer, Product> mapProducts;
+    private ProductPersistenceImpl productPersistence;
 
-    public ProductForSaleServiceImpl(SupermarketServiceImpl supermarket, CartServiceImpl cartService) throws IOException {
+    public ProductForSaleServiceImpl(SupermarketServiceImpl supermarket, CartServiceImpl cartService, ProductPersistenceImpl productPersistence) throws IOException {
         this.supermarket = supermarket;
         this.cartService = cartService;
         this.superMarketList = supermarket.supermarketsListJson();
         this.mapProducts = productFromJsonToMap();
+        this.productPersistence = productPersistence;
     }
 
     public ProductForSaleServiceImpl() throws IOException {
