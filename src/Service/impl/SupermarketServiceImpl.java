@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
-    private final HashMap<String, Supermarket> superMarketList = supermarketsListJson(); //cuit y supermercado //cuit y supermercado
+    private Map<String, Supermarket> superMarketList = supermarketsListJson(); //cuit y supermercado //cuit y supermercado
 
     public SupermarketServiceImpl() throws IOException {
     }
@@ -131,6 +131,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             if (s.getName().equalsIgnoreCase(entry.getValue().getName())) {
+                System.out.println("muestre precio en funcion de grabar "+ s);
                 entry.setValue(s);
             }
         }
@@ -237,7 +238,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public void saveSupermarketInJsonFile(HashMap<String, Supermarket> superList) throws IOException {
+    public void saveSupermarketInJsonFile(Map<String, Supermarket> superList) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(supermarketFile, superList);
@@ -247,10 +248,10 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public HashMap<String, Supermarket> supermarketsListJson() throws IOException {
-        TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
-        };
-        return new ObjectMapper().readValue(supermarketFile, typeReferenceMap);
+    public Map<String, Supermarket> supermarketsListJson() throws IOException {
+        /*TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
+        };*/
+        return new ObjectMapper().readValue(supermarketFile, new TypeReference<Map<String, Supermarket>>(){});
     }
     //endregion
 
@@ -343,7 +344,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public List<ProductForSale> searchSpecialProductsByName(String name) {
 
         //me aseguro que este todo en minuscula para comparar despues con los productos del json
-        name = name.toLowerCase(Locale.ROOT);
+        name = name.toLowerCase();
         //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
         List<ProductForSale> listProduct = new ArrayList<>();
 
@@ -353,7 +354,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             if (!entry.getValue().getProductList().isEmpty()) {
                 //recorro el Set de productos de cada supermercado
                 for (ProductForSale p : entry.getValue().getProductList()) {
-                    if (p.getProduct().getProductName().contains(name)) {
+                    if (p.getProduct().getProductName().toLowerCase().contains(name)) {
                         //agrego a la lista los productos que esten en oferta
                         listProduct.add(p);
                     }

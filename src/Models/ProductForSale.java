@@ -1,6 +1,8 @@
 package Models;
 
-public class ProductForSale {
+import java.io.Serializable;
+
+public class ProductForSale implements Serializable {
     private Product product;
     private Double price;
     private Boolean onSale;

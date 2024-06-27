@@ -4,19 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart<T> {
-    private double totalPrice;
+    private double totalPrice = 0;
     private Map<T, Integer> cart = new HashMap<>();
 
     public Cart() {
-    }
-
-    public Cart(double totalPrice, Map<T, Integer> cart) {
-        this.totalPrice = totalPrice;
-        this.cart = cart;
-    }
-
-    public Cart(Map<T, Integer> cart) {
-        this.cart = cart;
     }
 
     public double getTotalPrice() {
@@ -38,7 +29,7 @@ public class Cart<T> {
     @Override
     public String toString() {
         return "           TU CARRITO DE COMPRAS:" +
-                "         Precio total:" + totalPrice +
-                "\n Lista de productos:" + cart;
+                "         Precio total:[" + totalPrice +
+                "]\n Lista de productos:" + cart;
     }
 }
