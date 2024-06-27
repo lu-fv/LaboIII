@@ -10,11 +10,11 @@ public class Verification {
         }
     }
 
-    public static void isNegative(Integer x) {
+    /*public static void isNegative(Integer x) {
         if (x < 0) {
             throw new IllegalArgumentException("Valor negativo");
         }
-    }
+    }*/
 
     public static void isNull(Object o) {
         if (o == null) {

@@ -1,12 +1,1 @@
-{
-  "foods": {
-    "123": {
-      "type": "food",
-      "productName": "Pan",
-      "brand": "Bimbo",
-      "category": "GROCERY",
-      "perishable": true,
-      "id": 123
-    }
-  }
-}
+{"foods":{"123":{"type":"food","productName":"Pan Lactal","brand":"Bimbo","category":"GROCERY","perishable":true,"id":123},"999":{"type":"food","productName":"Queso Crema","brand":"Cremón","category":"DAIRY","perishable":true,"id":999},"122":{"type":"food","productName":"Dulce De Batata","brand":"La Campagnola","category":"GROCERY","perishable":true,"id":122}}}
