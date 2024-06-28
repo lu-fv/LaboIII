@@ -5,6 +5,7 @@ import Models.*;
 import Service.CartService;
 import Service.ProductForSaleService;
 import Service.SupermarketService;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -13,9 +14,9 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     //private final File fileProduct = new File("product.json");
     private final SupermarketService supermarket = new SupermarketServiceImpl();
 
-    private final CartService cartService = new CartServiceImpl();
+    private CartService cartService = new CartServiceImpl();
 
-    private final HashMap<String, Supermarket> superMarketList = new HashMap<>();
+    private final HashMap<String, Supermarket> superMarketList = (HashMap<String, Supermarket>) supermarket.supermarketsListJson();
 
 
     public ProductForSaleServiceImpl() throws IOException {
@@ -62,10 +63,21 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
             newProductForSale = new ProductForSale(ProductPersistenceImpl.startFoodService().getFoods().get(opcId), newPrice, false);
         }
 
-        //agrego producto vendible a la lista del supermercado
-        s.getProductList().add(newProductForSale);
-        //uso la funcion que agrega el supermercado modificado y guarda en el json
-        supermarket.modifySupermarketListProducts(s);
+        System.out.println("EL producto nuevo es el siguiente: " + newProductForSale);
+        System.out.println("Confirma? s/n");
+        sc.nextLine();
+        String ok = sc.nextLine();
+
+        sc.nextLine();
+        if (ok.equalsIgnoreCase("s")) {
+            //agrego producto vendible a la lista del supermercado
+            s.getProductList().add(newProductForSale);
+            //uso la funcion que agrega el supermercado modificado y guarda en el json
+            supermarket.modifySupermarketListProducts(s);
+            System.out.println("Operacion exitosa!");
+        } else {
+            System.out.println("Vuelva a intentar en el menu de opciones");
+        }
     }
 
     @Override
@@ -192,38 +204,10 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
     }
 
     @Override
-    public void addCartFromListProductForSale(List<ProductForSale> list) throws IOException {
-        Integer numProduct;
-        Scanner sc = new Scanner(System.in);
-        String continueAdd = "S";
-
-        do {
-            //muestro los productos de la lista mostrando con numeros que se relacionan con el i (indice)
-            System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS <<<<<<<<<<<<<<<<<<<<<<");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println("[" + (i + 1) + "] - " + list.get(i));
-            }
-            System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion...");
-            numProduct = sc.nextInt();
-            //valido que la opcion ingresada coincide con alguno de los productos mostrados que va de 1 a size de la lista
-            if (numProduct > 0 && numProduct < list.size()) {
-                //si ingresa una opcion correcta del listado procedemos a pedir la cantidad de ese producto para añadir al carrito
-                System.out.println("Ingrese la cantidad que desea del producto " + list.get(numProduct - 1).getProduct().getProductName());
-                cartService.addProductForSale(list.get(numProduct - 1), sc.nextInt());
-                System.out.println("Producto agregado al carrito. Desea seguir agregando productos de este listado? s/n");
-                continueAdd = sc.nextLine();
-            } else {
-                System.out.println("Ha seleccionado una opcion incorrecta de producto!. Intenelo nuevamente.");
-            }
-            //el do While continua mientras no ingreses una opcion correcta o si deseas seguir agregando productos a la lista
-        } while (numProduct <= 0 || numProduct >= list.size() || continueAdd.equalsIgnoreCase("s"));
-    }
-
-    @Override
     public ProductForSale searchProductoForSaleById(Supermarket s, Integer id) {
         //recorro el set en busca del id de producto
-        for (ProductForSale p : superMarketList.get(s.getCuit()).getProductList()) {
-            if (p.getProduct().getID() == id) {
+        for (ProductForSale p : s.getProductList()) {
+            if (p.getProduct().getID().equals(id)) {
                 //retorno producto
                 return p;
             }
@@ -231,15 +215,6 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         //si termina el for y no lo encuentra retorna null
         return null;
     }
-
-    /*private Map<Integer, Product> productFromJsonToMap() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-
-        TypeFactory typeFactory = mapper.getTypeFactory();
-        MapType mapType = typeFactory.constructMapType(HashMap.class, Integer.class, Product.class);
-
-        return mapper.readValue(fileProduct, mapType);
-    }*/
 
     @Override
     public boolean isDouble(String price) {
@@ -253,4 +228,15 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         }
     }
 
+    @Override
+    public String searchSupermarketByEachProductForSale(ProductForSale product) {
+        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+            for (ProductForSale p : entry.getValue().getProductList()) {
+                if (p.equals(product)) {
+                    return entry.getValue().getName();
+                }
+            }
+        }
+        return null;
+    }
 }

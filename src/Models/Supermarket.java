@@ -1,14 +1,15 @@
 package Models;
+import java.io.Serializable;
 import  java.lang.String;
 import java.util.*;
 //import java.util.Set;
 
-public class Supermarket{
+public class Supermarket implements Serializable {
     private String name;
     private String address;
     private String phone;
     private String cuit;
-    private List<ProductForSale> productList = new ArrayList<>();
+    private List<ProductForSale> productList;
 
     public Supermarket() {
     }
@@ -18,6 +19,7 @@ public class Supermarket{
         this.address = address;
         this.phone = phone;
         this.cuit = cuit;
+        this.productList=new ArrayList<>();
     }
 
     public Supermarket(String name, String address, String phone, String cuit, List<ProductForSale> productList) {

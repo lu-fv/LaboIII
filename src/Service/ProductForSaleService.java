@@ -14,7 +14,7 @@ public interface ProductForSaleService {
     void removeProductForSaleForSupermarket(Supermarket sp, Integer id) throws IOException;
     void modifyProduct(ProductForSale productForSale);
     void modifyProductForSaleInSupermarket(Supermarket sp, Integer id);
-    void addCartFromListProductForSale(List<ProductForSale> list) throws IOException;
     ProductForSale searchProductoForSaleById(Supermarket s, Integer id);
     boolean isDouble (String price);
+    String searchSupermarketByEachProductForSale(ProductForSale product);
 }

@@ -3,9 +3,11 @@ package Models;
 import Enums.Category;
 import Interface.Warning;
 import Utils.Verification;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.io.Serializable;
 
+@JsonTypeName("Beverage")
 public class Beverage extends Product implements Warning, Serializable {
     //ATTRIBUTES------------------------------------------
     private Double litres;

@@ -16,7 +16,8 @@ public class MenusServiceImpl implements MenusService {
     private static final String privateAccesKey = "1234";
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
-    protected SupermarketService supermarketService = new SupermarketServiceImpl();;
+    protected SupermarketService supermarketService = new SupermarketServiceImpl();
+
     protected CartService cartService = new CartServiceImpl();
     protected ProductForSaleService productForSaleService = new ProductForSaleServiceImpl();
     protected ProductServiceImpl productService = new ProductServiceImpl();
@@ -139,10 +140,12 @@ public class MenusServiceImpl implements MenusService {
                 case 1:
                     //region Busqueda por nombre de producto en TODOS los supermercados
                     System.out.println("Ingrese el nombre del producto que esta buscando");
+                    sc.nextLine();
                     String nameProduct = sc.nextLine();
-                    List<ProductForSale> productsList = supermarketService.searchSpecialProductsByName(nameProduct);
+                    List<ProductForSale> productsList = new ArrayList<>();
+                    productsList = supermarketService.searchSpecialProductsByName(nameProduct);
                     if (!productsList.isEmpty()) {
-                        productForSaleService.addCartFromListProductForSale(productsList);
+                        cartService.addCartFromListProductForSale(productsList);
                     } else {
                         System.out.println("El supermercado aun no tiene productos con esa descripcion");
                     }
@@ -154,7 +157,7 @@ public class MenusServiceImpl implements MenusService {
                     List<ProductForSale> productsInSale = supermarketService.searchSalesProducts();
                     System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS EN OFERTA <<<<<<<<<<<<<<<<<<<<<<");
                     if (!productsInSale.isEmpty()) {
-                        productForSaleService.addCartFromListProductForSale(productsInSale);
+                        cartService.addCartFromListProductForSale(productsInSale);
                     } else {
                         System.out.println("El supermercado aun no tiene productos en oferta");
                     }
@@ -171,7 +174,7 @@ public class MenusServiceImpl implements MenusService {
                             case 0:
                                 List<ProductForSale> listDairy = supermarketService.searchProductsByCategory(Category.DAIRY);
                                 if (!listDairy.isEmpty()) {
-                                    productForSaleService.addCartFromListProductForSale(listDairy);
+                                    cartService.addCartFromListProductForSale(listDairy);
                                 } else {
                                     System.out.println("No existe la categoria lacteos en los supermercados");
                                 }
@@ -179,7 +182,7 @@ public class MenusServiceImpl implements MenusService {
                             case 1:
                                 List<ProductForSale> listBakery = supermarketService.searchProductsByCategory(Category.BAKERY);
                                 if (!listBakery.isEmpty()) {
-                                    productForSaleService.addCartFromListProductForSale(listBakery);
+                                    cartService.addCartFromListProductForSale(listBakery);
                                 } else {
                                     System.out.println("No existe la categoria panaderia en los supermercados");
                                 }
@@ -187,7 +190,7 @@ public class MenusServiceImpl implements MenusService {
                             case 2:
                                 List<ProductForSale> listGrocery = supermarketService.searchProductsByCategory(Category.GROCERY);
                                 if (!listGrocery.isEmpty()) {
-                                    productForSaleService.addCartFromListProductForSale(listGrocery);
+                                    cartService.addCartFromListProductForSale(listGrocery);
                                 } else {
                                     System.out.println("No existe la categoria alimentos en los supermercados");
                                 }
@@ -195,7 +198,7 @@ public class MenusServiceImpl implements MenusService {
                             case 3:
                                 List<ProductForSale> listAlcohol = supermarketService.searchProductsByCategory(Category.ALCOHOL);
                                 if (!listAlcohol.isEmpty()) {
-                                    productForSaleService.addCartFromListProductForSale(listAlcohol);
+                                    cartService.addCartFromListProductForSale(listAlcohol);
                                 } else {
                                     System.out.println("No existe la categoria bebidas alcoholicas en los supermercados");
                                 }
@@ -209,13 +212,8 @@ public class MenusServiceImpl implements MenusService {
                     break;
                 case 4:
                     //region Mostrar carrito y grabar
+                    cartService.totalPriceOfCart();
                     cartService.showCartsProductList();
-                    System.out.println("Desea confirmar el carrito?. s/n");
-                    if (sc.nextLine().equalsIgnoreCase("s")) {
-                        cartService.saveCartList();
-                    } else {
-                        System.out.println("Continue agregando productos.");
-                    }
                     //endregion
                     break;
                 case 5:
@@ -294,9 +292,11 @@ public class MenusServiceImpl implements MenusService {
                     case 1:
                         //region Busqueda de productos por nombre en un supermercado seleccionado
                         System.out.println("Ingrese el nombre del producto buscado: ");
-                        productsForSale = supermarketService.serchProductByNameInSupermarket(supermarketSelect, sc.nextLine());
+                        sc.nextLine();
+                        String nameSearch = sc.nextLine();
+                        productsForSale = supermarketService.serchProductByNameInSupermarket(supermarketSelect, nameSearch);
                         if (!productsForSale.isEmpty()) {
-                            productForSaleService.addCartFromListProductForSale(productsForSale);
+                            cartService.addCartFromListProductForSale(productsForSale);
                         } else {
                             System.out.println("El supermercado aun no tiene productos con esa descripcion");
                         }
@@ -306,7 +306,7 @@ public class MenusServiceImpl implements MenusService {
                         //region Busqueda de productos en oferta en un supermercado seleccionado
                         productsForSale = supermarketService.serchProductInSaleInSupermarket(supermarketSelect);
                         if (!productsForSale.isEmpty()) {
-                            productForSaleService.addCartFromListProductForSale(productsForSale);
+                            cartService.addCartFromListProductForSale(productsForSale);
                         } else {
                             System.out.println("El supermercado aun no tiene productos en oferta");
                         }
@@ -322,7 +322,7 @@ public class MenusServiceImpl implements MenusService {
                                 case 0:
                                     List<ProductForSale> listDairy = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.DAIRY);
                                     if (!listDairy.isEmpty()) {
-                                        productForSaleService.addCartFromListProductForSale(listDairy);
+                                        cartService.addCartFromListProductForSale(listDairy);
                                     } else {
                                         System.out.println("No existe la categoria lacteos en los supermercados");
                                     }
@@ -330,7 +330,7 @@ public class MenusServiceImpl implements MenusService {
                                 case 1:
                                     List<ProductForSale> listBakery = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.BAKERY);
                                     if (!listBakery.isEmpty()) {
-                                        productForSaleService.addCartFromListProductForSale(listBakery);
+                                        cartService.addCartFromListProductForSale(listBakery);
                                     } else {
                                         System.out.println("No existe la categoria panaderia en los supermercados");
                                     }
@@ -338,7 +338,7 @@ public class MenusServiceImpl implements MenusService {
                                 case 2:
                                     List<ProductForSale> listGrocery = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.GROCERY);
                                     if (!listGrocery.isEmpty()) {
-                                        productForSaleService.addCartFromListProductForSale(listGrocery);
+                                        cartService.addCartFromListProductForSale(listGrocery);
                                     } else {
                                         System.out.println("No existe la categoria alimentos en los supermercados");
                                     }
@@ -346,7 +346,7 @@ public class MenusServiceImpl implements MenusService {
                                 case 3:
                                     List<ProductForSale> listAlcohol = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.ALCOHOL);
                                     if (!listAlcohol.isEmpty()) {
-                                        productForSaleService.addCartFromListProductForSale(listAlcohol);
+                                        cartService.addCartFromListProductForSale(listAlcohol);
                                     } else {
                                         System.out.println("No existe la categoria bebidas alcoholicas en los supermercados");
                                     }
@@ -359,14 +359,9 @@ public class MenusServiceImpl implements MenusService {
                         //endregion
                         break;
                     case 4:
-                        //region Mostrar el carrito y grabar
+                        //region Mostrar el carrito
+                        cartService.totalPriceOfCart();
                         cartService.showCartsProductList();
-                        System.out.println("Desea confirmar el carrito?. s/n");
-                        if (sc.nextLine().equalsIgnoreCase("s")) {
-                            cartService.saveCartList();
-                        } else {
-                            System.out.println("Continue agregando productos.");
-                        }
                         //endregion
                         break;
                     case 5:
@@ -704,13 +699,19 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        product = productForSaleService.searchProductoForSaleById(supermarketExist, sc.nextInt());
+                        Integer idSelect = Integer.parseInt(sc.nextLine());
+                        product = productForSaleService.searchProductoForSaleById(supermarketExist, idSelect);
+
                         if (product == null) {
                             System.out.println("No existe el Id ingresado dentro del listado del supermercado " + supermarketExist);
                         } else {
-                            System.out.println("Ingrese el precio nuevo : ");
-                            product.setPrice(sc.nextDouble());
+                            System.out.println("Producto que desea Modificar :\n "+ product);
+                            System.out.println("Ingrese el precio nuevo: ");
+                            Double newPrice = Double.parseDouble(sc.nextLine());
+                            product.setPrice(newPrice);
+                            System.out.println("Producto modificado: "+ product);
                             supermarketService.modifySupermarketListProducts(supermarketExist);
+                            System.out.println("Modificacion exitosa!!!");
                         }
                     }
                     //endregion de un superme
@@ -724,7 +725,8 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        productForSaleService.removeProductForSaleForSupermarket(supermarketExist, sc.nextInt());
+                        Integer idSelect = Integer.parseInt(sc.nextLine());
+                        productForSaleService.removeProductForSaleForSupermarket(supermarketExist, idSelect);
                     }
                     //endregion
                     break;
@@ -784,9 +786,10 @@ public class MenusServiceImpl implements MenusService {
                             if (p.getProduct().getCategory() == c) {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
-                                System.out.println(p);
                             }
                         }
+                        supermarketService.modifySupermarketListProducts(s);
+                        System.out.println("Oferta aplicada con exito!!");
                     }
                     break;
                 case 2:
@@ -799,9 +802,10 @@ public class MenusServiceImpl implements MenusService {
                             if (p.getProduct().getID().equals(idSelect)) {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
-                                System.out.println(p);
                             }
                         }
+                        supermarketService.modifySupermarketListProducts(s);
+                        System.out.println("Oferta aplicada con exito!!");
                     }
                     break;
                 case 3:
@@ -814,12 +818,14 @@ public class MenusServiceImpl implements MenusService {
                         if (p.getProduct().getBrand().equalsIgnoreCase(brandSelect)) {
                             p.setDiscountPercent(percent);
                             p.setOnSale(true);
-                            System.out.println(p);
                             flag = true;
                         }
                     }
                     if (!flag) {
                         System.out.println("No existen productos con esa marca");
+                    } else {
+                        System.out.println("Oferta aplicada con exito!!");
+                        supermarketService.modifySupermarketListProducts(s);
                     }
                     break;
                 case 0:

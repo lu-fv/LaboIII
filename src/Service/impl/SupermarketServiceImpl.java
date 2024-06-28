@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class SupermarketServiceImpl implements SupermarketService, Serializable {
     private final File supermarketFile = new File("supermarket.json");
-    private final HashMap<String, Supermarket> superMarketList = supermarketsListJson(); //cuit y supermercado //cuit y supermercado
+    private Map<String, Supermarket> superMarketList = supermarketsListJson(); //cuit y supermercado //cuit y supermercado
 
     public SupermarketServiceImpl() throws IOException {
     }
@@ -114,7 +114,9 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         //pregunto si desea eliminar el supermercado y muestro para verificar datos correctos
         System.out.println("Desea eliminar el supermerdado " + s.getName() + "[CUIT: " + s.getCuit() + "] ? s/n");
-        if (sc.nextLine().equalsIgnoreCase("s")) {
+        sc.nextLine();
+        String opc = sc.nextLine();
+        if (opc.equalsIgnoreCase("s")) {
             //en caso de afirmacion procedo a eliminar
             this.superMarketList.remove(s.getCuit());
             //guardo la modificacion en el json
@@ -131,6 +133,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             if (s.getName().equalsIgnoreCase(entry.getValue().getName())) {
+                System.out.println("muestre precio en funcion de grabar "+ s);
                 entry.setValue(s);
             }
         }
@@ -237,7 +240,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public void saveSupermarketInJsonFile(HashMap<String, Supermarket> superList) throws IOException {
+    public void saveSupermarketInJsonFile(Map<String, Supermarket> superList) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(supermarketFile, superList);
@@ -247,10 +250,10 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 
     @Override
-    public HashMap<String, Supermarket> supermarketsListJson() throws IOException {
-        TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
-        };
-        return new ObjectMapper().readValue(supermarketFile, typeReferenceMap);
+    public Map<String, Supermarket> supermarketsListJson() throws IOException {
+        /*TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
+        };*/
+        return new ObjectMapper().readValue(supermarketFile, new TypeReference<Map<String, Supermarket>>(){});
     }
     //endregion
 
@@ -306,14 +309,16 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     @Override
     public List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name) {
 
+        name = name.toLowerCase();
         //recorro y busco productos que contengan en su descripcion lo pasado por parametro
         List<ProductForSale> products = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
-            if (p.getProduct().getProductName().contains(name)) {
+        for (ProductForSale p : supermarket.getProductList()) {
+            if (p.getProduct().getProductName().toLowerCase().contains(name)) {
                 products.add(p);
             }
         }
         return products;
+
     }
     //endregion
 
@@ -343,7 +348,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public List<ProductForSale> searchSpecialProductsByName(String name) {
 
         //me aseguro que este todo en minuscula para comparar despues con los productos del json
-        name = name.toLowerCase(Locale.ROOT);
+        name = name.toLowerCase();
         //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
         List<ProductForSale> listProduct = new ArrayList<>();
 
@@ -353,7 +358,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             if (!entry.getValue().getProductList().isEmpty()) {
                 //recorro el Set de productos de cada supermercado
                 for (ProductForSale p : entry.getValue().getProductList()) {
-                    if (p.getProduct().getProductName().contains(name)) {
+                    if (p.getProduct().getProductName().toLowerCase().contains(name)) {
                         //agrego a la lista los productos que esten en oferta
                         listProduct.add(p);
                     }

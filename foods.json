@@ -1,12 +1,1 @@
-{
-  "foods": {
-    "123": {
-      "type": "food",
-      "productName": "Pan",
-      "brand": "Bimbo",
-      "category": "GROCERY",
-      "perishable": true,
-      "id": 123
-    }
-  }
-}
+{"foods":{"123":{"type":"Food","productName":"Pan Lactal","brand":"Bimbo","category":"BAKERY","perishable":true,"id":123},"888":{"type":"Food","productName":"Cereales","brand":"Zucarita","category":"GROCERY","perishable":false,"id":888},"7":{"type":"Food","productName":"Papas","brand":"Pringles","category":"GROCERY","perishable":false,"id":7}}}

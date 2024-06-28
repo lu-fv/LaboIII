@@ -7,6 +7,7 @@ import Models.Supermarket;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface SupermarketService {
     //region ABM-----------------------------------------------------------------
@@ -20,23 +21,30 @@ public interface SupermarketService {
 
     void supermarketList();
 
-    void saveSupermarketInJsonFile(HashMap<String, Supermarket>superList) throws IOException;
+    void saveSupermarketInJsonFile(Map<String, Supermarket> superList) throws IOException;
 
-    HashMap<String,Supermarket> supermarketsListJson () throws IOException;
+    Map<String, Supermarket> supermarketsListJson() throws IOException;
     //endregion
 
     //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
     Supermarket search(String name) throws IOException;
+
     void showListSupermarket(Supermarket supermarket);
+
     List<ProductForSale> serchByCategoryInSupermarket(Supermarket supermarket, Category category);
+
     List<ProductForSale> serchProductInSaleInSupermarket(Supermarket supermarket);
+
     List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name);
     //endregion
 
     //region BÚSQUEDA GENERAL----------------------------------------------------
     List<ProductForSale> searchSalesProducts() throws IOException;
+
     List<ProductForSale> searchSpecialProductsByName(String name) throws IOException;
+
     List<ProductForSale> searchProductsByCategory(Category c) throws IOException;
+
     public Boolean searchSpecialProductsByNameExist(String name);
     //endregion
 }

@@ -2,10 +2,10 @@ package Models;
 
 import Enums.Category;
 import Utils.Verification;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import java.io.Serializable;
-
-public class Food extends Product implements Serializable {
+@JsonTypeName("Food")
+public class Food extends Product {
     //ATTRIBUTES-----------------------------------------
     private Boolean perishable;
 
