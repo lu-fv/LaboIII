@@ -3,28 +3,21 @@ package Service.impl;
 import Models.Cart;
 import Models.ProductForSale;
 import Service.CartService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import Service.ProductForSaleService;
+import Service.SupermarketService;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class CartServiceImpl implements CartService {
-    private final File cartFile = new File("cart.json");
+
     private Cart<ProductForSale> cart = new Cart<>();
 
     public Cart<ProductForSale> getCart() {
         return cart;
     }
-
-    @Override
-    public Cart<ProductForSale> getCartForSave() {
-        return cart;
-    }
-
 
     @Override
     public void addProductForSale(ProductForSale p, Integer amount) throws IOException {
@@ -61,7 +54,7 @@ public class CartServiceImpl implements CartService {
                     System.out.println(">>>>>>>>>>>>>>>>>> LISTA DE PRODUCTOS <<<<<<<<<<<<<<<<<<<<<<");
 
                     for (i = 0; i < list.size(); i++) {
-                        System.out.println("[Opcion : " + (i + 1) + "] \n" + list.get(i));
+                        System.out.println("[Opcion : " + (i + 1) + "]\n" + list.get(i));
                         System.out.println("_____________________________________________________________________");
                     }
                     System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion o presione cualquier tecla para salir...");
@@ -80,30 +73,27 @@ public class CartServiceImpl implements CartService {
                         System.out.println("Producto agregado al carrito. Desea seguir agregando productos de este listado? s/n");
                         continueAdd = sc.nextLine();
 
-                        if(!continueAdd.equalsIgnoreCase("s") && !continueAdd.equalsIgnoreCase("n")){
+                        if (!continueAdd.equalsIgnoreCase("s") && !continueAdd.equalsIgnoreCase("n")) {
                             System.out.println("Ingrese una opcion correcta, s ó n");
                         }
                     } while (!continueAdd.equalsIgnoreCase("s") && !continueAdd.equalsIgnoreCase("n"));
 
                 } while (continueAdd.equalsIgnoreCase("s"));
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
-                correctForm = false;
-            } catch (IndexOutOfBoundsException i) {
-                System.out.println(i.getMessage());
                 correctForm = false;
             }
         } while (!correctForm);
     }
 
-
     @Override
-    public void showCartsProductList() {
+    public void showCartsProductList() throws IOException {
         if (!cart.getCart().isEmpty()) {
             System.out.println("        TU LISTA DE COMPRAS\n");
             Integer i = 1;
             for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
                 System.out.println("[" + i + "] \n " + entry.getKey() + " >> cantidad : " + entry.getValue());
+                System.out.println("Supermercado : "+ new ProductForSaleServiceImpl().searchSupermarketByEachProductForSale(entry.getKey()));
                 i++;
             }
             System.out.println("          \nPRECIO TOTAL DE LA LISTA : [$" + cart.getTotalPrice() + "]");
@@ -111,7 +101,6 @@ public class CartServiceImpl implements CartService {
             System.out.println("Aun no a agregado productos al carrito!");
         }
     }
-
 
     @Override
     public void deleteSomeProductOfCart() throws IOException {
@@ -122,8 +111,9 @@ public class CartServiceImpl implements CartService {
             System.out.println(entry);
         }
         System.out.println("Ingrese el ID del producto que desea eliminar...");
+        Integer idNew = Integer.parseInt(sc.nextLine());
         for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
-            if (entry.getKey().getProduct().getID() == sc.nextInt()) {
+            if (entry.getKey().getProduct().getID().equals(idNew)) {
                 product = entry.getKey();
                 flag = true;
             }

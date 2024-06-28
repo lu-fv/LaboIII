@@ -7,9 +7,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface CartService {
-    Cart<ProductForSale> getCartForSave();
     void addProductForSale(ProductForSale p, Integer amount) throws IOException;
-    void showCartsProductList();
+    void showCartsProductList() throws IOException;
     void addCartFromListProductForSale(List<ProductForSale> list) throws IOException;
     void deleteSomeProductOfCart() throws IOException;
     void modifyCartList() throws IOException;

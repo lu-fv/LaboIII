@@ -203,13 +203,11 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         }
     }
 
-
-
     @Override
     public ProductForSale searchProductoForSaleById(Supermarket s, Integer id) {
         //recorro el set en busca del id de producto
-        for (ProductForSale p : superMarketList.get(s.getCuit()).getProductList()) {
-            if (p.getProduct().getID().equals(id)){
+        for (ProductForSale p : s.getProductList()) {
+            if (p.getProduct().getID().equals(id)) {
                 //retorno producto
                 return p;
             }
@@ -230,4 +228,15 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
         }
     }
 
+    @Override
+    public String searchSupermarketByEachProductForSale(ProductForSale product) {
+        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+            for (ProductForSale p : entry.getValue().getProductList()) {
+                if (p.equals(product)) {
+                    return entry.getValue().getName();
+                }
+            }
+        }
+        return null;
+    }
 }

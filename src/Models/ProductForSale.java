@@ -1,6 +1,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ProductForSale implements Serializable {
     private Product product;
@@ -52,16 +53,29 @@ public class ProductForSale implements Serializable {
 
     @Override
     public String toString() {
-        if(this.onSale){
-            return "Descripcion (Producto en oferta): "+ product +
+        if (this.onSale) {
+            return "Descripcion (Producto en oferta): " + product +
                     " - Precio Anterior: [$" + price +
                     "] - Precio en Oferta [$" + applyDiscount(getDiscountPercent()) + "]";
-        }else{
-            return "Descripcion: "+ product +
+        } else {
+            return "Descripcion: " + product +
                     " - Precio: [$" + price +
                     "]";
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductForSale product1 = (ProductForSale) o;
+        return Objects.equals(product.getID(), product1.product.getID()) && Objects.equals(price, product1.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(product, price, onSale, discountPercent);
     }
 
     public Double applyDiscount(Integer percentage) {

@@ -6,31 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/beverages.json" beforeDir="false" afterPath="$PROJECT_DIR$/beverages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foods.json" beforeDir="false" afterPath="$PROJECT_DIR$/foods.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Cart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Supermarket.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/CartService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/CartService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/ProductForSaleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/ProductForSaleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/SupermarketService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/SupermarketService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/CartServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/CartServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/ProductForSaleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/ProductForSaleServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Beverage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/ProductForSale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/ProductForSale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Supermarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Supermarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CartService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/ProductForSaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ProductForSaleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/SupermarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SupermarketService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/CartServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/impl/ProductForSaleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/ProductForSaleServiceImpl.java" afterDir="false" />
@@ -52,6 +37,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>

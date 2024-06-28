@@ -17,7 +17,7 @@ public class MenusServiceImpl implements MenusService {
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
     protected SupermarketService supermarketService = new SupermarketServiceImpl();
-    ;
+
     protected CartService cartService = new CartServiceImpl();
     protected ProductForSaleService productForSaleService = new ProductForSaleServiceImpl();
     protected ProductServiceImpl productService = new ProductServiceImpl();
@@ -292,7 +292,9 @@ public class MenusServiceImpl implements MenusService {
                     case 1:
                         //region Busqueda de productos por nombre en un supermercado seleccionado
                         System.out.println("Ingrese el nombre del producto buscado: ");
-                        productsForSale = supermarketService.serchProductByNameInSupermarket(supermarketSelect, sc.nextLine());
+                        sc.nextLine();
+                        String nameSearch = sc.nextLine();
+                        productsForSale = supermarketService.serchProductByNameInSupermarket(supermarketSelect, nameSearch);
                         if (!productsForSale.isEmpty()) {
                             cartService.addCartFromListProductForSale(productsForSale);
                         } else {
@@ -699,24 +701,19 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("Ingrese el id del producto que desea modificar...");
                         Integer idSelect = Integer.parseInt(sc.nextLine());
                         product = productForSaleService.searchProductoForSaleById(supermarketExist, idSelect);
+
                         if (product == null) {
                             System.out.println("No existe el Id ingresado dentro del listado del supermercado " + supermarketExist);
                         } else {
-                            System.out.println("Ingrese el precio nuevo : ");
-
+                            System.out.println("Producto que desea Modificar :\n "+ product);
+                            System.out.println("Ingrese el precio nuevo: ");
                             Double newPrice = Double.parseDouble(sc.nextLine());
-
-                            System.out.println("producto vendible original "+ product);
-
                             product.setPrice(newPrice);
-
-                            System.out.println("producto vendible modificado "+ product);
-
+                            System.out.println("Producto modificado: "+ product);
                             supermarketService.modifySupermarketListProducts(supermarketExist);
                             System.out.println("Modificacion exitosa!!!");
                         }
                     }
-                    supermarketService.modifySupermarketListProducts(supermarketExist);
                     //endregion de un superme
                     break;
                 case 7:
@@ -728,7 +725,8 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        productForSaleService.removeProductForSaleForSupermarket(supermarketExist, sc.nextInt());
+                        Integer idSelect = Integer.parseInt(sc.nextLine());
+                        productForSaleService.removeProductForSaleForSupermarket(supermarketExist, idSelect);
                     }
                     //endregion
                     break;

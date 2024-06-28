@@ -114,7 +114,9 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         //pregunto si desea eliminar el supermercado y muestro para verificar datos correctos
         System.out.println("Desea eliminar el supermerdado " + s.getName() + "[CUIT: " + s.getCuit() + "] ? s/n");
-        if (sc.nextLine().equalsIgnoreCase("s")) {
+        sc.nextLine();
+        String opc = sc.nextLine();
+        if (opc.equalsIgnoreCase("s")) {
             //en caso de afirmacion procedo a eliminar
             this.superMarketList.remove(s.getCuit());
             //guardo la modificacion en el json
@@ -307,14 +309,16 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     @Override
     public List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name) {
 
+        name = name.toLowerCase();
         //recorro y busco productos que contengan en su descripcion lo pasado por parametro
         List<ProductForSale> products = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
-            if (p.getProduct().getProductName().contains(name)) {
+        for (ProductForSale p : supermarket.getProductList()) {
+            if (p.getProduct().getProductName().toLowerCase().contains(name)) {
                 products.add(p);
             }
         }
         return products;
+
     }
     //endregion
 
