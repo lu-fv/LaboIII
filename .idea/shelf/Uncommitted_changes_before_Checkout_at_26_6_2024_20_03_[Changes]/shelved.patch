@@ -1,0 +1,115 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"092ad90e-7b8c-4dd4-b3a3-8ffe566365cd\" name=\"Changes\" comment=\"clases, constructors, getter and setter\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_18_46__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_18_46__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_06__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_06__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_28__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_28__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_21_10__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_21_10__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/beverages.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/beverages.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/foods.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/foods.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/BeverageServiceImpl.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/BeverageServiceImpl.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/FoodServiceImpl.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/FoodServiceImpl.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/Beverage.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Models/Beverage.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/Food.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Models/Food.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/Product.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Models/Product.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/ProductForSale.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Models/ProductForSale.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Service/impl/BeverageServiceImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Service/impl/BeverageServiceImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Service/impl/FoodServiceImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Service/impl/FoodServiceImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/supermarket.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/supermarket.json\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"ROOT_SYNC\" value=\"DONT_SYNC\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 7\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2hIBVAFB8fmxnvjqkrqpGwxKkIO\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Main.executor\": \"Run\",\r\n    \"Downloaded.Files.Path.Enabled\": \"false\",\r\n    \"Repository.Attach.Annotations\": \"false\",\r\n    \"Repository.Attach.JavaDocs\": \"false\",\r\n    \"Repository.Attach.Sources\": \"false\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"lula-branch-4\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/mariu/OneDrive/Escritorio/librerias  JSon/jackson-databind-2.17.1.jar\",\r\n    \"onboarding.tips.debug.path\": \"E:/Labo III/ProyectoLaboIII/src/Main.java\",\r\n    \"project.structure.last.edited\": \"Libraries\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"092ad90e-7b8c-4dd4-b3a3-8ffe566365cd\" name=\"Changes\" comment=\"\" />\r\n      <created>1717271736874</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1717271736874</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"clases, constructors, getter and setter\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1717278016900</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1717278016900</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\r\n                <map>\r\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"clases, constructors, getter and setter\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"clases, constructors, getter and setter\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java</url>\r\n          <line>688</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -5,26 +5,11 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter">
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_18_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_18_46__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_06__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_28__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_19_28__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_21_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_6_2024_21_10__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/beverages.json" beforeDir="false" afterPath="$PROJECT_DIR$/beverages.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/foods.json" beforeDir="false" afterPath="$PROJECT_DIR$/foods.json" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/ProductForSale.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/BeverageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/BeverageServiceImpl.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/FoodServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/FoodServiceImpl.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Beverage.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Food.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/ProductForSale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/ProductForSale.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Service/impl/BeverageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/BeverageServiceImpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Service/impl/FoodServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/FoodServiceImpl.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/supermarket.json" beforeDir="false" afterPath="$PROJECT_DIR$/supermarket.json" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+Index: supermarket.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"30-59036076-3\": {\r\n    \"name\": \"VEA\",\r\n    \"address\": \"Av. Pedro Luro n 3901\",\r\n    \"phone\": \"0810-999-9832\",\r\n    \"cuit\": \"30-59036076-3\",\r\n    \"productList\": [\r\n      {\r\n        \"product\": {\r\n          \"type\": \"food\",\r\n          \"productName\": \"Pan\",\r\n          \"brand\": \"Bimbo\",\r\n          \"category\": \"GROCERY\",\r\n          \"perishable\": true,\r\n          \"id\": 123\r\n        },\r\n        \"price\": 123.0,\r\n        \"onSale\": false,\r\n        \"discountPercent\": 30\r\n      },\r\n      {\r\n        \"product\": {\r\n          \"type\": \"beverage\",\r\n          \"productName\": \"Gaseosa\",\r\n          \"brand\": \"Pepsi\",\r\n          \"category\": \"GROCERY\",\r\n          \"litres\": 1.5,\r\n          \"id\": 456\r\n        },\r\n        \"price\": 456.0,\r\n        \"onSale\": false,\r\n        \"discountPercent\": 30\r\n      }\r\n    ]\r\n  },\r\n  \"30-55149749-2\": {\r\n    \"name\": \"TOLEDO\",\r\n    \"address\": \"Av. Colon n 3350\",\r\n    \"phone\": \"0800-333-3266\",\r\n    \"cuit\": \"30-55149749-2\",\r\n    \"productList\": []\r\n  },\r\n  \"30-68731043-4\": {\r\n    \"name\": \"CARREFOUR\",\r\n    \"address\": \"Catamarca n 1965\",\r\n    \"phone\": \"0800-444-8484\",\r\n    \"cuit\": \"30-68731043-4\",\r\n    \"productList\": [\r\n      {\r\n        \"product\": {\r\n          \"type\": \"beverage\",\r\n          \"productName\": \"Gaseosa\",\r\n          \"brand\": \"Pepsi\",\r\n          \"category\": \"GROCERY\",\r\n          \"litres\": 1.5,\r\n          \"id\": 456\r\n        },\r\n        \"price\": 456.0,\r\n        \"onSale\": false,\r\n        \"discountPercent\": 30\r\n      }\r\n    ]\r\n  }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/supermarket.json b/supermarket.json
+--- a/supermarket.json	
++++ b/supermarket.json	
+@@ -1,64 +1,1 @@
+-{
+-  "30-59036076-3": {
+-    "name": "VEA",
+-    "address": "Av. Pedro Luro n 3901",
+-    "phone": "0810-999-9832",
+-    "cuit": "30-59036076-3",
+-    "productList": [
+-      {
+-        "product": {
+-          "type": "food",
+-          "productName": "Pan",
+-          "brand": "Bimbo",
+-          "category": "GROCERY",
+-          "perishable": true,
+-          "id": 123
+-        },
+-        "price": 123.0,
+-        "onSale": false,
+-        "discountPercent": 30
+-      },
+-      {
+-        "product": {
+-          "type": "beverage",
+-          "productName": "Gaseosa",
+-          "brand": "Pepsi",
+-          "category": "GROCERY",
+-          "litres": 1.5,
+-          "id": 456
+-        },
+-        "price": 456.0,
+-        "onSale": false,
+-        "discountPercent": 30
+-      }
+-    ]
+-  },
+-  "30-55149749-2": {
+-    "name": "TOLEDO",
+-    "address": "Av. Colon n 3350",
+-    "phone": "0800-333-3266",
+-    "cuit": "30-55149749-2",
+-    "productList": []
+-  },
+-  "30-68731043-4": {
+-    "name": "CARREFOUR",
+-    "address": "Catamarca n 1965",
+-    "phone": "0800-444-8484",
+-    "cuit": "30-68731043-4",
+-    "productList": [
+-      {
+-        "product": {
+-          "type": "beverage",
+-          "productName": "Gaseosa",
+-          "brand": "Pepsi",
+-          "category": "GROCERY",
+-          "litres": 1.5,
+-          "id": 456
+-        },
+-        "price": 456.0,
+-        "onSale": false,
+-        "discountPercent": 30
+-      }
+-    ]
+-  }
+-}
+\ No newline at end of file
++{"30-59036076-3":{"name":"VEA","address":"Av. Pedro Luro n 3901","phone":"0810-999-9832","cuit":"30-59036076-3","productList":[{"product":{"type":"food","productName":"Pan","brand":"Bimbo","category":"GROCERY","perishable":true,"id":123},"price":123.0,"onSale":false,"discountPercent":30},{"product":{"type":"beverage","productName":"Gaseosa","brand":"Pepsi","category":"GROCERY","litres":1.5,"id":456},"price":456.0,"onSale":false,"discountPercent":30}]},"30-55149749-2":{"name":"TOLEDO","address":"Av. Colon n 3350","phone":"0800-333-3266","cuit":"30-55149749-2","productList":[{"product":{"type":"food","productName":"Pan","brand":"Bimbo","category":"GROCERY","perishable":true,"id":123},"price":450.0,"onSale":false,"discountPercent":30}]},"30-68731043-4":{"name":"CARREFOUR","address":"Catamarca n 1965","phone":"0800-444-8484","cuit":"30-68731043-4","productList":[{"product":{"type":"beverage","productName":"Gaseosa","brand":"Pepsi","category":"GROCERY","litres":1.5,"id":456},"price":456.0,"onSale":false,"discountPercent":30}]}}
+\ No newline at end of file

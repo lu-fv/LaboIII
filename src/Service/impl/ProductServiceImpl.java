@@ -11,12 +11,18 @@ import java.util.*;
 public class ProductServiceImpl implements ProductService {
     private static Set<Integer> idHashSet = new HashSet<>();
 
-    //START--------------------------------------------------------------
+    //GETTER================================================================
+    public static Set<Integer> getIdHashSet() {
+        return idHashSet;
+    }
+
+    //METHODS===============================================================
+    //add-------------------------------------------------------------------
     public static void add(Integer id) {
         idHashSet.add(id);
     }
 
-    //CREAR--------------------------------------------------------------
+    //create----------------------------------------------------------------
     public static Integer createID() {
         Scanner scanner = new Scanner(System.in);
         Integer id = null;
@@ -91,7 +97,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     //INTERNA: SELECCIONAR CATEGORÍA
-    //-------------------DUDA: ¿DEBERÍA AGREGAR ESTOS DOS MÉTODOS A LA INTERFAZ?
     protected static Category selectCategory(Integer id) {
         for (Category c : Category.values()) {
             if (Objects.equals(id, c.getId())) {
@@ -108,11 +113,7 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    public static void deleteID(Integer id) {
-        idHashSet.remove(id);
-    }
-
-    //MODIFICAR----------------------------------------------------------
+    //modify----------------------------------------------------------------
     public static void modify(Product product, Integer opc) {
         Scanner scanner = new Scanner(System.in);
 
@@ -145,6 +146,11 @@ public class ProductServiceImpl implements ProductService {
                 System.out.println("Opción no disponible");
                 break;
         }
+    }
+
+    //delete----------------------------------------------------------------
+    public static void deleteID(Integer id) {
+        idHashSet.remove(id);
     }
 
     public static Integer askForID() {

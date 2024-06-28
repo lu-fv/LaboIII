@@ -1,6 +1,7 @@
 package Service;
 
 import Enums.Category;
+import Models.Food;
 import Models.Product;
 import Models.ProductForSale;
 import Models.Supermarket;
@@ -48,5 +49,8 @@ public interface SupermarketService {
 
     public Boolean searchSpecialProductsByNameExist(String name);
     //endregion
+
+    //region ACTUALIZACIÓN DE DATOS DE UN PRODUCTO
     void updateProductData(Product updated) throws IOException;
+    //endregion
 }

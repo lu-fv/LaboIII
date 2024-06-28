@@ -13,10 +13,12 @@ import java.util.*;
 public class FoodServiceImpl extends ProductServiceImpl implements FoodService, Serializable {
     private Map<Integer, Food> foods;
 
+    //CONSTRUCTOR===========================================================
     public FoodServiceImpl() {
         this.foods = new HashMap<>();
     }
 
+    //G&S===================================================================
     public Map<Integer, Food> getFoods() {
         return foods;
     }
@@ -25,16 +27,15 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
         this.foods = foods;
     }
 
-    //AGREGAR
+    //METHODS===============================================================
+    //add-------------------------------------------------------------------
     @Override
     public Food add(Food food) throws IOException {
         foods.put(food.getID(), food);
         ProductPersistenceImpl.saveFoods(this);
-        //ProductPersistenceImpl.saveProducts(foods, null);
         return food;
     }
 
-    //AGREGAR TODOS
     @Override
     public void addAll(List<Food> foodList) {
         for (Food f : foodList) {
@@ -42,7 +43,7 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
         }
     }
 
-    //CREAR
+    //create----------------------------------------------------------------
     @Override
     public Food create() throws IOException {
         Boolean retry;
@@ -66,7 +67,6 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
         return null;
     }
 
-    //INTERNA CREAR: CREAR PERISHABLE
     private Boolean createPerishable() {
         Scanner scanner = new Scanner(System.in);
         Integer aux = null;
@@ -90,7 +90,7 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
         }
     }
 
-    //MODIFICAR
+    //modify----------------------------------------------------------------
     @Override
     public Food modify(Integer id) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -111,22 +111,23 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
 
                     if (opc == 4) {
                         food.setPerishable(createPerishable()); //Modifico los atributos propios de la clase Food
+                    } else if (opc == 0) {
+                        return this.add(food); //Retorno el alimento modificado y reemplazado en el map
                     } else {
                         ProductServiceImpl.modify(food, opc); //Modifico los atributos de la superclase Product
                     }
                 } else { //Si no encuentro el alimento
                     return null; //Retorno null
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Opción no disponible");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            }
-            if (opc == 0) {
-                return this.add(food); //Retorno el alimento modificado y reemplazado en el map
             }
         } while (true);
     }
 
-    //ELIMINAR
+    //delete----------------------------------------------------------------
     @Override
     public Food delete(Integer id) throws IOException { //AGREGAR PERSISTENCIA Y CONFIRMAR ELIMINACIÓN
         Scanner sc = new Scanner(System.in);
@@ -143,6 +144,7 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
                 do {
                     retry = false;
                     try {
+                        System.out.print(">");
                         opc = Integer.parseInt(sc.nextLine());
                         Verification.isOutOfBounds(opc, 1, 2);
 
@@ -163,12 +165,15 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
         return null;
     }
 
-    public Food remove(Integer id) {
+    @Override
+    public Food remove(Integer id) throws IOException {
         ProductServiceImpl.deleteID(id);
-        return foods.remove(id);
+        Food f = foods.remove(id);
+        ProductPersistenceImpl.saveFoods(this);
+        return f;
     }
 
-    //MOSTRAR TODOS LOS ELEMENTOS
+    //list------------------------------------------------------------------
     @Override
     public void showAll() {
         for (Map.Entry<Integer, Food> entry : foods.entrySet()) {
@@ -176,6 +181,8 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
         }
     }
 
+    //start------------------------------------------------------------------
+    @Override
     public void startID() {
         for (Map.Entry<Integer, Food> entry : foods.entrySet()) {
             ProductServiceImpl.add(entry.getKey());

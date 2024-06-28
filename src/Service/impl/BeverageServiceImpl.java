@@ -13,10 +13,12 @@ import java.util.*;
 public class BeverageServiceImpl implements BeverageService, Serializable {
     private Map<Integer, Beverage> beverages;
 
+    //CONSTRUCTOR===========================================================
     public BeverageServiceImpl() {
         this.beverages = new HashMap<>();
     }
 
+    //G&S===================================================================
     public Map<Integer, Beverage> getBeverages() {
         return beverages;
     }
@@ -25,11 +27,12 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
         this.beverages = beverages;
     }
 
+    //METHODS===============================================================
+    //add-------------------------------------------------------------------
     @Override
     public Beverage add(Beverage beverage) throws IOException {
         beverages.put(beverage.getID(), beverage);
         ProductPersistenceImpl.saveBeverages(this);
-        //ProductPersistenceImpl.saveProducts(null, beverages);
         return beverage;
     }
 
@@ -40,6 +43,7 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
         }
     }
 
+    //create----------------------------------------------------------------
     @Override
     public Beverage create() throws IOException {
         Boolean retry;
@@ -75,6 +79,7 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
         return litres;
     }
 
+    //modify----------------------------------------------------------------
     @Override
     public Beverage modify(Integer id) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -91,25 +96,28 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
                     System.out.println("            [4] Modificar litros");
                     System.out.println("            [0] Salir");
 
+                    System.out.print(">");
                     opc = Integer.parseInt(sc.nextLine()); //Pregunto qué se quiere cambiar
 
                     if (opc == 4) {
                         beverage.setLitres(createLitres()); //Modifico los atributos propios de la clase Beverage
+                    } else if (opc == 0) {
+                        return this.add(beverage); //Retorno la bebida modificada y reemplazada en el map
                     } else {
                         ProductServiceImpl.modify(beverage, opc); //Modifico los productos de la superclase Product
                     }
-                } else {
+                } else { //Si no encuentro la bebida
                     return null; //Retorno null
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Opción no disponible");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            }
-            if (opc == 0) {
-                return this.add(beverage); //Retorno la bebida modificada y reemplazada en el map
             }
         } while (true); //Repito hasta que no haya problemas
     }
 
+    //delete----------------------------------------------------------------
     @Override
     public Beverage delete(Integer id) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -126,6 +134,7 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
                 do {
                     retry = false;
                     try {
+                        System.out.print(">");
                         opc = Integer.parseInt(sc.nextLine());
                         Verification.isOutOfBounds(opc, 1, 2);
 
@@ -146,11 +155,15 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
         return null;
     }
 
-    public Beverage remove(Integer id) {
+    @Override
+    public Beverage remove(Integer id) throws IOException {
         ProductServiceImpl.deleteID(id);
-        return beverages.remove(id);
+        Beverage b = beverages.remove(id);
+        ProductPersistenceImpl.saveBeverages(this);
+        return b;
     }
 
+    //list------------------------------------------------------------------
     @Override
     public void showAll() {
         for (Map.Entry<Integer, Beverage> entry : beverages.entrySet()) {
@@ -158,6 +171,8 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
         }
     }
 
+    //start------------------------------------------------------------------
+    @Override
     public void startID() {
         for (Map.Entry<Integer, Beverage> entry : beverages.entrySet()) {
             ProductServiceImpl.add(entry.getKey());

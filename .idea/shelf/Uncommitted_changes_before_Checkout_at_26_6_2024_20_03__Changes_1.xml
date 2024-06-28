@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_26_6_2024_20_03_[Changes]1" date="1719443049848" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 26/6/2024 20:03 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Models/ProductForSale.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Models/ProductForSale.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03_[Changes]1/ProductForSale.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Models/Product.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Models/Product.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03_[Changes]1/Product.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Models/Beverage.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Models/Beverage.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03_[Changes]1/Beverage.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProyectoLaboIII/Models/Food.class" />
+    <option name="AFTER_PATH" value="out/production/ProyectoLaboIII/Models/Food.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03_[Changes]1/Food.class" />
+  </binary>
+</changelist>
