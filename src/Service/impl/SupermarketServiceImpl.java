@@ -138,6 +138,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         saveSupermarketInJsonFile(superMarketList);
     }
 
+/// funciona
     @Override
     public void modifySupermarket(String name) throws IOException {
 
@@ -170,241 +171,254 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
                     break;
                 case 2:
                     System.out.println("Ingrese nuevo domicilio: ");
-                    s.setAddress(sr.nextLine());
-                    break;
-                case 3:
-                    System.out.println("Ingrese nuevo telefono: ");
-                    String phone;
-                    String newPhone;
+                    String supermarketAdress;
                     do {
-                        phone = sr.nextLine();
-                        newPhone = phone.replaceAll("-", "");
-                        alfa = Pattern.matches("^[a-zA-Z]*$", newPhone);
-                        if (alfa) {
-                            System.out.println("Ingrese solo numeros por favor");
+                        supermarketAdress = st.nextLine();
+                        alfa = Pattern.matches("^[a-zA-Z]*$", supermarketAdress);
+                        if (!alfa) {
+                            System.out.println("Ingrese solo caracteres por favor");
                         }
-                        if (newPhone.length() < 10) {
-                            System.out.println("Ingrese la cantidad de numeros correctos");
-                        }
-                    } while (alfa || newPhone.length() < 10);
-                    s.setPhone(phone);
-                    break;
-                case 4:
-                    System.out.println("Ingrese nueva CUIT: ");
-                    String cuit;
-                    String newCuit;
-                    do {
-                        cuit = sr.nextLine();
-                        newCuit = cuit.replaceAll("-", "");
-                        alfa = Pattern.matches("^[a-zA-Z]*$", newCuit);
-                        if (alfa) {
-                            System.out.println("Ingrese solo numeros por favor");
-                        }
-                        if (newCuit.length() != 11) {
-                            System.out.println("Ingrese un cuit correcto");
-                        }
-                    } while (alfa || newCuit.length() != 11);
-                    s.setCuit(cuit);
-                case 5:
-                    break;
-                default:
-                    System.out.println("Ingrese una opcion valida");
-                    break;
-            }
+                    } while (!alfa);
+                    s.setAddress(supermarketAdress);
 
-        } while (opc != 5);
+            break;
+            case 3:
+                System.out.println("Ingrese nuevo telefono: ");
+                String phone;
+                String newPhone;
 
-        saveSupermarketInJsonFile(superMarketList);
+                do {
+                    sr.nextLine();
+                    phone = sr.nextLine();
+                    newPhone = phone.replaceAll("-", "");
+                    alfa = Pattern.matches("^[a-zA-Z]*$", newPhone);
+                    if (alfa) {
+                        System.out.println("Ingrese solo numeros por favor");
+                    }
+                    if (newPhone.length() < 10) {
+                        System.out.println("Ingrese la cantidad de numeros correctos");
+                    }
+                } while (alfa || newPhone.length() != 10);
+                s.setPhone(newPhone);
+                break;
+            case 4:
+                System.out.println("Ingrese nueva CUIT: ");
+                String cuit;
+                String newCuit;
+
+                do {
+                    sr.nextLine();
+                    cuit = sr.nextLine();
+                    newCuit = cuit.replaceAll("-", "");
+                    alfa = Pattern.matches("^[a-zA-Z]*$", newCuit);
+                    if (alfa) {
+                        System.out.println("Ingrese solo numeros por favor");
+                    }
+                    if (newCuit.length() != 11) {
+                        System.out.println("Ingrese un cuit correcto");
+                    }
+                } while (alfa || newCuit.length() != 11);
+                s.setCuit(cuit);
+            case 5:
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida");
+                break;
+        }
+
+    } while(opc !=5);
+
+    saveSupermarketInJsonFile(superMarketList);
         System.out.println("Datos guardados exitosamente!!!");
 
+}
+
+@Override
+public void supermarketList() {
+
+    for (Map.Entry<String, Supermarket> entry : this.superMarketList.entrySet()) {
+        System.out.println("        SUPERMERCADO: ");
+        System.out.println("Nombre:     " + entry.getValue().getName());
+        System.out.println("Domicilio:  " + entry.getValue().getAddress());
+        System.out.println("telefono:   " + entry.getValue().getPhone());
+        System.out.println("CUIT:       " + entry.getValue().getCuit());
+        System.out.println("        LISTADO DE PRODUCTOS DEL SUPERMERCADO " + entry.getValue().getName() + ":");
+        for (ProductForSale p : entry.getValue().getProductList()) {
+            System.out.println(p);
+        }
     }
 
-    @Override
-    public void supermarketList() {
+}
 
-        for (Map.Entry<String, Supermarket> entry : this.superMarketList.entrySet()) {
-            System.out.println("        SUPERMERCADO: ");
-            System.out.println("Nombre:     " + entry.getValue().getName());
-            System.out.println("Domicilio:  " + entry.getValue().getAddress());
-            System.out.println("telefono:   " + entry.getValue().getPhone());
-            System.out.println("CUIT:       " + entry.getValue().getCuit());
-            System.out.println("        LISTADO DE PRODUCTOS DEL SUPERMERCADO " + entry.getValue().getName() + ":");
+@Override
+public void saveSupermarketInJsonFile(HashMap<String, Supermarket> superList) throws IOException {
+    try {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(supermarketFile, superList);
+    } catch (IOException e) {
+        System.out.println(e.getMessage());
+    }
+}
+
+@Override
+public HashMap<String, Supermarket> supermarketsListJson() throws IOException {
+    TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
+    };
+    return new ObjectMapper().readValue(supermarketFile, typeReferenceMap);
+}
+//endregion
+
+//region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
+@Override
+public Supermarket search(String name) {
+    Supermarket supermarket = null;
+
+    //busca supermercado por nombre en el map general del json
+    for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+        if (entry.getValue().getName().equalsIgnoreCase(name)) {
+            supermarket = entry.getValue();
+        }
+    }
+    //si encuentra retorna supermercado sino retorna null
+    return supermarket;
+}
+
+@Override
+public void showListSupermarket(Supermarket supermarket) {
+    if (supermarket != null) {
+        // muestra la lista de supermercados si existe
+        System.out.println(supermarket);
+    }
+}
+
+@Override
+public List<ProductForSale> serchByCategoryInSupermarket(Supermarket supermarket, Category category) {
+
+    //creo una lista de productos que coincidan con la categoria enviada por parametro
+    List<ProductForSale> productForCategory = new ArrayList<>();
+    for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
+        if (p.getProduct().getCategory() == (category)) {
+            productForCategory.add(p);
+        }
+    }
+    return productForCategory;
+}
+
+@Override
+public List<ProductForSale> serchProductInSaleInSupermarket(Supermarket supermarket) {
+
+    //recorro y armo una lista de productos que esten en oferta
+    List<ProductForSale> productsInSale = new ArrayList<>();
+    for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
+        if (p.getOnSale()) {
+            productsInSale.add(p);
+        }
+    }
+    return productsInSale;
+}
+
+@Override
+public List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name) {
+
+    //recorro y busco productos que contengan en su descripcion lo pasado por parametro
+    List<ProductForSale> products = new ArrayList<>();
+    for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
+        if (p.getProduct().getProductName().contains(name)) {
+            products.add(p);
+        }
+    }
+    return products;
+}
+//endregion
+
+//region BÚSQUEDA GENERAL----------------------------------------------------
+@Override
+public List<ProductForSale> searchSalesProducts() {
+    //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
+    List<ProductForSale> listProduct = new ArrayList<>();
+
+    //recorro la lista de supermercados
+    for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+        //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+        if (!entry.getValue().getProductList().isEmpty()) {
+            //recorro el Set de productos de cada supermercado
             for (ProductForSale p : entry.getValue().getProductList()) {
-                System.out.println(p);
-            }
-        }
-
-    }
-
-    @Override
-    public void saveSupermarketInJsonFile(HashMap<String, Supermarket> superList) throws IOException {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(supermarketFile, superList);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Override
-    public HashMap<String, Supermarket> supermarketsListJson() throws IOException {
-        TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
-        };
-        return new ObjectMapper().readValue(supermarketFile, typeReferenceMap);
-    }
-    //endregion
-
-    //region BÚSQUEDA POR SUPERMERCADO-------------------------------------------
-    @Override
-    public Supermarket search(String name) {
-        Supermarket supermarket = null;
-
-        //busca supermercado por nombre en el map general del json
-        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
-            if (entry.getValue().getName().equalsIgnoreCase(name)) {
-                supermarket = entry.getValue();
-            }
-        }
-        //si encuentra retorna supermercado sino retorna null
-        return supermarket;
-    }
-
-    @Override
-    public void showListSupermarket(Supermarket supermarket) {
-        if (supermarket != null) {
-            // muestra la lista de supermercados si existe
-            System.out.println(supermarket);
-        }
-    }
-
-    @Override
-    public List<ProductForSale> serchByCategoryInSupermarket(Supermarket supermarket, Category category) {
-
-        //creo una lista de productos que coincidan con la categoria enviada por parametro
-        List<ProductForSale> productForCategory = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
-            if (p.getProduct().getCategory() == (category)) {
-                productForCategory.add(p);
-            }
-        }
-        return productForCategory;
-    }
-
-    @Override
-    public List<ProductForSale> serchProductInSaleInSupermarket(Supermarket supermarket) {
-
-        //recorro y armo una lista de productos que esten en oferta
-        List<ProductForSale> productsInSale = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
-            if (p.getOnSale()) {
-                productsInSale.add(p);
-            }
-        }
-        return productsInSale;
-    }
-
-    @Override
-    public List<ProductForSale> serchProductByNameInSupermarket(Supermarket supermarket, String name) {
-
-        //recorro y busco productos que contengan en su descripcion lo pasado por parametro
-        List<ProductForSale> products = new ArrayList<>();
-        for (ProductForSale p : superMarketList.get(supermarket.getCuit()).getProductList()) {
-            if (p.getProduct().getProductName().contains(name)) {
-                products.add(p);
-            }
-        }
-        return products;
-    }
-    //endregion
-
-    //region BÚSQUEDA GENERAL----------------------------------------------------
-    @Override
-    public List<ProductForSale> searchSalesProducts() {
-        //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
-        List<ProductForSale> listProduct = new ArrayList<>();
-
-        //recorro la lista de supermercados
-        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
-            //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductList().isEmpty()) {
-                //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductList()) {
-                    if (p.getOnSale()) {
-                        //agrego a la lista los productos que esten en oferta
-                        listProduct.add(p);
-                    }
+                if (p.getOnSale()) {
+                    //agrego a la lista los productos que esten en oferta
+                    listProduct.add(p);
                 }
             }
         }
-        return listProduct;
     }
+    return listProduct;
+}
 
-    @Override
-    public List<ProductForSale> searchSpecialProductsByName(String name) {
+@Override
+public List<ProductForSale> searchSpecialProductsByName(String name) {
 
-        //me aseguro que este todo en minuscula para comparar despues con los productos del json
-        name = name.toLowerCase(Locale.ROOT);
-        //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
-        List<ProductForSale> listProduct = new ArrayList<>();
+    //me aseguro que este todo en minuscula para comparar despues con los productos del json
+    name = name.toLowerCase(Locale.ROOT);
+    //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
+    List<ProductForSale> listProduct = new ArrayList<>();
 
-        //recorro la lista de supermercados
-        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
-            //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductList().isEmpty()) {
-                //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductList()) {
-                    if (p.getProduct().getProductName().contains(name)) {
-                        //agrego a la lista los productos que esten en oferta
-                        listProduct.add(p);
-                    }
+    //recorro la lista de supermercados
+    for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+        //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+        if (!entry.getValue().getProductList().isEmpty()) {
+            //recorro el Set de productos de cada supermercado
+            for (ProductForSale p : entry.getValue().getProductList()) {
+                if (p.getProduct().getProductName().contains(name)) {
+                    //agrego a la lista los productos que esten en oferta
+                    listProduct.add(p);
                 }
             }
         }
-        return listProduct;
     }
+    return listProduct;
+}
 
-    @Override
-    public List<ProductForSale> searchProductsByCategory(Category c) {
-        //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
-        List<ProductForSale> listProduct = new ArrayList<>();
+@Override
+public List<ProductForSale> searchProductsByCategory(Category c) {
+    //creo una lista nueva de productos para cargar los productos que coincidan con el filtro en oferta
+    List<ProductForSale> listProduct = new ArrayList<>();
 
-        //recorro la lista de supermercados
-        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
-            //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductList().isEmpty()) {
-                //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductList()) {
-                    if (p.getProduct().getCategory() == (c)) {
-                        //agrego a la lista los productos que esten en oferta
-                        listProduct.add(p);
-                    }
+    //recorro la lista de supermercados
+    for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+        //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+        if (!entry.getValue().getProductList().isEmpty()) {
+            //recorro el Set de productos de cada supermercado
+            for (ProductForSale p : entry.getValue().getProductList()) {
+                if (p.getProduct().getCategory() == (c)) {
+                    //agrego a la lista los productos que esten en oferta
+                    listProduct.add(p);
                 }
             }
         }
-        return listProduct;
-
     }
+    return listProduct;
 
-    @Override
-    public Boolean searchSpecialProductsByNameExist(String name) {
-        //me aseguro que este todo en minuscula para comparar despues con los productos del json
-        name = name.toLowerCase(Locale.ROOT);
+}
 
-        //recorro la lista de supermercados
-        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
-            //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
-            if (!entry.getValue().getProductList().isEmpty()) {
-                //recorro el Set de productos de cada supermercado
-                for (ProductForSale p : entry.getValue().getProductList()) {
-                    //paso a minuscula el nombre del producto
-                    String nameProductSupermarket = p.getProduct().getProductName().toLowerCase(Locale.ROOT);
-                    if (nameProductSupermarket.contains(name)) {
-                        return true;
-                    }
+@Override
+public Boolean searchSpecialProductsByNameExist(String name) {
+    //me aseguro que este todo en minuscula para comparar despues con los productos del json
+    name = name.toLowerCase(Locale.ROOT);
+
+    //recorro la lista de supermercados
+    for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
+        //si el supermercado tiene productos en su lista recorro (osea si no esta vacia)
+        if (!entry.getValue().getProductList().isEmpty()) {
+            //recorro el Set de productos de cada supermercado
+            for (ProductForSale p : entry.getValue().getProductList()) {
+                //paso a minuscula el nombre del producto
+                String nameProductSupermarket = p.getProduct().getProductName().toLowerCase(Locale.ROOT);
+                if (nameProductSupermarket.contains(name)) {
+                    return true;
                 }
             }
         }
-        return false;
     }
+    return false;
+}
 //endregion
 }

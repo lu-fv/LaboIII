@@ -1,23 +1,10 @@
 {
   "30-59036076-3": {
     "name": "VEA",
-    "address": "Av. Pedro Luro n 3901",
-    "phone": "0810-999-9832",
+    "address": "JARA",
+    "phone": "2235221931",
     "cuit": "30-59036076-3",
     "productList": [
-      {
-        "product": {
-          "type": "food",
-          "productName": "Pan",
-          "brand": "Bimbo",
-          "category": "GROCERY",
-          "perishable": true,
-          "id": 123
-        },
-        "price": 123.0,
-        "onSale": false,
-        "discountPercent": 30
-      },
       {
         "product": {
           "type": "beverage",
@@ -28,8 +15,34 @@
           "id": 456
         },
         "price": 456.0,
+        "onSale": true,
+        "discountPercent": 40
+      },
+      {
+        "product": {
+          "type": "food",
+          "productName": "Pan",
+          "brand": "Bimbo",
+          "category": "GROCERY",
+          "perishable": true,
+          "id": 123
+        },
+        "price": 300.0,
         "onSale": false,
-        "discountPercent": 30
+        "discountPercent": 40
+      },
+      {
+        "product": {
+          "type": "beverage",
+          "productName": "Gaseosa",
+          "brand": "Pepsi",
+          "category": "GROCERY",
+          "litres": 1.5,
+          "id": 456
+        },
+        "price": 500.0,
+        "onSale": true,
+        "discountPercent": 40
       }
     ]
   },
@@ -56,8 +69,8 @@
           "id": 456
         },
         "price": 456.0,
-        "onSale": false,
-        "discountPercent": 30
+        "onSale": true,
+        "discountPercent": 50
       }
     ]
   }

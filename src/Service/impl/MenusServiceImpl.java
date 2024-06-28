@@ -704,13 +704,23 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         System.out.println("Ingrese el id del producto que desea modificar...");
-                        product = productForSaleService.searchProductoForSaleById(supermarketExist, sc.nextInt());
+                        Integer idSelect = Integer.parseInt(sc.nextLine());
+                        product = productForSaleService.searchProductoForSaleById(supermarketExist, idSelect);
                         if (product == null) {
                             System.out.println("No existe el Id ingresado dentro del listado del supermercado " + supermarketExist);
                         } else {
                             System.out.println("Ingrese el precio nuevo : ");
-                            product.setPrice(sc.nextDouble());
+
+                            Double newPrice = Double.parseDouble(sc.nextLine());
+
+                            System.out.println("producto vendible original "+ product);
+
+                            product.setPrice(newPrice);
+
+                            System.out.println("producto vendible modificado "+ product);
+
                             supermarketService.modifySupermarketListProducts(supermarketExist);
+                            System.out.println("Modificacion exitosa!!!");
                         }
                     }
                     //endregion de un superme
@@ -723,7 +733,7 @@ public class MenusServiceImpl implements MenusService {
                     if (supermarketExist == null) {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
-                        System.out.println("Ingrese el id del producto que desea modificar...");
+                        System.out.println("Ingrese el id del producto que desea eliminar...");
                         productForSaleService.removeProductForSaleForSupermarket(supermarketExist, sc.nextInt());
                     }
                     //endregion
@@ -749,6 +759,7 @@ public class MenusServiceImpl implements MenusService {
                         System.out.println("el supermercado que desea no existe en la base de datos");
                     } else {
                         menuDiscountOff(supermarketExist);
+
                     }
                     //endregion
                     break;
@@ -785,6 +796,7 @@ public class MenusServiceImpl implements MenusService {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
                                 System.out.println(p);
+                                supermarketService.modifySupermarketListProducts(s);
                             }
                         }
                     }
@@ -792,6 +804,7 @@ public class MenusServiceImpl implements MenusService {
                 case 2:
                     System.out.println("Ingrese el ID del producto:");
                     Integer idSelect = sc.nextInt();
+
                     if (productForSaleService.validationId(idSelect)) {
                         System.out.println("Ingrese el porcentaje de descuento deseado:");
                         Integer percent = sc.nextInt();
@@ -800,12 +813,15 @@ public class MenusServiceImpl implements MenusService {
                                 p.setDiscountPercent(percent);
                                 p.setOnSale(true);
                                 System.out.println(p);
+
+                                supermarketService.modifySupermarketListProducts(s);
                             }
                         }
                     }
                     break;
                 case 3:
                     System.out.println("Ingrese la marca:");
+                    sc.nextLine();
                     String brandSelect = sc.nextLine();
                     Boolean flag = false;
                     System.out.println("Ingrese el porcentaje de descuento deseado:");
@@ -816,8 +832,10 @@ public class MenusServiceImpl implements MenusService {
                             p.setOnSale(true);
                             System.out.println(p);
                             flag = true;
+                            supermarketService.modifySupermarketListProducts(s);
                         }
                     }
+
                     if (!flag) {
                         System.out.println("No existen productos con esa marca");
                     }
@@ -832,9 +850,11 @@ public class MenusServiceImpl implements MenusService {
     }
 
     public void menuDiscountOff(Supermarket s) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        Category c;
         Integer opc = null;
+        Category c;
+        Scanner sc = new Scanner(System.in);
+
+
         do {
             System.out.println("            RETIRAR OFERTA: ");
             System.out.println("          [1] - Por Categoria");
@@ -842,6 +862,7 @@ public class MenusServiceImpl implements MenusService {
             System.out.println("          [3] - Por Marca");
             System.out.println("          [0] - Salir");
             System.out.println("          Ingrese una opcion:");
+            opc = sc.nextInt();
 
             switch (opc) {
                 case 1:
@@ -852,6 +873,7 @@ public class MenusServiceImpl implements MenusService {
                         for (ProductForSale p : s.getProductList()) {
                             if (p.getProduct().getCategory() == c) {
                                 p.setOnSale(false);
+                                supermarketService.modifySupermarketListProducts(s);
                             }
                         }
                         System.out.println("Oferta eliminada");
@@ -864,6 +886,7 @@ public class MenusServiceImpl implements MenusService {
                         for (ProductForSale p : s.getProductList()) {
                             if (p.getProduct().getID().equals(idSelect)) {
                                 p.setOnSale(false);
+                               supermarketService.modifySupermarketListProducts(s);
                             }
                         }
                         System.out.println("Oferta eliminada");
@@ -875,6 +898,7 @@ public class MenusServiceImpl implements MenusService {
                     for (ProductForSale p : s.getProductList()) {
                         if (p.getProduct().getBrand().equalsIgnoreCase(brandSelect)) {
                             p.setOnSale(false);
+                            supermarketService.modifySupermarketListProducts(s);
                         }
                     }
                     System.out.println("Oferta eliminada");

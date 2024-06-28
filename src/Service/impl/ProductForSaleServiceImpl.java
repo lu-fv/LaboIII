@@ -15,7 +15,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
 
     private final CartService cartService = new CartServiceImpl();
 
-    private final HashMap<String, Supermarket> superMarketList = new HashMap<>();
+    private final HashMap<String, Supermarket> superMarketList =  supermarket.supermarketsListJson();
 
 
     public ProductForSaleServiceImpl() throws IOException {
@@ -86,6 +86,7 @@ public class ProductForSaleServiceImpl implements ProductForSaleService {
                 System.out.println(" Es el producto que desea eliminar? s/n");
                 if (st.nextLine().equalsIgnoreCase("s")) {
                     //si se confirma la eliminacion procedo a removerlo
+
                     superMarketList.get(sp.getCuit()).getProductList().remove(p);
                     //guardo el supermercado
                     supermarket.saveSupermarketInJsonFile(superMarketList);
