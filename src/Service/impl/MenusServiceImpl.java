@@ -25,10 +25,10 @@ public class MenusServiceImpl implements MenusService {
 
     public MenusServiceImpl() throws IOException {
         try {
-            foodService = ProductPersistenceImpl.startFoodService();
-            beverageService = ProductPersistenceImpl.startBeverageService();
-            foodService.startID();
-            beverageService.startID();
+            foodService = ProductPersistenceImpl.startFoodService(); //Cargo los datos del json de alimentos
+            beverageService = ProductPersistenceImpl.startBeverageService(); //Cargo los datos del json de bebidas
+            foodService.startID(); //Cargo el set de IDs
+            beverageService.startID(); //Cargo el set de IDs
 
         } catch (IOException e) {
             System.out.println(e.getMessage());

@@ -27,21 +27,21 @@ public class ProductServiceImpl implements ProductService {
         Scanner scanner = new Scanner(System.in);
         Integer id = null;
         Boolean retry = true;
-        do {//cambiar por excepción
+        do {
             try {
-                System.out.println("Id:");
+                System.out.println("Id:"); //Pido ID
                 id = Integer.parseInt(scanner.nextLine());
 
-                Verification.contains(idHashSet, id);
+                Verification.contains(idHashSet, id); //Verifico que el ID no exista en el sistema
 
-                idHashSet.add(id);
+                idHashSet.add(id); //Si el ID no está duplicado, se agrega al set
                 retry = false;
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("¡¡Error!! ID inválido");
             } catch (IllegalArgumentException e) {
                 System.out.println("Este ID ya existe");
             }
-        } while (retry);
+        } while (retry); //Repito hasta que no haya problemas con los datos ingresados
         return id;
     }
 
@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         name = scanner.nextLine();
 
         try {
-            Verification.isEmpty(name);
+            Verification.isEmpty(name); //Verifica que se hayan ingresado datos
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("¡¡Error!! Completar nombre de producto");
         }
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
         brand = scanner.nextLine();
 
         try {
-            Verification.isEmpty(brand);
+            Verification.isEmpty(brand); //Verifica que se hayan ingresado datos
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("¡¡Error!! Completar marca");
         }
@@ -87,9 +87,9 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             System.out.println("Id categoría:");
-            showCategories();
+            showCategories(); //Muestro categorías
             Integer categoryId = Integer.parseInt(scanner.nextLine());
-            category = selectCategory(categoryId);
+            category = selectCategory(categoryId); //Busco la categoría seleccionada
         } catch (NumberFormatException e) {
             throw new NumberFormatException("¡¡Error!! ID inválido");
         }
@@ -114,7 +114,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     //modify----------------------------------------------------------------
-    public static void modify(Product product, Integer opc) {
+    public static void modify(Product product, Integer opc) { //Recibo el producto y el dato que quiero modificar
         Scanner scanner = new Scanner(System.in);
 
         switch (opc) {
@@ -153,7 +153,7 @@ public class ProductServiceImpl implements ProductService {
         idHashSet.remove(id);
     }
 
-    public static Integer askForID() {
+    public static Integer askForID() { //Pido un ID y lo devuelvo si no hay problemas con los datos ingresados
         Scanner sc = new Scanner(System.in);
 
         try {

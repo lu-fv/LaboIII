@@ -31,7 +31,7 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
     @Override
     public Beverage add(Beverage beverage) throws IOException {
         beverages.put(beverage.getID(), beverage);
-        ProductPersistenceImpl.saveBeverages(this);
+        ProductPersistenceImpl.saveBeverages(this); //Se guarda la instancia en un json de bebidas
         return beverage;
     }
 
@@ -59,9 +59,9 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
             } catch (IllegalArgumentException e) {
                 System.out.println("\n" + e.getMessage());
                 retry = true;
-                ProductServiceImpl.deleteID(id);
+                ProductServiceImpl.deleteID(id); //Se elimina el ID del set de IDs para pedirlo nuevamente y que no lo rechace
             }
-        } while (retry);
+        } while (retry); //Se repite hasta que no haya problemas con los datos ingresados
         return null;
     }
 
@@ -118,16 +118,16 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
 
     //delete----------------------------------------------------------------
     @Override
-    public Beverage delete(Integer id) throws IOException {
+    public Beverage delete(Integer id) throws IOException { //Recibo el ID por parámetro
         Scanner sc = new Scanner(System.in);
         Boolean retry;
         Integer opc = null;
         Beverage beverage = null;
-        if ((beverage = beverages.get(id)) != null) {
+        if ((beverage = beverages.get(id)) != null) { //Si existe una bebida con este ID
             SupermarketServiceImpl s = new SupermarketServiceImpl();
-            if (!s.searchSpecialProductsByNameExist(beverage.getProductName())) {
+            if (!s.searchSpecialProductsByNameExist(beverage.getProductName())) { //Corroboro que el producto no esté en ningún supermercado
                 System.out.println(beverage);
-                System.out.println("\nEliminar este producto");
+                System.out.println("\nEliminar este producto"); //Muestro el producto ingresado y pido confirmación para eliminar
                 System.out.println("1.Sí");
                 System.out.println("2.No");
                 do {
@@ -137,7 +137,7 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
                         opc = Integer.parseInt(sc.nextLine());
                         Verification.isOutOfBounds(opc, 1, 2);
 
-                        if (opc == 1) {
+                        if (opc == 1) { //Se elimina la bebida
                             return remove(id);
                         }
                     } catch (NumberFormatException e) {
@@ -156,9 +156,9 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
 
     @Override
     public Beverage remove(Integer id) throws IOException {
-        ProductServiceImpl.deleteID(id);
-        Beverage b = beverages.remove(id);
-        ProductPersistenceImpl.saveBeverages(this);
+        ProductServiceImpl.deleteID(id); //Se elimina el ID del set de IDs
+        Beverage b = beverages.remove(id); //Se elimina la bebida del map de bebidas
+        ProductPersistenceImpl.saveBeverages(this); //Se actualiza el json de bebidas
         return b;
     }
 
@@ -172,7 +172,7 @@ public class BeverageServiceImpl implements BeverageService, Serializable {
 
     //start------------------------------------------------------------------
     @Override
-    public void startID() {
+    public void startID() { //Se ejecuta al inicio del programa para cargar las bebidas del json al sistema
         for (Map.Entry<Integer, Beverage> entry : beverages.entrySet()) {
             ProductServiceImpl.add(entry.getKey());
         }

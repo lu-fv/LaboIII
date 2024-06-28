@@ -59,9 +59,9 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
             } catch (IllegalArgumentException | NullPointerException e) {
                 System.out.println("\n" + e.getMessage());
                 retry = true;
-                ProductServiceImpl.deleteID(id);
+                ProductServiceImpl.deleteID(id); //Se elimina el ID del set de IDs para pedirlo nuevamente y que no lo rechace
             }
-        } while (retry);
+        } while (retry); //Se repite hasta que no haya problemas con los datos ingresados
         return null;
     }
 
@@ -127,16 +127,16 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
 
     //delete----------------------------------------------------------------
     @Override
-    public Food delete(Integer id) throws IOException { //AGREGAR PERSISTENCIA Y CONFIRMAR ELIMINACIÓN
+    public Food delete(Integer id) throws IOException { //Recibo el ID por parámetro
         Scanner sc = new Scanner(System.in);
         Boolean retry;
         Integer opc = null;
         Food food = null;
-        if ((food = foods.get(id)) != null) {
+        if ((food = foods.get(id)) != null) { //Si existe un alimento con este ID
             SupermarketServiceImpl s = new SupermarketServiceImpl();
-            if (!s.searchSpecialProductsByNameExist(food.getProductName())) {
+            if (!s.searchSpecialProductsByNameExist(food.getProductName())) { //Corroboro que el producto no esté en ningún supermercado
                 System.out.println(food);
-                System.out.println("\nEliminar este producto");
+                System.out.println("\nEliminar este producto"); //Muestro el producto ingresado y pido confirmación para eliminar
                 System.out.println("1.Sí");
                 System.out.println("2.No");
                 do {
@@ -146,7 +146,7 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
                         opc = Integer.parseInt(sc.nextLine());
                         Verification.isOutOfBounds(opc, 1, 2);
 
-                        if (opc == 1) {
+                        if (opc == 1) { //Se elimina el alimento
                             return remove(id);
                         }
                     } catch (NumberFormatException e) {
@@ -165,9 +165,9 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
 
     @Override
     public Food remove(Integer id) throws IOException {
-        ProductServiceImpl.deleteID(id);
-        Food f = foods.remove(id);
-        ProductPersistenceImpl.saveFoods(this);
+        ProductServiceImpl.deleteID(id); //Elimino el ID del set de IDs
+        Food f = foods.remove(id); //Elimino el alimento del map de alimentos
+        ProductPersistenceImpl.saveFoods(this); //Actualizo el json de alimentos
         return f;
     }
 
@@ -181,7 +181,7 @@ public class FoodServiceImpl extends ProductServiceImpl implements FoodService, 
 
     //start------------------------------------------------------------------
     @Override
-    public void startID() {
+    public void startID() { //Se ejecuta al inicio del programa para cargar los alimentos del json al sistema
         for (Map.Entry<Integer, Food> entry : foods.entrySet()) {
             ProductServiceImpl.add(entry.getKey());
         }
