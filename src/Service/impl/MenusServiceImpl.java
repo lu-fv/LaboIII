@@ -848,6 +848,7 @@ public class MenusServiceImpl implements MenusService {
             System.out.println("          [3] - Por Marca");
             System.out.println("          [0] - Salir");
             System.out.println("          Ingrese una opcion:");
+            opc = sc.nextInt();
 
             switch (opc) {
                 case 1:
@@ -860,7 +861,9 @@ public class MenusServiceImpl implements MenusService {
                                 p.setOnSale(false);
                             }
                         }
+                        supermarketService.modifySupermarketListProducts(s);
                         System.out.println("Oferta eliminada");
+
                     }
                     break;
                 case 2:
@@ -872,6 +875,7 @@ public class MenusServiceImpl implements MenusService {
                                 p.setOnSale(false);
                             }
                         }
+                        supermarketService.modifySupermarketListProducts(s);
                         System.out.println("Oferta eliminada");
                     }
                     break;
@@ -883,6 +887,7 @@ public class MenusServiceImpl implements MenusService {
                             p.setOnSale(false);
                         }
                     }
+                    supermarketService.modifySupermarketListProducts(s);
                     System.out.println("Oferta eliminada");
                     break;
                 case 0:
