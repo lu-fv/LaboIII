@@ -167,8 +167,10 @@ public class MenusServiceImpl implements MenusService {
                         case 1:
                             //region Busqueda por nombre de producto en TODOS los supermercados
                             System.out.println("Ingrese el nombre del producto que esta buscando");
+                            sc.nextLine();
                             String nameProduct = sc.nextLine();
-                            List<ProductForSale> productsList = supermarketService.searchSpecialProductsByName(nameProduct);
+                            List<ProductForSale> productsList = new ArrayList<>();
+                            productsList = supermarketService.searchSpecialProductsByName(nameProduct);
                             if (!productsList.isEmpty()) {
                                 cartService.addCartFromListProductForSale(productsList);
                             } else {
@@ -278,7 +280,7 @@ public class MenusServiceImpl implements MenusService {
                 }
             } while (retry);
         } while (opc != 0);
-    }//LISTO SOLO FALTA PROBAR
+    }//LISTO
 
     @Override
     public void shoppingListMenuBySupermarket() throws IOException {
@@ -294,11 +296,12 @@ public class MenusServiceImpl implements MenusService {
             System.out.println(entry);
             System.out.println("_______________________________________________________________________________");
         }
-        System.out.println("Ingrese el supermercado deseado: ");
+        System.out.println("\nIngrese el nombre del supermercado deseado: ");
+        String nameS = sc.nextLine();
 
         //region Validacion de ingreso correcto del supermercado seleccionado de la lista
         do {
-            supermarketSelect = supermarketService.search(sc.nextLine());
+            supermarketSelect = supermarketService.search(nameS);
             if (supermarketSelect == null) {
                 System.out.println("Ingrese correctamente el nombre del supermercado...");
             }
@@ -327,7 +330,8 @@ public class MenusServiceImpl implements MenusService {
                             case 1:
                                 //region Busqueda de productos por nombre en un supermercado seleccionado
                                 System.out.println("Ingrese el nombre del producto buscado: ");
-                                productsForSale = supermarketService.serchProductByNameInSupermarket(supermarketSelect, sc.nextLine());
+                                String nameSelect = sc.nextLine();
+                                productsForSale = supermarketService.serchProductByNameInSupermarket(supermarketSelect, nameSelect);
                                 if (!productsForSale.isEmpty()) {
                                     cartService.addCartFromListProductForSale(productsForSale);
                                 } else {
@@ -400,6 +404,7 @@ public class MenusServiceImpl implements MenusService {
                             case 5:
                                 //region Modificar carrito
                                 do {
+                                    System.out.println(">>>>>>>>>>>>>>>> MODIFICAR TU LISTA <<<<<<<<<<<<<<<<<<<<<");
                                     System.out.println("[1] Desea eliminar un producto");
                                     System.out.println("[2] Desea modificar cantidad de un  producto");
                                     System.out.println("[0] Salir");
@@ -437,7 +442,7 @@ public class MenusServiceImpl implements MenusService {
         } else {
             System.out.println("Se ha ingresado un nombre incorrecto! Vuelva a intentarlo.");
         }
-    }//LISTO SOLO FALTA PROBAR
+    }//LISTO
 
     @Override
     public void privateAccessMenu() throws IOException {
@@ -530,7 +535,7 @@ public class MenusServiceImpl implements MenusService {
                 }
             } while (retry);
         } while (opc != 0);
-    }//FALTA VALIDACIONES...
+    }//FALTA
 
     @Override
     public void privateAccessCreateProductMenu() {
@@ -851,7 +856,8 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     } //LISTO FALTA PROBAR
 
-    public void menuDiscountOn(Supermarket s) throws IOException {
+
+    private void menuDiscountOn(Supermarket s) throws IOException {
         Integer opc = null;
         Boolean retry;
         Category c;
@@ -934,7 +940,7 @@ public class MenusServiceImpl implements MenusService {
         } while (opc != 0);
     }
 
-    public void menuDiscountOff(Supermarket s) throws IOException {
+    private void menuDiscountOff(Supermarket s) throws IOException {
         Scanner sc = new Scanner(System.in);
         Category c;
         Integer opc = null;

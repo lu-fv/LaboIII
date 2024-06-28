@@ -7,6 +7,19 @@
     "productList": [
       {
         "product": {
+          "type": "beverage",
+          "productName": "Yogurt de Banana",
+          "brand": "Dahi",
+          "category": "DAIRY",
+          "litres": 0.2,
+          "id": 88
+        },
+        "price": 350.0,
+        "onSale": false,
+        "discountPercent": 30
+      },
+      {
+        "product": {
           "type": "food",
           "productName": "Pan Artesano",
           "brand": "Bimbo",
@@ -63,6 +76,19 @@
       {
         "product": {
           "type": "beverage",
+          "productName": "Leche Chocolatada",
+          "brand": "Cindor",
+          "category": "GROCERY",
+          "litres": 1.0,
+          "id": 55
+        },
+        "price": 1000.0,
+        "onSale": false,
+        "discountPercent": 30
+      },
+      {
+        "product": {
+          "type": "beverage",
           "productName": "Gaseosa",
           "brand": "Coca Cola",
           "category": "GROCERY",
@@ -70,6 +96,19 @@
           "id": 456
         },
         "price": 456.0,
+        "onSale": false,
+        "discountPercent": 30
+      },
+      {
+        "product": {
+          "type": "food",
+          "productName": "queso crema",
+          "brand": "Milkaut",
+          "category": "DAIRY",
+          "perishable": true,
+          "id": 6789
+        },
+        "price": 609.0,
         "onSale": false,
         "discountPercent": 30
       }
