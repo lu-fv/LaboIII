@@ -2,6 +2,8 @@ package Service.impl;
 
 import Enums.Category;
 import Exceptions.ExceptionIncorrectPassword;
+import Models.Beverage;
+import Models.Food;
 import Models.ProductForSale;
 import Models.Supermarket;
 import Service.*;
@@ -17,7 +19,6 @@ public class MenusServiceImpl implements MenusService {
     protected FoodServiceImpl foodService;
     protected BeverageServiceImpl beverageService;
     protected SupermarketService supermarketService = new SupermarketServiceImpl();
-    ;
     protected CartService cartService = new CartServiceImpl();
     protected ProductForSaleService productForSaleService = new ProductForSaleServiceImpl();
     protected ProductServiceImpl productService = new ProductServiceImpl();
@@ -612,8 +613,10 @@ public class MenusServiceImpl implements MenusService {
                             break;
                         case 1:
                             try {
-                                if (foodService.modify(ProductServiceImpl.askForID()) != null) {
+                                Food modified;
+                                if ((modified = foodService.modify(ProductServiceImpl.askForID())) != null) { //Si encuentro el producto buscado y logro modificarlo
                                     System.out.println("Información modificada");
+                                    supermarketService.updateProductData(modified); //Actualizo los datos del producto en los supermercados que lo contengan
                                 } else {
                                     System.out.println("ID no encontrado");
                                 }
@@ -624,8 +627,10 @@ public class MenusServiceImpl implements MenusService {
                             break;
                         case 2:
                             try {
-                                if (beverageService.modify(ProductServiceImpl.askForID()) != null) {
+                                Beverage modified;
+                                if ((modified = beverageService.modify(ProductServiceImpl.askForID())) != null) { //Si encuentro el producto buscado y logro modificarlo
                                     System.out.println("Información modificada");
+                                    supermarketService.updateProductData(modified); //Actualizo los datos del producto en los supermercados que lo contengan
                                 } else {
                                     System.out.println("ID no encontrado");
                                 }
@@ -716,7 +721,7 @@ public class MenusServiceImpl implements MenusService {
         Scanner sc = new Scanner(System.in);
         Integer opc = null;
         Boolean retry;
-        Supermarket supermarketExist;
+        Supermarket supermarketExists;
         ProductForSale product;
 
 
@@ -791,18 +796,18 @@ public class MenusServiceImpl implements MenusService {
                             //region Modificar Precio del Producto Vendible de un supermercado existente
                             System.out.println("Ingrese el nombre del supermercado: ");
                             name = sc.nextLine();
-                            supermarketExist = supermarketService.search(name);
-                            if (supermarketExist == null) {
-                                System.out.println("el supermercado que desea no existe en la base de datos");
-                            } else {
+                            supermarketExists = supermarketService.search(name);
+                            if (supermarketExists == null) { //No encuentro el supermercado
+                                System.out.println("Este supermercado no existe en la base de datos");
+                            } else { //Encuentro el supermercado
                                 System.out.println("Ingrese el id del producto que desea modificar...");
-                                product = productForSaleService.searchProductoForSaleById(supermarketExist, sc.nextInt());
-                                if (product == null) {
-                                    System.out.println("No existe el Id ingresado dentro del listado del supermercado " + supermarketExist);
+                                product = productForSaleService.searchProductoForSaleById(supermarketExists, sc.nextInt());
+                                if (product == null) { //No encuentro el producto en el supermercado
+                                    System.out.println("No existe el Id ingresado dentro del listado del supermercado " + supermarketExists);
                                 } else {
                                     System.out.println("Ingrese el precio nuevo : ");
                                     product.setPrice(sc.nextDouble());
-                                    supermarketService.modifySupermarketListProducts(supermarketExist);
+                                    supermarketService.modifySupermarketListProducts(supermarketExists);
                                 }
                             }
                             //endregion de un superme
@@ -811,12 +816,12 @@ public class MenusServiceImpl implements MenusService {
                             //region Eliminar producto vendible de un supermercado existente
                             System.out.println("Ingrese el nombre del supermercado: ");
                             name = sc.nextLine();
-                            supermarketExist = supermarketService.search(name);
-                            if (supermarketExist == null) {
+                            supermarketExists = supermarketService.search(name);
+                            if (supermarketExists == null) {
                                 System.out.println("el supermercado que desea no existe en la base de datos");
                             } else {
                                 System.out.println("Ingrese el id del producto que desea modificar...");
-                                productForSaleService.removeProductForSaleForSupermarket(supermarketExist, sc.nextInt());
+                                productForSaleService.removeProductForSaleForSupermarket(supermarketExists, sc.nextInt());
                             }
                             //endregion
                             break;
@@ -824,11 +829,11 @@ public class MenusServiceImpl implements MenusService {
                             //region Aplicar Oferta
                             System.out.println("Ingrese el nombre del supermercado: ");
                             name = sc.nextLine();
-                            supermarketExist = supermarketService.search(name);
-                            if (supermarketExist == null) {
+                            supermarketExists = supermarketService.search(name);
+                            if (supermarketExists == null) {
                                 System.out.println("el supermercado que desea no existe en la base de datos");
                             } else {
-                                menuDiscountOn(supermarketExist);
+                                menuDiscountOn(supermarketExists);
                             }
                             //endregion
                             break;
@@ -836,11 +841,11 @@ public class MenusServiceImpl implements MenusService {
                             //region Sacar Oferta
                             System.out.println("Ingrese el nombre del supermercado: ");
                             name = sc.nextLine();
-                            supermarketExist = supermarketService.search(name);
-                            if (supermarketExist == null) {
+                            supermarketExists = supermarketService.search(name);
+                            if (supermarketExists == null) {
                                 System.out.println("el supermercado que desea no existe en la base de datos");
                             } else {
-                                menuDiscountOff(supermarketExist);
+                                menuDiscountOff(supermarketExists);
                             }
                             //endregion
                             break;

@@ -1,6 +1,6 @@
 package Service.impl;
 
-import Models.Supermarket;
+import Models.*;
 import Service.SupermarketService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.*;
 
 import Enums.Category;
-import Models.ProductForSale;
 
 
 import java.io.File;
@@ -405,6 +404,18 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateProductData(Product updated) throws IOException {
+        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) { //entry.getValue() = un supermercado
+            for (ProductForSale p : entry.getValue().getProductList()) { //p = un producto vendible de un supermercado
+                if (p.getProduct().equals(updated)) { //Si coincide el id del producto vendible con el producto actualizado
+                    p.setProduct(updated); //Se actualizan todos los datos del producto vendible
+                }
+            }
+        }
+        saveSupermarketInJsonFile(superMarketList);
     }
 //endregion
 }
