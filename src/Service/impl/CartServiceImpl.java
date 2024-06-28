@@ -57,7 +57,7 @@ public class CartServiceImpl implements CartService {
                         System.out.println("[Opcion : " + (i + 1) + "]\n" + list.get(i));
                         System.out.println("_____________________________________________________________________");
                     }
-                    System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion o presione cualquier tecla para salir...");
+                    System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion");
                     do {
                         numProduct = Integer.parseInt(sc.nextLine());
 
@@ -80,7 +80,7 @@ public class CartServiceImpl implements CartService {
 
                 } while (continueAdd.equalsIgnoreCase("s"));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Volviendo...");
                 correctForm = false;
             }
         } while (!correctForm);
@@ -138,8 +138,10 @@ public class CartServiceImpl implements CartService {
             System.out.println(entry);
         }
         System.out.println("Ingrese el id del producto que desea modificar la cantidad...");
+        System.out.print(">");
+        Integer id = Integer.parseInt(sc.nextLine());
         for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
-            if (entry.getKey().getProduct().getID() == sc.nextInt()) {
+            if (entry.getKey().getProduct().getID().equals(id)) {
                 System.out.println("Ingrese la cantidad deseada...");
                 entry.setValue(sc.nextInt());
                 flag = true;
