@@ -368,6 +368,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             }
         }
         return listProduct;
+
     }
 
     @Override

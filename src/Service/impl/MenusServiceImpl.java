@@ -167,7 +167,6 @@ public class MenusServiceImpl implements MenusService {
                         case 1:
                             //region Busqueda por nombre de producto en TODOS los supermercados
                             System.out.println("Ingrese el nombre del producto que esta buscando");
-                            sc.nextLine();
                             String nameProduct = sc.nextLine();
                             List<ProductForSale> productsList = new ArrayList<>();
                             productsList = supermarketService.searchSpecialProductsByName(nameProduct);
@@ -199,6 +198,7 @@ public class MenusServiceImpl implements MenusService {
                                 categorySelect = sc.nextInt();
                                 switch (categorySelect) {
                                     case 0:
+                                        //Busca productos de categoria Dairy en todos los supermercados
                                         List<ProductForSale> listDairy = supermarketService.searchProductsByCategory(Category.DAIRY);
                                         if (!listDairy.isEmpty()) {
                                             cartService.addCartFromListProductForSale(listDairy);
@@ -207,6 +207,7 @@ public class MenusServiceImpl implements MenusService {
                                         }
                                         break;
                                     case 1:
+                                        //Busca productos de categoria Bakery en todos los supermercados
                                         List<ProductForSale> listBakery = supermarketService.searchProductsByCategory(Category.BAKERY);
                                         if (!listBakery.isEmpty()) {
                                             cartService.addCartFromListProductForSale(listBakery);
@@ -215,6 +216,7 @@ public class MenusServiceImpl implements MenusService {
                                         }
                                         break;
                                     case 2:
+                                        //Busca productos de categoria Grocery en todos los supermercados
                                         List<ProductForSale> listGrocery = supermarketService.searchProductsByCategory(Category.GROCERY);
                                         if (!listGrocery.isEmpty()) {
                                             cartService.addCartFromListProductForSale(listGrocery);
@@ -223,6 +225,7 @@ public class MenusServiceImpl implements MenusService {
                                         }
                                         break;
                                     case 3:
+                                        //Busca productos de categoria Alcohol en todos los supermercados
                                         List<ProductForSale> listAlcohol = supermarketService.searchProductsByCategory(Category.ALCOHOL);
                                         if (!listAlcohol.isEmpty()) {
                                             cartService.addCartFromListProductForSale(listAlcohol);
@@ -290,22 +293,23 @@ public class MenusServiceImpl implements MenusService {
         Supermarket supermarketSelect = new Supermarket();
         List<ProductForSale> productsForSale = new ArrayList<>();
 
+
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<< LISTADO DE SUPERMERCADOS >>>>>>>>>>>>>>>>>>>>>>>>>>");
+        //muestra lista de nombres de supermercados recorriendo el map de supermercados
         for (Map.Entry<String, Supermarket> entry : supermarketService.supermarketsListJson().entrySet()) {
-            System.out.println(entry);
+            System.out.println("Supermercado : "+ entry.getValue().getName());
             System.out.println("_______________________________________________________________________________");
         }
         System.out.println("\nIngrese el nombre del supermercado deseado: ");
-        String nameS = sc.nextLine();
-
         //region Validacion de ingreso correcto del supermercado seleccionado de la lista
         do {
+            String nameS = sc.nextLine();
             supermarketSelect = supermarketService.search(nameS);
             if (supermarketSelect == null) {
                 System.out.println("Ingrese correctamente el nombre del supermercado...");
             }
             attempts--;
-        } while (attempts >= 0 && supermarketSelect == null);
+        } while (attempts > 0 && supermarketSelect == null);
         //endregion
 
         if (supermarketSelect != null) {
@@ -330,6 +334,7 @@ public class MenusServiceImpl implements MenusService {
                                 //region Busqueda de productos por nombre en un supermercado seleccionado
                                 System.out.println("Ingrese el nombre del producto buscado: ");
                                 String nameSelect = sc.nextLine();
+                                //busca en el supermercado seleccionado el producto ingresado por teclado
                                 productsForSale = supermarketService.serchProductByNameInSupermarket(supermarketSelect, nameSelect);
                                 if (!productsForSale.isEmpty()) {
                                     cartService.addCartFromListProductForSale(productsForSale);
@@ -341,6 +346,7 @@ public class MenusServiceImpl implements MenusService {
                             case 2:
                                 //region Busqueda de productos en oferta en un supermercado seleccionado
                                 productsForSale = supermarketService.serchProductInSaleInSupermarket(supermarketSelect);
+                                //busca en el supermercado seleccionado el producto ingresado por teclado
                                 if (!productsForSale.isEmpty()) {
                                     cartService.addCartFromListProductForSale(productsForSale);
                                 } else {
@@ -356,6 +362,7 @@ public class MenusServiceImpl implements MenusService {
                                     categorySelect = sc.nextInt();
                                     switch (categorySelect) {
                                         case 0:
+                                            //Busca productos de categoria Dairy
                                             List<ProductForSale> listDairy = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.DAIRY);
                                             if (!listDairy.isEmpty()) {
                                                 cartService.addCartFromListProductForSale(listDairy);
@@ -364,6 +371,7 @@ public class MenusServiceImpl implements MenusService {
                                             }
                                             break;
                                         case 1:
+                                            //Busca productos de categoria Bakery
                                             List<ProductForSale> listBakery = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.BAKERY);
                                             if (!listBakery.isEmpty()) {
                                                 cartService.addCartFromListProductForSale(listBakery);
@@ -372,6 +380,7 @@ public class MenusServiceImpl implements MenusService {
                                             }
                                             break;
                                         case 2:
+                                            //Busca productos de categoria Grocery
                                             List<ProductForSale> listGrocery = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.GROCERY);
                                             if (!listGrocery.isEmpty()) {
                                                 cartService.addCartFromListProductForSale(listGrocery);
@@ -380,6 +389,7 @@ public class MenusServiceImpl implements MenusService {
                                             }
                                             break;
                                         case 3:
+                                            //Busca productos de categoria Alcohol
                                             List<ProductForSale> listAlcohol = supermarketService.serchByCategoryInSupermarket(supermarketSelect, Category.ALCOHOL);
                                             if (!listAlcohol.isEmpty()) {
                                                 cartService.addCartFromListProductForSale(listAlcohol);
@@ -410,9 +420,11 @@ public class MenusServiceImpl implements MenusService {
 
                                     switch (opc) {
                                         case 1:
+                                            //Elimina algun producto del carrito
                                             cartService.deleteSomeProductOfCart();
                                             break;
                                         case 2:
+                                            //modifica la cantidad de algun producto
                                             cartService.modifyCartList();
                                             break;
                                         case 0:
