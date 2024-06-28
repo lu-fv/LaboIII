@@ -5,22 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092ad90e-7b8c-4dd4-b3a3-8ffe566365cd" name="Changes" comment="clases, constructors, getter and setter">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_6_2024_20_03__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_6_2024_22_25__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_6_2024_22_25__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_6_2024_22_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_6_2024_22_48__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_6_2024_22_55__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_6_2024_22_55__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/beverages.json" beforeDir="false" afterPath="$PROJECT_DIR$/beverages.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foods.json" beforeDir="false" afterPath="$PROJECT_DIR$/foods.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Beverage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Food.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Models/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/CartServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/CartServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/MenusServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/ProductForSaleServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/CartServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/MenusServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProyectoLaboIII/Service/impl/SupermarketServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/impl/SupermarketServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/supermarket.json" beforeDir="false" afterPath="$PROJECT_DIR$/supermarket.json" afterDir="false" />
     </list>
@@ -69,9 +59,9 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;eugeBranchPrueba&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mariu/OneDrive/Escritorio/librerias  JSon/jackson-databind-2.17.1.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mariu/OneDrive/Escritorio/copia labo III&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;E:/Labo III/ProyectoLaboIII/src/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,

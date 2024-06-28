@@ -21,7 +21,7 @@
       {
         "product": {
           "type": "food",
-          "productName": "Pan Artesano",
+          "productName": "Pan Artesano con cereales",
           "brand": "Bimbo",
           "category": "GROCERY",
           "perishable": true,
@@ -55,7 +55,7 @@
       {
         "product": {
           "type": "food",
-          "productName": "Pan Artesano",
+          "productName": "Pan Artesano con cereales",
           "brand": "Bimbo",
           "category": "GROCERY",
           "perishable": true,

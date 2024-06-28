@@ -321,6 +321,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
         return products;
 
     }
+
     //endregion
 
     //region BÚSQUEDA GENERAL----------------------------------------------------
@@ -411,6 +412,18 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateProductData(Product updated) throws IOException {
+        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) { //entry.getValue() = un supermercado
+            for (ProductForSale p : entry.getValue().getProductList()) { //p = un producto vendible de un supermercado
+                if (p.getProduct().equals(updated)) { //Si coincide el id del producto vendible con el producto actualizado
+                    p.setProduct(updated); //Se actualizan todos los datos del producto vendible
+                }
+            }
+        }
+        saveSupermarketInJsonFile(superMarketList);
     }
 //endregion
 
