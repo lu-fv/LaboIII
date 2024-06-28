@@ -1,8 +1,6 @@
 package Service.impl;
 
-import Enums.Category;
 import Models.Food;
-import Models.Supermarket;
 import Service.FoodService;
 import Utils.Verification;
 

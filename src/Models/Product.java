@@ -13,10 +13,10 @@ import java.util.Objects;
         property = "type"
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Beverage.class, name = "Beverage"),
-        @JsonSubTypes.Type(value = Food.class, name = "Food")
+        @JsonSubTypes.Type(value = Beverage.class, name = "beverage"),
+        @JsonSubTypes.Type(value = Food.class, name = "food")
 })
-public  class Product implements Serializable {
+public abstract class Product implements Serializable {
     private Integer ID;
     private String productName;
     private String brand;

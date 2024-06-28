@@ -12,7 +12,6 @@ import java.util.*;
 
 import Enums.Category;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -134,7 +133,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
         for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) {
             if (s.getName().equalsIgnoreCase(entry.getValue().getName())) {
-                System.out.println("muestre precio en funcion de grabar "+ s);
+                System.out.println("muestre precio en funcion de grabar " + s);
                 entry.setValue(s);
             }
         }
@@ -227,6 +226,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     public void supermarketList() {
 
         for (Map.Entry<String, Supermarket> entry : this.superMarketList.entrySet()) {
+            System.out.println("=============================================================");
             System.out.println("        SUPERMERCADO: ");
             System.out.println("Nombre:     " + entry.getValue().getName());
             System.out.println("Domicilio:  " + entry.getValue().getAddress());
@@ -235,6 +235,7 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
             System.out.println("        LISTADO DE PRODUCTOS DEL SUPERMERCADO " + entry.getValue().getName() + ":");
             for (ProductForSale p : entry.getValue().getProductList()) {
                 System.out.println(p);
+                System.out.println("__________________________________________________________");
             }
         }
 
@@ -252,9 +253,8 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
 
     @Override
     public Map<String, Supermarket> supermarketsListJson() throws IOException {
-        /*TypeReference<HashMap<String, Supermarket>> typeReferenceMap = new TypeReference<HashMap<String, Supermarket>>() {
-        };*/
-        return new ObjectMapper().readValue(supermarketFile, new TypeReference<Map<String, Supermarket>>(){});
+        return new ObjectMapper().readValue(supermarketFile, new TypeReference<Map<String, Supermarket>>() {
+        });
     }
     //endregion
 
@@ -426,15 +426,4 @@ public class SupermarketServiceImpl implements SupermarketService, Serializable 
     }
 //endregion
 
-    @Override
-    public void updateProductData(Product updated) throws IOException {
-        for (Map.Entry<String, Supermarket> entry : superMarketList.entrySet()) { //entry.getValue() = un supermercado
-            for (ProductForSale p : entry.getValue().getProductList()) { //p = un producto vendible de un supermercado
-                if (p.getProduct().equals(updated)) { //Si coincide el id del producto vendible con el producto actualizado
-                    p.setProduct(updated); //Se actualizan todos los datos del producto vendible
-                }
-            }
-        }
-        saveSupermarketInJsonFile(superMarketList);
-    }
 }

@@ -1,1 +1,117 @@
-{"30-59036076-3":{"name":"VEA","address":"Av. Pedro Luro n 3901","phone":"0810-999-9832","cuit":"30-59036076-3","productList":[{"product":{"type":"food","productName":"Pan Artesano","brand":"Bimbo","category":"GROCERY","perishable":true,"id":123},"price":123.0,"onSale":false,"discountPercent":30},{"product":{"type":"beverage","productName":"Gaseosa","brand":"Coca Cola","category":"GROCERY","litres":2.0,"id":456},"price":456.0,"onSale":false,"discountPercent":30}]},"30-55149749-2":{"name":"TOLEDO","address":"Av. Colon n 3350","phone":"0800-333-3266","cuit":"30-55149749-2","productList":[{"product":{"type":"food","productName":"Pan Artesano","brand":"Bimbo","category":"GROCERY","perishable":true,"id":123},"price":700.0,"onSale":false,"discountPercent":30}]},"30-68731043-4":{"name":"CARREFOUR","address":"Catamarca n 1965","phone":"0800-444-8484","cuit":"30-68731043-4","productList":[{"product":{"type":"beverage","productName":"Gaseosa","brand":"Coca Cola","category":"GROCERY","litres":2.0,"id":456},"price":456.0,"onSale":false,"discountPercent":30}]}}
+{
+  "30-59036076-3": {
+    "name": "VEA",
+    "address": "Av. Pedro Luro n 3901",
+    "phone": "0810-999-9832",
+    "cuit": "30-59036076-3",
+    "productList": [
+      {
+        "product": {
+          "type": "beverage",
+          "productName": "Yogur De Banana",
+          "brand": "Dahi",
+          "category": "DAIRY",
+          "litres": 0.2,
+          "id": 88
+        },
+        "price": 350.0,
+        "onSale": false,
+        "discountPercent": 30
+      },
+      {
+        "product": {
+          "type": "food",
+          "productName": "Pan Artesano",
+          "brand": "Bimbo",
+          "category": "GROCERY",
+          "perishable": true,
+          "id": 123
+        },
+        "price": 123.0,
+        "onSale": false,
+        "discountPercent": 30
+      },
+      {
+        "product": {
+          "type": "beverage",
+          "productName": "Gaseosa",
+          "brand": "Coca Cola",
+          "category": "GROCERY",
+          "litres": 2.0,
+          "id": 456
+        },
+        "price": 456.0,
+        "onSale": false,
+        "discountPercent": 30
+      }
+    ]
+  },
+  "30-55149749-2": {
+    "name": "TOLEDO",
+    "address": "Av. Colon n 3350",
+    "phone": "0800-333-3266",
+    "cuit": "30-55149749-2",
+    "productList": [
+      {
+        "product": {
+          "type": "food",
+          "productName": "Pan Artesano",
+          "brand": "Bimbo",
+          "category": "GROCERY",
+          "perishable": true,
+          "id": 123
+        },
+        "price": 700.0,
+        "onSale": false,
+        "discountPercent": 30
+      }
+    ]
+  },
+  "30-68731043-4": {
+    "name": "CARREFOUR",
+    "address": "Catamarca n 1965",
+    "phone": "0800-444-8484",
+    "cuit": "30-68731043-4",
+    "productList": [
+      {
+        "product": {
+          "type": "beverage",
+          "productName": "Leche Chocolatada",
+          "brand": "Cindor",
+          "category": "GROCERY",
+          "litres": 1.0,
+          "id": 55
+        },
+        "price": 1000.0,
+        "onSale": false,
+        "discountPercent": 30
+      },
+      {
+        "product": {
+          "type": "beverage",
+          "productName": "Gaseosa",
+          "brand": "Coca Cola",
+          "category": "GROCERY",
+          "litres": 2.0,
+          "id": 456
+        },
+        "price": 456.0,
+        "onSale": false,
+        "discountPercent": 30
+      },
+      {
+        "product": {
+          "type": "food",
+          "productName": "queso crema",
+          "brand": "Milkaut",
+          "category": "DAIRY",
+          "perishable": true,
+          "id": 6789
+        },
+        "price": 609.0,
+        "onSale": false,
+        "discountPercent": 30
+      }
+    ]
+  }
+}

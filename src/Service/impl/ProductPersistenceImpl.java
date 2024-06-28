@@ -1,19 +1,10 @@
 package Service.impl;
 
-import Models.Beverage;
-import Models.Food;
-import Models.Product;
 import Service.ProductPersistenceService;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-
 import java.io.File;
 import java.io.IOException;
-import java.security.PublicKey;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class ProductPersistenceImpl implements ProductPersistenceService {
     //FOODS===================================================

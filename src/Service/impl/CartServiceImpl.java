@@ -3,8 +3,6 @@ package Service.impl;
 import Models.Cart;
 import Models.ProductForSale;
 import Service.CartService;
-import Service.ProductForSaleService;
-import Service.SupermarketService;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,9 +53,10 @@ public class CartServiceImpl implements CartService {
 
                     for (i = 0; i < list.size(); i++) {
                         System.out.println("[Opcion : " + (i + 1) + "]\n" + list.get(i));
+                        System.out.println("Supermercado : " + new ProductForSaleServiceImpl().searchSupermarketByEachProductForSale(list.get(i)));
                         System.out.println("_____________________________________________________________________");
                     }
-                    System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion o presione cualquier tecla para salir...");
+                    System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion...");
                     do {
                         numProduct = Integer.parseInt(sc.nextLine());
 
@@ -75,6 +74,7 @@ public class CartServiceImpl implements CartService {
 
                         if (!continueAdd.equalsIgnoreCase("s") && !continueAdd.equalsIgnoreCase("n")) {
                             System.out.println("Ingrese una opcion correcta, s ó n");
+                            correctForm = false;
                         }
                     } while (!continueAdd.equalsIgnoreCase("s") && !continueAdd.equalsIgnoreCase("n"));
 
@@ -89,11 +89,12 @@ public class CartServiceImpl implements CartService {
     @Override
     public void showCartsProductList() throws IOException {
         if (!cart.getCart().isEmpty()) {
-            System.out.println("        TU LISTA DE COMPRAS\n");
+            System.out.println("        TU LISTA DE COMPRAS: \n");
             Integer i = 1;
             for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
                 System.out.println("[" + i + "] \n " + entry.getKey() + " >> cantidad : " + entry.getValue());
-                System.out.println("Supermercado : "+ new ProductForSaleServiceImpl().searchSupermarketByEachProductForSale(entry.getKey()));
+                System.out.println("Supermercado : " + new ProductForSaleServiceImpl().searchSupermarketByEachProductForSale(entry.getKey()));
+                System.out.println("_______________________________________________________________________________");
                 i++;
             }
             System.out.println("          \nPRECIO TOTAL DE LA LISTA : [$" + cart.getTotalPrice() + "]");

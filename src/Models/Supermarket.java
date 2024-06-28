@@ -9,7 +9,7 @@ public class Supermarket implements Serializable {
     private String address;
     private String phone;
     private String cuit;
-    private List<ProductForSale> productList;
+    private Set<ProductForSale> productList;
 
     public Supermarket() {
     }
@@ -19,10 +19,10 @@ public class Supermarket implements Serializable {
         this.address = address;
         this.phone = phone;
         this.cuit = cuit;
-        this.productList=new ArrayList<>();
+        this.productList=new HashSet<>();
     }
 
-    public Supermarket(String name, String address, String phone, String cuit, List<ProductForSale> productList) {
+    public Supermarket(String name, String address, String phone, String cuit, Set<ProductForSale> productList) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -62,11 +62,11 @@ public class Supermarket implements Serializable {
         this.cuit = cuit;
     }
 
-    public List<ProductForSale> getProductList() {
+    public Set<ProductForSale> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<ProductForSale> productList) {
+    public void setProductList(Set<ProductForSale> productList) {
         this.productList = productList;
     }
 

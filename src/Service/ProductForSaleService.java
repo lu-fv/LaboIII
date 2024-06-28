@@ -17,4 +17,5 @@ public interface ProductForSaleService {
     ProductForSale searchProductoForSaleById(Supermarket s, Integer id);
     boolean isDouble (String price);
     String searchSupermarketByEachProductForSale(ProductForSale product);
+
 }
