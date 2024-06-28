@@ -17,25 +17,20 @@ public class CartServiceImpl implements CartService {
         return cart;
     }
 
+    //Agregar producto al carrito ---------------------------------------------------------
     @Override
     public void addProductForSale(ProductForSale p, Integer amount) throws IOException {
-        //si esta vacio el carrito lo agrego simplemente
-        Integer flag = 0;
-        //si el carrito esta vacio
-        if (cart.getCart().isEmpty()) {
-            //agrego el producto al hashMap
+
+        //si esta vacio el carrito o el producto no existe en el Hash lo agrego simplemente
+        if (cart.getCart().isEmpty() || !cart.getCart().containsKey(p)) {
             cart.getCart().put(p, amount);
         } else {
-            //sino si existe el producto en el carrito modifico la cantidad
-            if (cart.getCart().containsKey(p)) {
-                cart.getCart().put(p, cart.getCart().get(p) + amount);
-            } else {
-                //entonces agrego el producto al hashMap
-                cart.getCart().put(p, amount);
-            }
+            //sino ...si existe el producto en el carrito modifico la cantidad
+            cart.getCart().put(p, cart.getCart().get(p) + amount);
         }
     }
 
+    //Pasa la lista de productos por parametro y pregunta que desea agregar al carrito -----
     @Override
     public void addCartFromListProductForSale(List<ProductForSale> list) throws IOException {
         Boolean correctForm = true;
@@ -56,27 +51,22 @@ public class CartServiceImpl implements CartService {
                         System.out.println("Supermercado : " + new ProductForSaleServiceImpl().searchSupermarketByEachProductForSale(list.get(i)));
                         System.out.println("_____________________________________________________________________");
                     }
-                    System.out.println("Ingrese los productos que desea agregar a la lista por numero de opcion...");
+                    System.out.println("Ingrese los productos que desea agregar a la lista por \'NUMERO DE OPCION\'...");
                     do {
                         numProduct = Integer.parseInt(sc.nextLine());
 
-                    } while (numProduct < 0 || numProduct > i + 1);
+                    } while (numProduct < 0 || numProduct > i + 1);//Valido que el numero ingresado este dentro del largo de la lista
 
-
-                    //si ingresa una opcion correcta del listado procedemos a pedir la cantidad de ese producto para añadir al carrito
-                    System.out.println("Ingrese la cantidad que desea del producto " + list.get(numProduct - 1).getProduct().getProductName());
+                    //Si ingresa una opcion correcta del listado procedemos a pedir la cantidad de ese producto para añadir al carrito
+                    System.out.println("Ingrese la cantidad que desea del producto '" + list.get(numProduct - 1).getProduct().getProductName() +"' - Marca : "+ list.get(numProduct -1).getProduct().getBrand());
                     Integer amount = Integer.parseInt(sc.nextLine());
                     addProductForSale(list.get(numProduct - 1), amount);
 
+                    System.out.println("Producto agregado al carrito. Desea seguir agregando productos de este listado? s/n");
                     do {
-                        System.out.println("Producto agregado al carrito. Desea seguir agregando productos de este listado? s/n");
+                        System.out.println("Ingrese una opcion correcta, s ó n");
                         continueAdd = sc.nextLine();
-
-                        if (!continueAdd.equalsIgnoreCase("s") && !continueAdd.equalsIgnoreCase("n")) {
-                            System.out.println("Ingrese una opcion correcta, s ó n");
-                            correctForm = false;
-                        }
-                    } while (!continueAdd.equalsIgnoreCase("s") && !continueAdd.equalsIgnoreCase("n"));
+                    }while(!continueAdd.equalsIgnoreCase("s") && (!continueAdd.equalsIgnoreCase("n")));
 
                 } while (continueAdd.equalsIgnoreCase("s"));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -84,8 +74,11 @@ public class CartServiceImpl implements CartService {
                 correctForm = false;
             }
         } while (!correctForm);
+        //suma todos los precios de productos del carrito
+        this.totalPriceOfCart();
     }
 
+    //Muestra tu lista del carrito
     @Override
     public void showCartsProductList() throws IOException {
         if (!cart.getCart().isEmpty()) {
@@ -103,25 +96,42 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    //Borra un elemento del carrito
     @Override
     public void deleteSomeProductOfCart() throws IOException {
         Scanner sc = new Scanner(System.in);
         Boolean flag = false;
+
         ProductForSale product = new ProductForSale();
+        //Recorro el Map de productos del carrito
         for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
             System.out.println(entry);
         }
+        //Pregunto cual desea eliminar
         System.out.println("Ingrese el ID del producto que desea eliminar...");
         Integer idNew = Integer.parseInt(sc.nextLine());
+        //Busco ese producto en el Set de cada supermercado
         for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
             if (entry.getKey().getProduct().getID().equals(idNew)) {
+                //asigno a la variable producto... el producto que estaba buscando
                 product = entry.getKey();
+                //cambio el flag a true
                 flag = true;
+                break;
             }
         }
+        //Si lo encontro
         if (flag) {
-            System.out.println("Ustede desea eliminar el siguiente producto " + product + ".Es correcto? s/n");
-            if (sc.nextLine().equalsIgnoreCase("s")) {
+            //Pregunto si desea eliminar dicho producto para evitar confusiones
+
+            System.out.println("Usted desea eliminar el siguiente producto " + product + ".Es correcto? s/n");
+            String continueDelete;
+            do {//valido que ingrese unicamente s o n
+                System.out.println("Ingrese una opcion correcta, \'s\' ó \'n\'");
+                continueDelete = sc.nextLine();
+            }while(!continueDelete.equalsIgnoreCase("s") && (!continueDelete.equalsIgnoreCase("n")));
+
+            if (continueDelete.equalsIgnoreCase("s")) {
                 cart.getCart().remove(product);
                 System.out.println("\nProducto eliminado exitosamente");
             }
@@ -130,6 +140,7 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    //Modifica un producto del carrito: o elimina un producto o modifica cantidad
     @Override
     public void modifyCartList() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -139,8 +150,9 @@ public class CartServiceImpl implements CartService {
             System.out.println(entry);
         }
         System.out.println("Ingrese el id del producto que desea modificar la cantidad...");
+        Integer idP = Integer.parseInt(sc.nextLine());
         for (Map.Entry<ProductForSale, Integer> entry : cart.getCart().entrySet()) {
-            if (entry.getKey().getProduct().getID() == sc.nextInt()) {
+            if (entry.getKey().getProduct().getID().equals(idP)) {
                 System.out.println("Ingrese la cantidad deseada...");
                 entry.setValue(sc.nextInt());
                 flag = true;
@@ -153,6 +165,7 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    //Suma todos los precios de productos del carrito
     @Override
     public void totalPriceOfCart() {
         Double total = 0d;

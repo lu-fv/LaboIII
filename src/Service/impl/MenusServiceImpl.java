@@ -239,7 +239,6 @@ public class MenusServiceImpl implements MenusService {
                             break;
                         case 4:
                             //region Mostrar carrito
-                            cartService.totalPriceOfCart();
                             cartService.showCartsProductList();
                             //endregion
                             break;
@@ -397,7 +396,6 @@ public class MenusServiceImpl implements MenusService {
                                 break;
                             case 4:
                                 //region Mostrar el carrito
-                                cartService.totalPriceOfCart();
                                 cartService.showCartsProductList();
                                 //endregion
                                 break;
