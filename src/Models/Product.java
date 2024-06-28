@@ -15,7 +15,7 @@ import java.io.Serializable;
         @JsonSubTypes.Type(value = Beverage.class, name = "Beverage"),
         @JsonSubTypes.Type(value = Food.class, name = "Food")
 })
-public  class Product implements Serializable {
+public abstract class Product implements Serializable {
     private Integer ID;
     private String productName;
     private String brand;
